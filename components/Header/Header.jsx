@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 
 const Header = (props) => (
   <div className="HeaderWrapper">
-    Test content
+    <div className="logo">
+    Veldora
+    </div>
+    <div className="socials">
+      I
+    </div>
   </div>
 );
 
