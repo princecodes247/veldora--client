@@ -3,9 +3,22 @@ import PropTypes from 'prop-types';
 //import { Test } from './SideMenu.styles';
 
 const SideMenu = (props) => (
-  <div className="SideMenuWrapper">
-    Test content
-  </div>
+  <aside className="SideMenuWrapper">
+    <div className="buttons">
+      <button className="dno">
+        Signin
+      </button>
+      <button className="dno">
+        Login
+      </button>
+    </div>
+    <ul>
+      <li>Home</li>
+      <li>Docs</li>
+      <li>FAQs</li>
+      <li>Contact</li>
+    </ul>
+  </aside>
 );
 
 SideMenu.propTypes = {
