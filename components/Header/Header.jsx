@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 //import { Test } from './Header.styles';
 
 const Header = (props) => (
-  <div className="HeaderWrapper">
+  <div className="flex items-center justify-between w-full mx-8">
     <div className="logo">
     Veldora
     </div>
