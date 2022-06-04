@@ -6,7 +6,7 @@ const nextConfig = {
       {
         source: '/',
         destination: '/waitlist',
-        permanent: true,
+        permanent: false,
       },
     ]
   },
