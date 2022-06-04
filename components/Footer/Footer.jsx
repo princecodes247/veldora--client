@@ -4,8 +4,9 @@ import Link from "next/link";
 //import { Test } from './Footer.styles';
 
 const Footer = (props) => (
-  <footer className="flex justify-between px-6 pt-16 pb-32 mt-12 lg:mr-32 border-t border-yellow-500">
-    <ul className="flex flex-col hidden sm:block gap-3">
+  <React.Fragment>
+    <footer className="flex flex-col border-b gap-8 lg:flex-row justify-between px-6 pt-16 pb-12 mt-12 lg:mr-32 border-t border-yellow-500">
+    <ul className="flex flex-col items-start gap-3">
       <li>
         <div className="logo"></div>
       </li>
@@ -22,14 +23,14 @@ const Footer = (props) => (
         <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 uppercase">Contact</li>
       </Link>
     </ul>
-    <ul className="text-center flex flex-col gap-2">
-      <h2 className="font-bold text-xl md:text-3xl">Contact Us</h2>
+    <ul className=" flex flex-col items-start gap-2">
+      <h2 className="font-bold text-3xl">Contact Us</h2>
       <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 ">Linkedin</li>
       <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 ">Facebook</li>
       <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 ">Instagram</li>
     </ul>
-    <ul className="text-center flex flex-col gap-1">
-      <h2 className="font-bold text-xl md:text-3xl">Misc</h2>
+    <ul className=" flex flex-col items-start gap-1">
+      <h2 className="font-bold text-3xl">Misc</h2>
       <li>Frequently Asked Questions</li>
       <li>Documentation</li>
       <li>Security Details</li>
@@ -38,6 +39,12 @@ const Footer = (props) => (
       </Link>
     </ul>
   </footer>
+  <div className="my-10">
+    <p className="text-center text-xs text-gray-300">
+      © Veldora 2022 - {new Date().getFullYear()} - All rights reserved.
+    </p>
+  </div>
+  </React.Fragment>
 );
 
 Footer.propTypes = {
