@@ -5,13 +5,13 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SideMenu from "../components/SideMenu";
 import WaitlistForm from "../components/WaitlistForm/WaitlistForm";
-
+import HeroImage from "../public/images/hero.svg";
 import styles from "../styles/Waitlist.module.css";
 import FeedbackSlider from "../components/FeedbackSlider/FeedbackSlider";
 
 export default function Waitlist() {
   return (
-    <div className="flex flex  relative px-12 lg:px-24 text-white bg-black">
+    <div className="flex flex  relative px-12 lg:pl-24 lg:pr-0 text-white bg-black">
       <Head>
         <title>Veldora Waitlist</title>
         <meta name="description" content="Veldora waitlist" />
@@ -24,7 +24,7 @@ export default function Waitlist() {
           <div className="flex flex-col flex-1 sm:text-left gap-4">
             <h1 className="text-4xl md:text-6xl font-bold">
               Need
-              <span className="text-orange-400"> backend </span>
+              <span className="text-primary"> backend </span>
               for your form?
             </h1>
             <p className="text-gray-400 w-3/4 sm:w-full my-4">
@@ -34,15 +34,15 @@ export default function Waitlist() {
             <WaitlistForm />
           </div>
           <div className="flex-1">
-            {/* <Image
-                src=
+            <Image
+                src={HeroImage}
                 alt="Veldora Waitlist"
-                /> */}
+                />
           </div>
         </section>
 
         <section className="my-16 lg:pr-32">
-          <h2 className="pb-3 text-3xl border-b mb-4 border-yellow-500 italic font-bold">
+          <h2 className="pb-3 text-3xl border-b mb-4 border-primary italic font-bold">
             What we do
           </h2>
           <div className="flex gap-4">
@@ -57,13 +57,13 @@ export default function Waitlist() {
               handled flawlessly without any backend from your endvalidation can
               be handled flawlessly without any backend from your end.
             </p>
-            <button className="p-5 py-2 mt-4 italic text-black bg-yellow-400">Join our Waitlist</button>
+            <button className="p-5 py-2 mt-4 italic text-black bg-primary">Join our Waitlist</button>
             </div>
           </div>
         </section>
         <section className="lg:pr-32">
-          <div className="border-b pb-20 border-yellow-500">
-            <h2 className="pb-3 text-3xl border-b mb-4 border-yellow-500 italic font-bold">
+          <div className="border-b pb-20 border-primary">
+            <h2 className="pb-3 text-3xl border-b mb-4 border-primary italic font-bold">
               How it works
             </h2>
             <div className="flex flex-col lg:flex-row gap-6">
@@ -74,7 +74,7 @@ export default function Waitlist() {
           </div>
         </section>
         <section className="lg:pr-32">
-          <div className="flex items-end justify-between pb-3 border-b border-yellow-500">
+          <div className="flex items-end justify-between pb-3 border-b border-primary">
             <h2 className="text-3xl italic font-bold">Feedback</h2>
             <div className="w-5 h-5 bg-red-500"></div>
           </div>

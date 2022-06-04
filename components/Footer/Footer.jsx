@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
+import Logo from '../../public/images/wordmark-small.svg';
+import Image from 'next/image';
 //import { Test } from './Footer.styles';
 
 const Footer = (props) => (
@@ -8,7 +10,9 @@ const Footer = (props) => (
     <footer className="flex flex-col border-b gap-8 lg:flex-row justify-between px-6 pt-16 pb-12 mt-12 lg:mr-32 border-t border-yellow-500">
     <ul className="flex flex-col items-start gap-3">
       <li>
-        <div className="logo"></div>
+        <div className="logo">
+          <Image src={Logo} alt="Veldora" />
+        </div>
       </li>
       <Link href="/">
         <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 uppercase">Home</li>
@@ -39,7 +43,7 @@ const Footer = (props) => (
       </Link>
     </ul>
   </footer>
-  <div className="my-10">
+  <div className="lg:hidden my-10">
     <p className="text-center text-xs text-gray-300">
       © Veldora 2022 - {new Date().getFullYear()} - All rights reserved.
     </p>
