@@ -11,7 +11,7 @@ import FeedbackSlider from "../components/FeedbackSlider/FeedbackSlider";
 
 export default function Waitlist() {
   return (
-    <div className="flex px-24 pr-24 text-white bg-black">
+    <div className="flex flex  relative px-12 lg:px-24 text-white bg-black">
       <Head>
         <title>Veldora Waitlist</title>
         <meta name="description" content="Veldora waitlist" />
@@ -20,14 +20,14 @@ export default function Waitlist() {
 
       <main className="pt-12">
         <Header />
-        <section className="flex items-start h-screen pt-24">
-          <div className="flex flex-col flex-1 gap-4">
-            <h1 className="text-6xl font-bold">
+        <section className="flex flex-1 flex-col-reverse sm:flex-row items-start md:h-screen pt-24">
+          <div className="flex flex-col flex-1 text-center sm:text-left gap-4">
+            <h1 className="text-3xl md:text-6xl font-bold">
               Need
-              <span className="text-6xl text-orange-400"> backend </span>
+              <span className="text-orange-400"> backend </span>
               for your form?
             </h1>
-            <p>
+            <p className="text-gray-400 w-3/4 sm:w-full mx-auto">
               Veldore solves that problem by providing you with quality form
               services. save your email to join the waitlist.
             </p>
@@ -48,20 +48,25 @@ export default function Waitlist() {
 validation can be handled flawlessly without any backend from your endvalidation can be handled flawlessly without any backend from your end.
         </p>
         </section> */}
-        <section className="pr-32">
-          <div className="border-b border-yellow-500">
-            <h2 className="pb-3 text-3xl italic font-bold">How it works</h2>
+        <section className="lg:pr-32">
+          <div className="border-b pb-20 border-yellow-500">
+            <h2 className="pb-3 text-3xl border-b mb-4 border-yellow-500 italic font-bold">How it works</h2>
+            <div className="flex gap-6">
+              <div className="w-24 h-24 bg-blue-300"></div>
+              <div className="w-24 h-24 bg-blue-300"></div>
+              <div className="w-24 h-24 bg-blue-300"></div>
+            </div>
           </div>
         </section>
-        <section className="pr-32">
+        <section className="lg:pr-32">
         <div className="flex items-end justify-between pb-3 border-b border-yellow-500">
           <h2 className="text-3xl italic font-bold">Feedback</h2>
           <div className="w-5 h-5 bg-red-500"></div>
         </div>
           
-          <FeedbackSlider />
+          {/* <FeedbackSlider /> */}
         </section>
-        <section className="flex flex-col items-center gap-4 pt-24 pr-32 text-center">
+        <section className="flex flex-col items-center gap-4 pt-24 lg:pr-32 text-center">
           <h2 className="text-3xl font-bold">Join our Waitlist</h2>
           <WaitlistForm alt />
         </section>

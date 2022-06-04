@@ -10,7 +10,7 @@ const FeedbackSlider = (props) => (
     <FeedbackCard/>
     <FeedbackCard/>
     <FeedbackCard/>
-    <div className="absolute right-0 flex items-center justify-center w-10 h-10 border-2 border-orange-400 rounded-full nextButton">
+    <div className="absolute right-0 cursor-pointer bg-white bg-opacity-0 hover:bg-opacity-10 flex items-center justify-center w-10 h-10 border-2 border-orange-400 rounded-full nextButton">
       P
     </div>
     </div>
