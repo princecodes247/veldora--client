@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 //import { Test } from './SideMenu.styles';
 
 const SideMenu = (props) => (
-  <aside className='justify-between flex-col absolute hidden lg:flex lg:sticky right-0  top-0 flex-1 pt-16 border-l border-primary'>
+  <aside className='justify-between flex-col absolute hidden lg:flex lg:sticky right-0  top-0  pt-16 border-l border-primary'>
     <aside className="p-8 pr-32">
     <div className="buttons flex border-2 border-primary">
-      <button className="uppercase text-xs font-bold p-2 bg-primary text-black">
+      <button className="uppercase px-6 text-xs font-bold p-2 bg-primary text-black">
         Signin
       </button>
-      <button className="uppercase text-xs font-bold p-2">
+      <button className="uppercase px-6 text-xs font-bold p-2">
         Login
       </button>
     </div>

@@ -8,18 +8,18 @@ import WaitlistForm from "../components/WaitlistForm/WaitlistForm";
 import HeroImage from "../public/images/hero.svg";
 import styles from "../styles/Waitlist.module.css";
 import FeedbackSlider from "../components/FeedbackSlider/FeedbackSlider";
+import Layout from "../components/layouts/SiteLayout";
 
 export default function Waitlist() {
   return (
-    <div className="flex flex  relative px-12 lg:pl-24 lg:pr-0 text-white bg-black">
+    <Layout>
+    
       <Head>
         <title>Veldora Waitlist</title>
         <meta name="description" content="Veldora waitlist" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="pt-12">
-        <Header />
         <section className="flex flex-1 flex-col-reverse sm:flex-row items-start md:h-screen pt-24">
           <div className="flex flex-col flex-1 sm:text-left gap-4">
             <h1 className="text-4xl md:text-6xl font-bold">
@@ -62,7 +62,7 @@ export default function Waitlist() {
           </div>
         </section>
         <section className="lg:pr-32">
-          <div className="border-b pb-20 border-primary">
+          <div className="pb-20">
             <h2 className="pb-3 text-3xl border-b mb-4 border-primary italic font-bold">
               How it works
             </h2>
@@ -73,21 +73,19 @@ export default function Waitlist() {
             </div>
           </div>
         </section>
-        <section className="lg:pr-32">
+        {/* <section className="lg:pr-32">
           <div className="flex items-end justify-between pb-3 border-b border-primary">
             <h2 className="text-3xl italic font-bold">Feedback</h2>
             <div className="w-5 h-5 bg-red-500"></div>
           </div>
 
-          {/* <FeedbackSlider /> */}
-        </section>
+          <FeedbackSlider />
+        </section> */}
         <section className="flex flex-col items-center gap-4 pt-24 lg:pr-32 text-center">
           <h2 className="text-3xl font-bold">Join our Waitlist</h2>
           <WaitlistForm alt />
         </section>
-        <Footer />
-      </main>
-      <SideMenu />
-    </div>
+  
+    </Layout>
   );
 }
