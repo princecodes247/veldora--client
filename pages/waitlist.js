@@ -22,7 +22,7 @@ export default function Waitlist() {
 
         <section className="flex flex-1 flex-col-reverse sm:flex-row items-start md:h-screen pt-24">
           <div className="flex flex-col flex-1 sm:text-left gap-4">
-            <h1 className="text-4xl md:text-6xl font-bold">
+            <h1 className="text-4xl md:text-6xl font-header font-bold">
               Need
               <span className="text-primary"> backend </span>
               for your form?
@@ -33,7 +33,7 @@ export default function Waitlist() {
             </p>
             <WaitlistForm />
           </div>
-          <div className="flex-1">
+          <div className="">
             <Image
                 src={HeroImage}
                 alt="Veldora Waitlist"
