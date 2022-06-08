@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 
 import HeroImage from "../public/images/hero.svg";
-import Layout from "../components/layouts/SiteLayout";
+import Layout from "../components/Layouts/SiteLayout";
 import Link from 'next/link';
 
 export default function NotFound() {

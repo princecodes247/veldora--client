@@ -8,7 +8,7 @@ import WaitlistForm from "../components/WaitlistForm/WaitlistForm";
 import HeroImage from "../public/images/hero.svg";
 import styles from "../styles/Waitlist.module.css";
 import FeedbackSlider from "../components/FeedbackSlider/FeedbackSlider";
-import Layout from "../components/layouts/SiteLayout";
+import Layout from "../components/Layouts/SiteLayout";
 
 export default function Waitlist() {
   return (
