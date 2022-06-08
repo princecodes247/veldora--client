@@ -17,29 +17,29 @@ return (
     <aside className="p-8 pr-20">
     <div className="buttons flex border-2 border-primary">
     <Link href="/auth/signup">
-      <button className="uppercase px-6 text-xs font-bold p-2 bg-primary text-black">
+      <button className="uppercase px-6 text-xs font-bold p-2 bg-primary hover:brightness-110 text-black">
         Signup
       </button>
     </Link>
     <Link href="/auth/login">
 
-      <button className="uppercase px-6 text-xs font-bold p-2">
+      <button className="uppercase px-6 text-xs bg-primary bg-opacity-0 hover:bg-opacity-20 transition-all font-bold p-2">
         Login
       </button>
     </Link>
     </div>
     <ul className='flex flex-col gap-4 mt-16'>
       <Link href="/waitlist">
-      <li className='py-3 pl-8 hover:bg-yellow-800 cursor-pointer transition-all uppercase font-bold text-xs'>Home</li>
+      <li className='py-3 pl-8 hover:bg-primary hover:bg-opacity-20 bg-gradient-to-r from-primary cursor-pointer transition-all uppercase font-bold text-xs'>Home</li>
       </Link>
       <Link href="/docs">
-      <li className='py-3 pl-8 hover:bg-yellow-800 cursor-pointer transition-all uppercase font-bold text-xs '>Docs</li>
+      <li className='py-3 pl-8 hover:bg-primary hover:bg-opacity-20 cursor-pointer transition-all uppercase font-bold text-xs '>Docs</li>
       </Link>
       <Link href="/faqs">
-      <li className='py-3 pl-8 hover:bg-yellow-800 cursor-pointer transition-all uppercase font-bold text-xs '>FAQs</li>
+      <li className='py-3 pl-8 hover:bg-primary hover:bg-opacity-20 cursor-pointer transition-all uppercase font-bold text-xs '>FAQs</li>
       </Link>
       <Link href="/contact">
-      <li className='py-3 pl-8 hover:bg-yellow-800 cursor-pointer transition-all uppercase font-bold text-xs '>Contact</li>
+      <li className='py-3 pl-8 hover:bg-primary hover:bg-opacity-20 cursor-pointer transition-all uppercase font-bold text-xs '>Contact</li>
       </Link>
     </ul>
   </aside>
