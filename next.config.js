@@ -29,7 +29,7 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: '/auth/*',
+        source: '/auth/:type',
         destination: '/comingsoon',
         permanent: false,
       },
