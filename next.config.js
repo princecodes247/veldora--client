@@ -1,37 +1,37 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  async redirects() {
+  async rewrites() {
     return [
       {
         source: '/',
         destination: '/waitlist',
-        permanent: false,
+        
       },
       {
         source: '/docs',
         destination: '/comingsoon',
-        permanent: false,
+        
       },
       {
         source: '/faqs',
         destination: '/comingsoon',
-        permanent: false,
+        
       },
       {
         source: '/about',
         destination: '/comingsoon',
-        permanent: false,
+        
       },
       {
         source: '/contact',
         destination: '/comingsoon',
-        permanent: false,
+        
       },
       {
         source: '/auth/:type',
         destination: '/comingsoon',
-        permanent: false,
+        
       },
     ]
   },
