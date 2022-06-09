@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'main' : "url('/images/bg.png')"
+        'main' : "url('/images/bg.webp')"
       },
       colors: {
         "primary": "#FDBB30",
