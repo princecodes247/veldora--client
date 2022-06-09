@@ -6,8 +6,8 @@ import SideMenu from '../SideMenu'
 
 export default function Layout({ children }) {
   return (
-    <div className="flex relative px-12 lg:pl-24 lg:pr-0 text-white bg-main">
-      <main className="pt-12 flex-1">
+    <div className="relative flex px-4 text-white bg-no-repeat bg-cover sm:px-12 lg:pl-24 lg:pr-0 bg-main">
+      <main className="flex-1 pt-12">
       <Header />
         {children}
       <Footer />

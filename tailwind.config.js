@@ -12,7 +12,7 @@ module.exports = {
         "primary": "#FDBB30",
       },
       fontFamily: {
-        'body': ['"Poppins"', ],
+        'body': ['"Poppins"', "sans-serif"],
         'header': ['"Poppins"', "sans-serif"],
       }
     },

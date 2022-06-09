@@ -10,6 +10,8 @@ import styles from "../styles/Waitlist.module.css";
 import FeedbackSlider from "../components/FeedbackSlider/FeedbackSlider";
 import Layout from "../components/Layouts/SiteLayout";
 
+import logo from "../public/images/logo.svg"
+
 export default function Waitlist() {
   return (
     <Layout>
@@ -20,14 +22,14 @@ export default function Waitlist() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <section className="flex flex-1 flex-col-reverse sm:flex-row items-start md:h-screen pt-24">
-          <div className="flex flex-col flex-1 sm:text-left gap-4">
-            <h1 className="text-4xl md:text-6xl font-header font-bold">
+        <section className="flex flex-col-reverse items-start flex-1 pt-24 sm:flex-row md:h-screen">
+          <div className="flex flex-col flex-1 gap-4 sm:text-left">
+            <h1 className="text-4xl font-bold md:text-6xl font-header">
               Need
               <span className="text-primary"> backend </span>
               for your form?
             </h1>
-            <p className="text-gray-400 w-3/4 sm:w-full my-4">
+            <p className="w-3/4 my-4 text-gray-400 sm:w-full">
               Veldora solves that problem by providing you with quality form
               services. save your email to join the waitlist.
             </p>
@@ -41,12 +43,14 @@ export default function Waitlist() {
           </div>
         </section>
 
-        <section className="my-16 lg:pr-32">
-          <h2 className="pb-3 text-3xl border-b mb-4 border-primary italic font-bold">
+        <section className="my-16 sm:mt-2 lg:pr-32">
+          <h2 className="pb-3 mb-4 text-3xl italic font-bold border-b border-primary">
             What we do
           </h2>
           <div className="flex gap-4">
-            <div className="hidden sm:block">SS</div>
+            <div className="hidden w-96 sm:block">
+              <Image src={logo} alt="Veldora" className="w-full" />
+            </div>
             <div className="">
 
             <p className="text-sm text-gray-400">
@@ -63,13 +67,13 @@ export default function Waitlist() {
         </section>
         <section className="lg:pr-32">
           <div className="pb-20">
-            <h2 className="pb-3 text-3xl border-b mb-4 border-primary italic font-bold">
+            <h2 className="pb-3 mb-4 text-3xl italic font-bold border-b border-primary">
               How it works
             </h2>
-            <div className="flex flex-col lg:flex-row gap-6">
-              <div className="w-full lg:w-24 h-44 lg:h-24 bg-blue-300"></div>
-              <div className="w-full lg:w-24 h-44 lg:h-24 bg-blue-300"></div>
-              <div className="w-full lg:w-24 h-44 lg:h-24 bg-blue-300"></div>
+            <div className="flex flex-col gap-6 lg:flex-row">
+              <div className="w-full bg-blue-900 bg-opacity-10 lg:w-24 h-44 lg:h-24"></div>
+              <div className="w-full bg-blue-900 bg-opacity-10 lg:w-24 h-44 lg:h-24"></div>
+              <div className="w-full bg-blue-900 bg-opacity-10 lg:w-24 h-44 lg:h-24"></div>
             </div>
           </div>
         </section>
@@ -81,7 +85,7 @@ export default function Waitlist() {
 
           <FeedbackSlider />
         </section> */}
-        <section className="flex flex-col items-center gap-4 pt-24 lg:pr-32 text-center">
+        <section className="flex flex-col items-center gap-4 pt-24 text-center lg:pr-32">
           <h2 className="text-3xl font-bold">Join our Waitlist</h2>
           <WaitlistForm alt />
         </section>

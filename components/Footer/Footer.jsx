@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 const Footer = (props) => (
   <React.Fragment>
-    <footer className="flex flex-col border-b gap-8 lg:flex-row justify-between px-6 pt-16 pb-12 mt-12 lg:mr-32 border-t border-yellow-500">
+    <footer className="flex flex-col justify-between gap-8 px-6 pt-16 pb-12 mt-12 border-t border-b border-yellow-500 lg:flex-row lg:mr-32">
     <ul className="flex flex-col items-start gap-3">
       <li>
         <div className="logo">
@@ -15,26 +15,26 @@ const Footer = (props) => (
         </div>
       </li>
       <Link href="/">
-        <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 uppercase">Home</li>
+        <li className="uppercase transition-all border-b-2 border-transparent cursor-pointer hover:border-yellow-400">Home</li>
       </Link>
       <Link href="/services">
-        <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 uppercase">Services</li>
+        <li className="uppercase transition-all border-b-2 border-transparent cursor-pointer hover:border-yellow-400">Services</li>
       </Link>
       <Link href="/about">
-        <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 uppercase">About</li>
+        <li className="uppercase transition-all border-b-2 border-transparent cursor-pointer hover:border-yellow-400">About</li>
       </Link>
       <Link href="/contact">
-        <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 uppercase">Contact</li>
+        <li className="uppercase transition-all border-b-2 border-transparent cursor-pointer hover:border-yellow-400">Contact</li>
       </Link>
     </ul>
-    <ul className=" flex flex-col items-start gap-2">
-      <h2 className="font-bold text-3xl">Contact Us</h2>
-      <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 ">Linkedin</li>
-      <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 ">Facebook</li>
-      <li className="hover:border-b-2 transition-all cursor-pointer border-yellow-400 ">Instagram</li>
+    <ul className="flex flex-col items-start gap-2 ">
+      <h2 className="text-3xl font-bold">Contact Us</h2>
+      <li className="transition-all border-b-2 border-transparent cursor-pointer hover:border-yellow-400 ">Linkedin</li>
+      <li className="transition-all border-b-2 border-transparent cursor-pointer hover:border-yellow-400 ">Facebook</li>
+      <li className="transition-all border-b-2 border-transparent cursor-pointer hover:border-yellow-400 ">Instagram</li>
     </ul>
-    <ul className=" flex flex-col items-start gap-1">
-      <h2 className="font-bold text-3xl">Misc</h2>
+    <ul className="flex flex-col items-start gap-1 ">
+      <h2 className="text-3xl font-bold">Misc</h2>
       <li>Frequently Asked Questions</li>
       <li>Documentation</li>
       <li>Security Details</li>
@@ -43,8 +43,8 @@ const Footer = (props) => (
       </Link>
     </ul>
   </footer>
-  <div className="lg:hidden my-10">
-    <p className="text-center text-xs text-gray-300">
+  <div className="my-10 lg:hidden">
+    <p className="text-xs text-center text-gray-300">
       © Veldora 2022 - {new Date().getFullYear()} - All rights reserved.
     </p>
   </div>
