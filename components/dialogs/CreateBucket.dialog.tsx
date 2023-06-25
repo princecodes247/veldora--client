@@ -13,13 +13,20 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "../ui/textarea";
 import { useMutate } from "@/hooks/useMutate";
 import { createBucket } from "@/services/BucketService";
+import { useState } from "react";
 
-export default function CreateProjectDialog() {
+export default function CreateBucketDialog() {
   const createBucketMutation = useMutate(createBucket, {
     loadingMessage: "",
+    onSuccessFunction: () => {
+      setOpen(false);
+    },
   });
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Create Bucket</Button>
       </DialogTrigger>
@@ -39,6 +46,8 @@ export default function CreateProjectDialog() {
               id="name"
               placeholder="Bubble Project Bucket"
               className="col-span-3"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-4">
@@ -49,12 +58,25 @@ export default function CreateProjectDialog() {
               id="description"
               placeholder="A simple description of your bucket"
               className="col-span-3"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={() => createBucketMutation} type="submit">
-            Create new Bucket!
+          <Button
+            onClick={() =>
+              createBucketMutation.mutate({
+                description,
+                name,
+              })
+            }
+            disabled={createBucketMutation.isLoading}
+            type="submit"
+          >
+            {createBucketMutation.isLoading
+              ? "Loading..."
+              : "Create new Bucket!"}
           </Button>
         </DialogFooter>
       </DialogContent>
