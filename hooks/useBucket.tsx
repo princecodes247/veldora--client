@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { getEvent } from "../services/BucketService";
+import { getBucket } from "../services/BucketService";
 
-const useEvent = (id: string) => {
+const useBucket = (id: string) => {
   return useQuery({
     queryKey: ["event", id],
     queryFn: async () => {
-      const result = await getEvent(id);
+      const result = await getBucket(id);
       console.log({ result: result.data.data });
       return result.data.data;
     },
@@ -14,4 +14,4 @@ const useEvent = (id: string) => {
   });
 };
 
-export default useEvent;
+export default useBucket;

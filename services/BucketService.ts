@@ -1,16 +1,13 @@
 import { AxiosResponse } from "axios";
-import { GetEventsData, IUserData, ResponseData } from "../interfaces/services";
+import { GetBucketsData, ResponseBody } from "../interfaces/services";
 import api, { authHeaders } from "./config";
-import { IEventData } from "@/interfaces";
+import { IBucketData } from "@/interfaces";
 
 const servicePrefix = "/buckets/";
+const submissionsPrefix = "/submissions/";
 
 export const getBucket = (id: string) => {
-  return api.get<
-    ResponseData & {
-      data: IEventData;
-    }
-  >(servicePrefix + id, {});
+  return api.get<ResponseBody<IBucketData>>(servicePrefix + id, {});
 };
 
 export const getUserBuckets = ({
@@ -22,8 +19,22 @@ export const getUserBuckets = ({
   page: number;
   pageSize: number;
 }>) => {
-  return api.get<GetEventsData>(
+  return api.get<GetBucketsData>(
     `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
+    {},
+  );
+};
+export const getSubmissions = ({
+  id,
+  page = 1,
+  pageSize,
+}: Partial<{
+  id: string;
+  page?: number;
+  pageSize?: number;
+}>) => {
+  return api.get<GetBucketsData>(
+    `${submissionsPrefix}?bucket=${id}&page=${page}&pageSize=${pageSize}`,
     {},
   );
 };
@@ -36,16 +47,14 @@ export const createBucket = ({
   description: string;
 }) => {
   return api.post<
-    ResponseData & {
-      data: {
-        event_id: number;
-        uuid: string;
-        commission: number;
-        updated_at: string;
-        created_at: string;
-        id: 4;
-      };
-    }
+    ResponseBody<{
+      event_id: number;
+      uuid: string;
+      commission: number;
+      updated_at: string;
+      created_at: string;
+      id: 4;
+    }>
   >(
     servicePrefix,
     {
@@ -71,7 +80,7 @@ export const getBuckets = ({
   page: number;
   pageSize: number;
 }>) => {
-  return api.get<GetEventsData>(
+  return api.get<GetBucketsData>(
     `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
     {},
   );
