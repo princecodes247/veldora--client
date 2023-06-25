@@ -1,46 +1,24 @@
-// import { Metadata } from "next";
-// import Image from "next/image";
-import {
-  Activity,
-  CreditCard,
-  DollarSign,
-  Download,
-  Grid,
-  LayoutGrid,
-  List,
-  Plus,
-  Users,
-} from "lucide-react";
+import { LayoutGrid, List } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarDateRangePicker } from "@/components/DateRangePicker";
-import { MainNav } from "@/components/MainNav";
-import { Overview } from "@/components/Overview";
-import { RecentSales } from "@/components/RecentSales";
 import { Search } from "@/components/Search";
-import TeamSwitcher from "@/components/TeamSwitcher";
-import { UserNav } from "@/components/UserNav";
 import { DashboardNav } from "@/components/DashboardNav";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
 import Head from "next/head";
 import { BucketCard } from "@/components/BucketCard";
-import CreateProjectDialog from "@/components/dialogs/CreateProject.dialog";
-
-// export const metadata: Metadata = {
-//   title: "Dashboard",
-//   description: "Example dashboard app using the components.",
-// };
+import CreateBucketDialog from "@/components/dialogs/CreateBucket.dialog";
+import useUserBuckets from "@/hooks/useUserBuckets";
+import React, { useState } from "react";
 
 export default function Dashboard() {
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
+  const buckets = useUserBuckets({
+    page,
+    pageSize,
+  });
+
+  console.log({ buckets: buckets.data?.pages });
+
   return (
     <>
       <div className="flex flex-col">
@@ -50,7 +28,7 @@ export default function Dashboard() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <DashboardNav />
-        <div className="flex-1 p-8 pt-6 space-y-4">
+        <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex flex-col justify-between space-y-2 md:flex-row md:items-center">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           </div>
@@ -75,21 +53,25 @@ export default function Dashboard() {
               {/* <Button>
                 <p className="mr-2">Create New</p> <Plus size={14} />
               </Button> */}
-              <CreateProjectDialog />
+              <CreateBucketDialog />
             </div>
 
             <TabsContent value="grid-view" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
-                  <BucketCard />
-                ))}
+                {React.Children.toArray(
+                  buckets.data?.pages?.map((group) =>
+                    group?.map(() => <BucketCard />),
+                  ),
+                )}
               </div>
             </TabsContent>
             <TabsContent value="list-view" className="space-y-4">
               <div className="flex flex-col gap-4">
-                {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
-                  <BucketCard listView />
-                ))}
+                {React.Children.toArray(
+                  buckets.data?.pages?.map((group) =>
+                    group?.map(() => <BucketCard listView />),
+                  ),
+                )}
               </div>
             </TabsContent>
           </Tabs>
