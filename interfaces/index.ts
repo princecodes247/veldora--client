@@ -62,52 +62,16 @@ export enum LoadingType {
   TEXT = "text",
 }
 
-export interface IMealData {
-  id: 5;
-  event_id: 4;
-  menu_id: 3;
+export interface IBucketData {
+  _id: string;
   name: string;
   description: string;
-  available: 1;
-  price: 20;
-  created_at: string;
-  updated_at: string;
+  submissionsCount: number;
 }
 
-export interface IEventData {
-  id: string;
-  reference: string;
+export interface ISubmissionData {
+  _id: string;
   name: string;
   description: string;
-  theme: string;
-  photo: string;
-  type: string;
-  venue: string;
-  address: string;
-  service_number: string;
-  currency: string;
-  capacity: string;
-  start_date: string;
-  end_date?: string;
-  start_time: string;
-  end_time?: string;
-  tickets: ITicketData[];
-  purchased_tickets: IPurchasedTicketData[];
-  total_purchased_ticket_count: number;
-  affliates: {
-    id: number;
-    event_id: number;
-    uuid: string;
-    commission: number;
-    created_at: string;
-  }[];
-}
-
-export interface IBlogData {
-  id: number;
-  name: string;
-  body: string;
-  photo: string;
-  created_at: string;
-  updated_at: string;
+  submissionsCount: number;
 }
