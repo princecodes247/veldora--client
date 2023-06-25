@@ -49,8 +49,18 @@ export interface ResponseBody<T> {
   message: string;
   data: T;
 }
+export interface PaginationMeta {
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
 
-export interface GetBucketsData extends ResponseBody<IBucketData[]> {}
+export interface GetBucketsData
+  extends ResponseBody<IBucketData[]>,
+    PaginationMeta {}
 
 // links: {
 //   first: "string";

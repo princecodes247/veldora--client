@@ -18,12 +18,11 @@ const useUserBuckets = ({
         page: pageParam,
         pageSize,
       });
-      console.log({ result: result.data.data });
-      const buckets = result.data.data;
+      console.log({ result: result.data });
+      const buckets = result.data;
       return buckets;
     },
-    getNextPageParam: (lastPage, pages) =>
-      (lastPage?.meta?.current_page ?? 1) + 1,
+    getNextPageParam: (lastPage, pages) => (lastPage?.meta?.page ?? 1) + 1,
   });
 };
 
