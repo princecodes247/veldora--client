@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { GetBucketsData, ResponseBody } from "../interfaces/services";
 import api, { authHeaders } from "./config";
-import { IBucketData } from "@/interfaces";
+import { IBucketData, ISubmissionData } from "@/interfaces";
 
 const servicePrefix = "/buckets/";
 const submissionsPrefix = "/submissions/";
@@ -33,7 +33,7 @@ export const getSubmissions = ({
   page?: number;
   pageSize?: number;
 }>) => {
-  return api.get<GetBucketsData>(
+  return api.get<ResponseBody<ISubmissionData[]>>(
     `${submissionsPrefix}?bucket=${id}&page=${page}&pageSize=${pageSize}`,
     {},
   );

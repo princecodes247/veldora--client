@@ -7,6 +7,7 @@ import { labels, priorities, statuses } from "@/constants/data";
 import { Task } from "@/constants/index";
 import { DataTableColumnHeader } from "@/components/Table/DataTableColumnHeader";
 import { DataTableRowActions } from "@/components/Table/DataTableRowActions";
+import { ISubmissionData } from "@/interfaces";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -119,9 +120,9 @@ export const columns: ColumnDef<Task>[] = [
 
 export const submissionColumns = (
   cols: Array<string> = [],
-): ColumnDef<Task>[] => {
+): ColumnDef<ISubmissionData>[] => {
   return [
-    ...[
+    ...([
       {
         id: "select",
         header: ({ table }) => (
@@ -156,8 +157,8 @@ export const submissionColumns = (
         enableSorting: false,
         enableHiding: false,
       },
-    ],
-    ...cols.map((col) => ({
+    ] as ColumnDef<ISubmissionData>[]),
+    ...(cols.map((col) => ({
       accessorKey: "_id",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title={col} />
@@ -165,6 +166,6 @@ export const submissionColumns = (
       cell: ({ row }) => <div className="w-[80px]">{row.getValue(col)}</div>,
       enableSorting: false,
       enableHiding: false,
-    })),
+    })) as ColumnDef<ISubmissionData>[]),
   ];
 };

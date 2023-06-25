@@ -69,7 +69,13 @@ export default function Dashboard() {
               <DataTable
                 data={submissions?.data ?? []}
                 columns={submissionColumns(
-                  submissions?.data?.map((submission) => submission.data),
+                  Array.from(
+                    new Set(
+                      submissions?.data?.flatMap((submission) =>
+                        Object.keys(submission.data),
+                      ),
+                    ),
+                  ),
                 )}
               />
             </TabsContent>

@@ -71,7 +71,8 @@ export interface IBucketData {
 
 export interface ISubmissionData {
   _id: string;
-  name: string;
-  description: string;
-  submissionsCount: number;
+  bucket: string;
+  data: {
+    [key: string]: any;
+  };
 }
