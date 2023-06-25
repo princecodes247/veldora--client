@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { cva } from "class-variance-authority";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
+import { IBucketData } from "@/interfaces";
 
 const bucketCardVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -35,9 +36,15 @@ const bucketCardVariants = cva(
   },
 );
 
-export function BucketCard({ listView }: { listView?: boolean }) {
+export function BucketCard({
+  bucket,
+  listView,
+}: {
+  bucket: IBucketData;
+  listView?: boolean;
+}) {
   return (
-    <Link href="/bucket/[id]" as={"/bucket/1"}>
+    <Link href="/bucket/[id]" as={"/bucket/" + bucket._id}>
       <Card
         className={clsx(
           "hover:shadow-md",
@@ -51,24 +58,28 @@ export function BucketCard({ listView }: { listView?: boolean }) {
           )}
         >
           <CardTitle className="flex gap-4">
-            <Avatar className="w-8 h-8">
+            <Avatar className="h-8 w-8">
               <AvatarImage src="/avatars/01.png" alt="@shadcn" />
-              <AvatarFallback className="text-sm">SC</AvatarFallback>
+              <AvatarFallback className="text-sm">
+                {bucket.name.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
-            <span className="text-xl font-bold">Bucket Name</span>
+            <span className="text-xl font-bold">{bucket.name}</span>
           </CardTitle>
           {/* <DollarSign className="w-4 h-4 text-muted-foreground" /> */}
         </CardHeader>
         <CardContent className={clsx(listView && "py-4")}>
           <div className="text-sm text-muted-foreground">
-            www.veldora.com/3274892343
+            www.veldora.com/{bucket._id}
           </div>
-          <div className="flex justify-between mt-4">
-            <p className="text-xs text-muted-foreground">20 submissions</p>
+          <div className="mt-4 flex justify-between">
+            <p className="text-xs text-muted-foreground">
+              {bucket.submissionsCount} submissions
+            </p>
           </div>
         </CardContent>
         {listView && (
-          <div className="items-center justify-center hidden p-4 md:flex">
+          <div className="hidden items-center justify-center p-4 md:flex">
             <button>
               <Menu />
             </button>
