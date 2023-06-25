@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const baseURL = "http://localhost:3000";
-const baseURL = new URL("https://catererhub.com/api");
+const baseURL = "http://localhost:3050/api/v1";
 
 const api = axios.create({
   baseURL: baseURL.toString(),

@@ -3,20 +3,29 @@ import { GetEventsData, IUserData, ResponseData } from "../interfaces/services";
 import api, { authHeaders } from "./config";
 import { IEventData } from "@/interfaces";
 
-const servicePrefix = "/website/events";
+const servicePrefix = "/buckets/";
 
 export const getBucket = (id: string) => {
   return api.get<
     ResponseData & {
       data: IEventData;
     }
-  >("/event/single/" + id, {});
+  >(servicePrefix + id, {});
 };
-export const getUserBuckets = () => {
-  return api.get("/event/", {
-    // return api.get<IEventData[]>("/event/", {
-    headers: authHeaders(),
-  });
+
+export const getUserBuckets = ({
+  name,
+  page,
+  pageSize,
+}: Partial<{
+  name: string;
+  page: number;
+  pageSize: number;
+}>) => {
+  return api.get<GetEventsData>(
+    `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
+    {},
+  );
 };
 
 export const createBucket = ({
@@ -38,7 +47,7 @@ export const createBucket = ({
       };
     }
   >(
-    "/event/affliate/store/",
+    servicePrefix,
     {
       name,
       description,
@@ -50,7 +59,7 @@ export const createBucket = ({
 };
 
 export const deleteBucket = ({ id }: { id: number }) => {
-  return api.post("/remove/event/affliate/" + id + "/", {});
+  return api.post(servicePrefix + "remove" + id + "/", {});
 };
 
 export const getBuckets = ({
@@ -63,7 +72,7 @@ export const getBuckets = ({
   pageSize: number;
 }>) => {
   return api.get<GetEventsData>(
-    `/website/events?name=${name}&page=${page}&pageSize=${pageSize}`,
+    `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
     {},
   );
 };
