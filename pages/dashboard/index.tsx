@@ -60,7 +60,7 @@ export default function Dashboard() {
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {React.Children.toArray(
                   buckets.data?.pages?.map((group) =>
-                    group?.map(() => <BucketCard />),
+                    group?.map((bucket) => <BucketCard bucket={bucket} />),
                   ),
                 )}
               </div>
@@ -69,7 +69,9 @@ export default function Dashboard() {
               <div className="flex flex-col gap-4">
                 {React.Children.toArray(
                   buckets.data?.pages?.map((group) =>
-                    group?.map(() => <BucketCard listView />),
+                    group?.map((bucket) => (
+                      <BucketCard bucket={bucket} listView />
+                    )),
                   ),
                 )}
               </div>
