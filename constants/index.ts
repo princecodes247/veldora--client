@@ -11,3 +11,10 @@ export const taskSchema = z.object({
 });
 
 export type Task = z.infer<typeof taskSchema>;
+
+export const submissionSchema = z.object({
+  _id: z.string().optional(),
+  data: z.any(),
+});
+
+export type Submisson = z.infer<typeof submissionSchema>;

@@ -30,9 +30,21 @@ import Link from "next/link";
 import Head from "next/head";
 import TaskPage from "@/components/Tasks";
 import { DataTable } from "@/components/Table/DataTable";
-import { columns } from "@/constants/mock/Columns";
+import { columns, submissionColumns } from "@/constants/mock/Columns";
+import { useRouter } from "next/router";
+import useBucket from "@/hooks/useBucket";
+import useSubmissions from "@/hooks/useSubmissions";
 
 export default function Dashboard() {
+  const router = useRouter();
+  const { id } = router.query as { id: string };
+
+  const bucket = useBucket(id ?? "");
+  const submissions = useSubmissions({
+    id: id ?? "",
+    page: 1,
+    pageSize: 10,
+  });
   return (
     <>
       <div className="flex flex-col">
@@ -44,17 +56,24 @@ export default function Dashboard() {
         <DashboardNav />
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex flex-col justify-between space-y-2 md:flex-row md:items-center">
-            <h2 className="text-3xl font-bold tracking-tight">Bucket Name</h2>
+            <h2 className="text-3xl font-bold tracking-tight">
+              {bucket.data?.name}
+            </h2>
           </div>
           <Tabs defaultValue="submissions" className="space-y-4">
             <TabsList>
               <TabsTrigger value="submissions">Submissions</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
+              <TabsTrigger value="config">Config</TabsTrigger>
             </TabsList>
             <TabsContent value="submissions" className="space-y-4">
-              <DataTable data={[]} columns={columns} />
+              <DataTable
+                data={submissions?.data ?? []}
+                columns={submissionColumns(
+                  submissions?.data?.map((submission) => submission.data),
+                )}
+              />
             </TabsContent>
-            <TabsContent value="settings" className="space-y-4"></TabsContent>
+            <TabsContent value="config" className="space-y-4"></TabsContent>
           </Tabs>
         </div>
       </div>
