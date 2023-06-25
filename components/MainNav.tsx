@@ -18,6 +18,12 @@ export function MainNav({
         Overview
       </Link>
       <Link
+        href="/dashboard/analytics"
+        className="text-sm font-medium transition-colors text-muted-foreground hover:text-primary"
+      >
+        Analytics
+      </Link>
+      <Link
         href="/settings"
         className="text-sm font-medium transition-colors text-muted-foreground hover:text-primary"
       >

@@ -20,3 +20,4 @@
 - [] Workspaces - Create forms in workspaces
 - [] Notifications - App and Email notifications
 - [] Pricing
+- [] "A take your time" popup when user is idle on a form

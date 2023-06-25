@@ -1,0 +1,80 @@
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { cva } from "class-variance-authority";
+import clsx from "clsx";
+import { Menu } from "lucide-react";
+
+const bucketCardVariants = cva(
+  "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline:
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  },
+);
+
+export function BucketCard({ listView }: { listView?: boolean }) {
+  return (
+    <Link href="/bucket/[id]" as={"/bucket/1"}>
+      <Card
+        className={clsx(
+          "hover:shadow-md",
+          listView && "flex flex-col justify-between gap-2 md:flex-row",
+        )}
+      >
+        <CardHeader
+          className={clsx(
+            "flex flex-row items-center justify-between space-y-0 pb-1",
+            listView && "py-4",
+          )}
+        >
+          <CardTitle className="flex gap-4">
+            <Avatar className="w-8 h-8">
+              <AvatarImage src="/avatars/01.png" alt="@shadcn" />
+              <AvatarFallback className="text-sm">SC</AvatarFallback>
+            </Avatar>
+            <span className="text-xl font-bold">Bucket Name</span>
+          </CardTitle>
+          {/* <DollarSign className="w-4 h-4 text-muted-foreground" /> */}
+        </CardHeader>
+        <CardContent className={clsx(listView && "py-4")}>
+          <div className="text-sm text-muted-foreground">
+            www.veldora.com/3274892343
+          </div>
+          <div className="flex justify-between mt-4">
+            <p className="text-xs text-muted-foreground">20 submissions</p>
+          </div>
+        </CardContent>
+        {listView && (
+          <div className="items-center justify-center hidden p-4 md:flex">
+            <button>
+              <Menu />
+            </button>
+          </div>
+        )}
+      </Card>
+    </Link>
+  );
+}
