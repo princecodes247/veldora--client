@@ -152,9 +152,7 @@ export const submissionColumns = (
         header: ({ column }) => (
           <DataTableColumnHeader column={column} title="ID" />
         ),
-        cell: ({ row }) => (
-          <div className="w-[80px]">{row.getValue("_id")}</div>
-        ),
+        cell: ({ row }) => <div className="">{row.getValue("_id")}</div>,
         filterFn: (row, id, value) => {
           return value.includes(row.getValue(id));
         },
@@ -167,7 +165,7 @@ export const submissionColumns = (
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title={col} />
       ),
-      cell: ({ row }) => <div className="w-[80px]">{row.getValue(col)}</div>,
+      cell: ({ row }) => <div className="">{row.getValue(col)}</div>,
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id));
       },
