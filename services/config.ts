@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const ba4seURL = "http://localhost:3050/api/v1";
-const baseURL = "https://veldora-server.onrender.com/api/v1";
+const baseURL = "http://localhost:3050/api/v1";
+// const baseURL = "https://veldora-server.onrender.com/api/v1";
 
 const api = axios.create({
   baseURL: baseURL.toString(),
@@ -29,12 +29,12 @@ api.interceptors.response.use(
     // Do something with response error
     console.log("interceptor error", error, error?.response?.data?.message);
     if (
-      error?.response?.data?.message.toLowerCase().includes("unauthenticated")
+      error?.response?.data?.message.toLowerCase().includes("unauthorized")
     ) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       console.log("interceptor errorssq");
-      window.location.href = "/";
+      window.location.href = "/login";
     }
     return Promise.reject(error);
   },

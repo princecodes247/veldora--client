@@ -6,8 +6,8 @@
 
 - [*] Create form, embed and get data
 - [*] Get and paginate forms and form responses
-- [] Form analytics design
-- [] Connect Form analytics
+- [*] Form analytics design
+- [*] Connect Form analytics
 - [] Connect settings page
 - [] Landing page
 - [] Delete response
@@ -17,7 +17,6 @@
 - [] Search for forms
 - [] Install @vercel/analytics
 - [*] Search form responses
-- [] Settings - Theme, User details
 - [] Send data to email anonymously
 
 ### Extra Features

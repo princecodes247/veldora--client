@@ -90,4 +90,4 @@ function Dashboard() {
   );
 }
 
-export default withAuthHOC(Dashboard);
+export default Dashboard;

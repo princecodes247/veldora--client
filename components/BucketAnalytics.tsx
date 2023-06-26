@@ -96,10 +96,10 @@ export default function BucketAnalytics({
         <Card className="col-span-3">
           <CardHeader>
             <CardTitle>Geographic Distribution</CardTitle>
-            <CardDescription>You made 265 sales this month.</CardDescription>
+            <CardDescription>You reached {bucket?.stats?.countries?.length ?? 0} countries this month.</CardDescription>
           </CardHeader>
           <CardContent>
-            <GeographicDistribution data={[]} />
+            <GeographicDistribution data={bucket?.stats?.countries ?? []} />
           </CardContent>
         </Card>
       </div>

@@ -10,7 +10,7 @@ import useBucket from "@/hooks/useBucket";
 import useSubmissions from "@/hooks/useSubmissions";
 import BucketAnalytics from "@/components/BucketAnalytics";
 
-export default function Dashboard() {
+export default function Bucket() {
   const router = useRouter();
   const { id } = router.query as { id: string };
 

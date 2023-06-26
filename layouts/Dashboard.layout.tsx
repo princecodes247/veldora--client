@@ -1,10 +1,11 @@
+import withAuthHOC from "@/HOCs/withAuthHOC";
 import { DashboardNav } from "@/components/DashboardNav";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <div>
       <DashboardNav />
@@ -12,3 +13,5 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     </div>
   );
 }
+
+export default withAuthHOC(DashboardLayout)
