@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3050/api/v1";
-// const baseURL = "https://veldora-server.onrender.com/api/v1";
+// const ba4seURL = "http://localhost:3050/api/v1";
+const baseURL = "https://veldora-server.onrender.com/api/v1";
 
 const api = axios.create({
   baseURL: baseURL.toString(),
