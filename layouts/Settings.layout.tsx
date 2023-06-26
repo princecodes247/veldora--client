@@ -5,25 +5,17 @@ import { SidebarNav } from "@/components/settings/SettingsSidebarNav";
 
 const sidebarNavItems = [
   {
-    title: "Profile",
-    href: "/settings",
-  },
-  {
     title: "Account",
-    href: "/settings/account",
+    href: "/settings",
   },
   {
     title: "Appearance",
     href: "/settings/appearance",
   },
-  {
-    title: "Notifications",
-    href: "/settings/notifications",
-  },
-  {
-    title: "Display",
-    href: "/settings/display",
-  },
+  // {
+  //   title: "Notifications",
+  //   href: "/settings/notifications",
+  // },
 ];
 
 interface SettingsLayoutProps {

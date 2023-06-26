@@ -25,6 +25,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useQuery } from "@tanstack/react-query";
+import useUser from "@/hooks/useUser";
 // import { toast } from "@/components/ui/use-toast"
 
 const profileFormSchema = z.object({
@@ -84,6 +86,10 @@ export function ProfileForm() {
     //   ),
     // })
   }
+
+  const user = useUser({
+    
+  })
 
   return (
     <Form {...form}>
