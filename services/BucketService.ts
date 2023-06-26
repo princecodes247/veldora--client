@@ -1,13 +1,17 @@
 import { AxiosResponse } from "axios";
 import { GetBucketsData, ResponseBody } from "../interfaces/services";
 import api, { authHeaders } from "./config";
-import { IBucketData, ISubmissionData } from "@/interfaces";
+import {
+  IBucketData,
+  IBucketDataWithStats,
+  ISubmissionData,
+} from "@/interfaces";
 
 const servicePrefix = "/buckets/";
 const submissionsPrefix = "/submissions/";
 
 export const getBucket = (id: string) => {
-  return api.get<ResponseBody<IBucketData>>(servicePrefix + id, {});
+  return api.get<ResponseBody<IBucketDataWithStats>>(servicePrefix + id, {});
 };
 
 export const getUserBuckets = ({
