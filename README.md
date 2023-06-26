@@ -23,3 +23,13 @@
 - [] Notifications - App and Email notifications
 - [] Pricing
 - [] "A take your time" popup when user is idle on a form
+
+## Analytics Page Contents
+
+- Submission Count
+- Views
+- Conversion Rate
+- Geographic Distribution
+- Referral Source
+- Device/Browser Type
+- Time of Day Analysis

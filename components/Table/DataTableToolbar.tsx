@@ -1,5 +1,5 @@
 import { Table } from "@tanstack/react-table";
-import { X } from "lucide-react";
+import { Trash, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,10 +23,10 @@ export function DataTableToolbar<TData>({
     <div className="flex items-center justify-between">
       <div className="flex items-center flex-1 space-x-2">
         <Input
-          placeholder="Filter tasks..."
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter submissions..."
+          value={(table.getColumn("_id")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
+            table.getColumn("_id")?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
@@ -55,7 +55,18 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      <DataTableViewOptions table={table} />
+      <div className="flex gap-2">
+        <DataTableViewOptions table={table} />
+        <Button
+          variant={"ghost"}
+          className="h-8"
+          disabled={false}
+          onClick={() => console.log({selectedrows: table.getSelectedRowModel()})}
+        >
+          <Trash className="w-4 h-4 mr-2" />
+          Delete
+        </Button>
+      </div>
     </div>
   );
 }

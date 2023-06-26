@@ -9,6 +9,7 @@ import CreateBucketDialog from "@/components/dialogs/CreateBucket.dialog";
 import useUserBuckets from "@/hooks/useUserBuckets";
 import React, { useState } from "react";
 import withAuthHOC from "@/HOCs/withAuthHOC";
+import { BucketCardSkeleton } from "@/components/BucketCardSkeleton";
 
 function Dashboard() {
   const [page, setPage] = useState(0);
@@ -60,11 +61,16 @@ function Dashboard() {
             <TabsContent value="grid-view" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {React.Children.toArray(
-                  buckets.data?.pages?.map((group) =>
-                    group?.data?.map((bucket) => (
-                      <BucketCard bucket={bucket} />
-                    )),
-                  ),
+                  buckets.isLoading &&
+                    [0, 0, 0, 0, 0, 0].map(() => <BucketCardSkeleton />),
+                )}
+                {React.Children.toArray(
+                  !buckets.isLoading &&
+                    buckets.data?.pages?.map((group) =>
+                      group?.data?.map((bucket) => (
+                        <BucketCard bucket={bucket} />
+                      )),
+                    ),
                 )}
               </div>
             </TabsContent>

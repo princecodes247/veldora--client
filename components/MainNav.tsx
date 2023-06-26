@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
+import clsx from "clsx";
 
 export function MainNav({
   className,
@@ -13,22 +14,19 @@ export function MainNav({
     >
       <Link
         href="/dashboard"
-        className="text-sm font-medium transition-colors hover:text-primary"
+        className={clsx(
+          "text-sm font-medium transition-colors hover:text-primary",
+          "text-muted-foreground",
+        )}
       >
         Overview
       </Link>
-      <Link
+      {/* <Link
         href="/dashboard/analytics"
-        className="text-sm font-medium transition-colors text-muted-foreground hover:text-primary"
+        className="text-sm font-medium transition-colors hover:text-primary"
       >
         Analytics
-      </Link>
-      <Link
-        href="/settings"
-        className="text-sm font-medium transition-colors text-muted-foreground hover:text-primary"
-      >
-        Settings
-      </Link>
+      </Link> */}
     </nav>
   );
 }

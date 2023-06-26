@@ -34,6 +34,8 @@ import { columns, submissionColumns } from "@/constants/mock/Columns";
 import { useRouter } from "next/router";
 import useBucket from "@/hooks/useBucket";
 import useSubmissions from "@/hooks/useSubmissions";
+import { ISubmissionData } from "@/interfaces";
+import BucketAnalytics from "@/components/BucketAnalytics";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -55,19 +57,32 @@ export default function Dashboard() {
         </Head>
         <DashboardNav />
         <div className="flex-1 space-y-4 p-8 pt-6">
-          <div className="flex flex-col justify-between space-y-2 md:flex-row md:items-center">
+          <div className="flex flex-col space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">
-              {bucket.data?.name}
+              {bucket.data?.name ?? ""}
             </h2>
+            <p>{bucket.data?.description ?? ""}</p>
           </div>
           <Tabs defaultValue="submissions" className="space-y-4">
             <TabsList>
+              <TabsTrigger value="summary">Summary</TabsTrigger>
               <TabsTrigger value="submissions">Submissions</TabsTrigger>
               <TabsTrigger value="config">Config</TabsTrigger>
             </TabsList>
+            <TabsContent value="summary" className="space-y-4">
+              <BucketAnalytics />
+            </TabsContent>
             <TabsContent value="submissions" className="space-y-4">
               <DataTable
-                data={submissions?.data ?? []}
+                data={
+                  submissions?.data?.map((submission) => {
+                    console.log({ submission });
+                    return {
+                      ...submission,
+                      ...submission.data,
+                    };
+                  }) ?? []
+                }
                 columns={submissionColumns(
                   Array.from(
                     new Set(

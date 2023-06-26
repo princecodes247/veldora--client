@@ -121,6 +121,7 @@ export const columns: ColumnDef<Task>[] = [
 export const submissionColumns = (
   cols: Array<string> = [],
 ): ColumnDef<ISubmissionData>[] => {
+  const data = "data";
   return [
     ...([
       {
@@ -154,18 +155,24 @@ export const submissionColumns = (
         cell: ({ row }) => (
           <div className="w-[80px]">{row.getValue("_id")}</div>
         ),
-        enableSorting: false,
+        filterFn: (row, id, value) => {
+          return value.includes(row.getValue(id));
+        },
+        enableSorting: true,
         enableHiding: false,
       },
     ] as ColumnDef<ISubmissionData>[]),
     ...(cols.map((col) => ({
-      accessorKey: "_id",
+      accessorKey: col,
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title={col} />
       ),
       cell: ({ row }) => <div className="w-[80px]">{row.getValue(col)}</div>,
-      enableSorting: false,
-      enableHiding: false,
+      filterFn: (row, id, value) => {
+        return value.includes(row.getValue(id));
+      },
+      enableSorting: true,
+      enableHiding: true,
     })) as ColumnDef<ISubmissionData>[]),
   ];
 };
