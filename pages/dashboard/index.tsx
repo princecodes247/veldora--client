@@ -8,8 +8,9 @@ import { BucketCard } from "@/components/BucketCard";
 import CreateBucketDialog from "@/components/dialogs/CreateBucket.dialog";
 import useUserBuckets from "@/hooks/useUserBuckets";
 import React, { useState } from "react";
+import withAuthHOC from "@/HOCs/withAuthHOC";
 
-export default function Dashboard() {
+function Dashboard() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const buckets = useUserBuckets({
@@ -84,3 +85,5 @@ export default function Dashboard() {
     </>
   );
 }
+
+export default withAuthHOC(Dashboard);

@@ -13,7 +13,8 @@
 - [] Search for forms
 - [] Install @vercel/analytics
 - [] Search form responses
-- Settings - Theme, User details
+- [] Settings - Theme, User details
+- [] Send data to email anonymously
 
 ### Extra Features
 

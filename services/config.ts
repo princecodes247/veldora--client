@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const baseURL = "http://localhost:3050/api/v1";
-const baseURL = "https://veldora-server.onrender.com/api/v1";
+const baseURL = "http://localhost:3050/api/v1";
+// const baseURL = "https://veldora-server.onrender.com/api/v1";
 
 const api = axios.create({
   baseURL: baseURL.toString(),
@@ -40,10 +40,13 @@ api.interceptors.response.use(
   },
 );
 
-const authHeaders = () => {
+const authHeaders = (extraConfig?: { [key: string]: string | undefined }) => {
   return {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
+    ...{
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("psg_auth_token") ?? ""}`,
+    },
+    ...extraConfig,
   };
 };
 export { baseURL, authHeaders, uninterceptedApi };

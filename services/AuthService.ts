@@ -1,7 +1,7 @@
 import { IAuthData } from "./../interfaces/services";
-import api from "./config";
+import api, { authHeaders } from "./config";
 
-const servicePrefix = "";
+const servicePrefix = "/auth";
 
 export const signIn = (data: IAuthData) => {
   return api.post(servicePrefix + "/login", data);
@@ -44,4 +44,12 @@ export const emailVerification = (data: { email: string; otp: string }) => {
 
 export const resendOTP = (data: { email: string }) => {
   return api.post("/resend/otp", data);
+};
+
+export const verifyAuth = () => {
+  return api.get<{ authStatus: string; identifier: string }>(`/users/me`, {
+    headers: authHeaders({
+      "Content-Type": undefined,
+    }),
+  });
 };

@@ -21,7 +21,9 @@ export const getUserBuckets = ({
 }>) => {
   return api.get<GetBucketsData>(
     `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
-    {},
+    {
+      headers: authHeaders(),
+    },
   );
 };
 export const getSubmissions = ({
