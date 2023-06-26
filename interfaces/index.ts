@@ -67,6 +67,23 @@ export interface IBucketData {
   name: string;
   description: string;
   submissionsCount: number;
+  views: {
+    country: string;
+    device: string;
+    countryCode: string;
+    isp: string;
+    ip: string;
+    platform: string;
+  }[];
+}
+
+export interface IBucketDataWithStats extends IBucketData {
+  stats: {
+    countries: [];
+    devices: [];
+    submissionCount: 3;
+    dailySubmissions: [];
+  };
 }
 
 export interface ISubmissionData {

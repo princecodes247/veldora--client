@@ -1,40 +1,13 @@
-import { Metadata } from "next";
-import Image from "next/image";
-import {
-  Activity,
-  CreditCard,
-  DollarSign,
-  Download,
-  Users,
-} from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarDateRangePicker } from "@/components/DateRangePicker";
-import { MainNav } from "@/components/MainNav";
-import { Overview } from "@/components/Overview";
-import { RecentSales } from "@/components/RecentSales";
-import { Search } from "@/components/Search";
-import TeamSwitcher from "@/components/TeamSwitcher";
-import { UserNav } from "@/components/UserNav";
 import { DashboardNav } from "@/components/DashboardNav";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
 import Head from "next/head";
-import TaskPage from "@/components/Tasks";
 import { DataTable } from "@/components/Table/DataTable";
-import { columns, submissionColumns } from "@/constants/mock/Columns";
+import { submissionColumns } from "@/constants/mock/Columns";
 import { useRouter } from "next/router";
 import useBucket from "@/hooks/useBucket";
 import useSubmissions from "@/hooks/useSubmissions";
-import { ISubmissionData } from "@/interfaces";
 import BucketAnalytics from "@/components/BucketAnalytics";
 
 export default function Dashboard() {
@@ -70,7 +43,7 @@ export default function Dashboard() {
               <TabsTrigger value="config">Config</TabsTrigger>
             </TabsList>
             <TabsContent value="summary" className="space-y-4">
-              <BucketAnalytics />
+              <BucketAnalytics bucket={bucket.data} />
             </TabsContent>
             <TabsContent value="submissions" className="space-y-4">
               <DataTable

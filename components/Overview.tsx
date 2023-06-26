@@ -1,6 +1,6 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
-const data = [
+const defaultData = [
   {
     name: "Jan",
     total: Math.floor(Math.random() * 5000) + 1000,
@@ -51,12 +51,12 @@ const data = [
   },
 ];
 
-export function Overview() {
+export function Overview({ data = defaultData }) {
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data}>
         <XAxis
-          dataKey="name"
+          dataKey="date"
           stroke="#888888"
           fontSize={12}
           tickLine={false}
@@ -65,11 +65,12 @@ export function Overview() {
         <YAxis
           stroke="#888888"
           fontSize={12}
-          tickLine={false}
+          tickLine={true}
           axisLine={false}
-          tickFormatter={(value: string) => `$${value}`}
+          allowDecimals={false}
+          tickFormatter={(value: string) => `${value} subs`}
         />
-        <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="count" fill="#adfa1d" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );
