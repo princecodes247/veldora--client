@@ -10,9 +10,9 @@
 - [*] Connect Form analytics
 - [*] Search for forms
 - [*] Add user data in nav
-- [*] Add empty states
-- [] Add logo and branding
-- [] Loading page
+- [*] Add logo and branding
+- [*] Loading page
+- [] Add empty states
 - [] Connect settings page
 - [] Landing page
 
