@@ -11,10 +11,10 @@ export function DashboardNav({user}: {
 }) {
   return (
     <div className="border-b">
-      <div className="flex items-center h-16 px-4">
+      <div className="flex items-center h-16 px-6">
         <div className="hidden md:flex">{/* <TeamSwitcher /> */}</div>
-        <div className="w-24 text-[#171123]">
-          <Logo variant="wordmark"/>
+        <div className="w-8 md:w-24 text-[#171123]">
+          <Logo variant="responsive"/>
         </div>
         <MainNav className="mx-6" />
         <div className="flex items-center ml-auto space-x-4">
