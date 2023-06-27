@@ -13,6 +13,8 @@
 - [*] Add logo and branding
 - [*] Loading page
 - [] Add empty states
+- [] Add empty states
+- [] Loading page
 - [] Connect settings page
 - [] Landing page
 
