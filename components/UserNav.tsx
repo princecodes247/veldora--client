@@ -16,7 +16,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { IUserData } from "@/interfaces/services";
 import { useContext } from "react";
-import { AuthContext } from "@/pages/bucket/contexts/Auth.context";
+import { AuthContext } from "@/contexts/Auth.context";
 
 export function UserNav({user}: {user: IUserData}) {
   
@@ -66,8 +66,8 @@ export function UserNav({user}: {user: IUserData}) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem
+        className="cursor-pointer"
           onClick={() => {
-            
             logout()
           }}
         >

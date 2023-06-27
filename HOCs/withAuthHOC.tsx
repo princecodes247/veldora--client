@@ -4,7 +4,7 @@ import { verifyAuth } from "@/services/AuthService";
 import { useRouter } from "next/router";
 import useUser from "@/hooks/useUser";
 import { Loading } from "@/components/Loading";
-import { AuthContext } from "@/pages/bucket/contexts/Auth.context";
+import { AuthContext } from "@/contexts/Auth.context";
 
 const API_URL = "http://localhost:7000";
 

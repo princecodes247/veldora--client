@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { useContext } from "react";
-import { AuthContext } from "@/pages/bucket/contexts/Auth.context";
+import { AuthContext } from "@/contexts/Auth.context";
 // import { toast } from "@/components/ui/use-toast"
 
 const profileFormSchema = z.object({
