@@ -19,42 +19,7 @@ export enum DeviceType {
   Web = "web",
 }
 
-export interface IPromotionData {
-  id: number;
-  name: string;
-  description: string;
-  logo?: string;
-  photo?: string;
-  promotion_expiry: string;
-  end_date?: string;
-  start_date?: string;
-}
-export interface ITicketData {
-  id: number;
-  event_id: number;
-  user_id: number;
-  type: string;
-  description: string;
-  price: number;
-  currency: string;
-  deleted_at: null;
-  created_at: string;
-  updated_at: string;
-}
 
-export interface IPurchasedTicketData extends ITicketData {
-  amount_paid: number;
-  reference: string;
-}
-
-export interface ITicketOptions {
-  amount: number;
-  selected: boolean;
-  quantity: number;
-}
-export interface ITicketOptionsMap {
-  [id: string]: ITicketOptions;
-}
 
 export enum LoadingType {
   FULLSCREEN = "fullscreen",
@@ -93,3 +58,4 @@ export interface ISubmissionData {
     [key: string]: any;
   };
 }
+

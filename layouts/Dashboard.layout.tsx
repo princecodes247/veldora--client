@@ -1,14 +1,16 @@
 import withAuthHOC from "@/HOCs/withAuthHOC";
 import { DashboardNav } from "@/components/DashboardNav";
+import { IUserData } from "@/interfaces/services";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
+  user: IUserData;
 }
 
-function DashboardLayout({ children }: DashboardLayoutProps) {
+function DashboardLayout({ children, user }: DashboardLayoutProps) {
   return (
     <div>
-      <DashboardNav />
+      <DashboardNav user={user} />
       {children}
     </div>
   );
