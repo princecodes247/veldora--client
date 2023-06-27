@@ -20,6 +20,7 @@
 
 ### Nice to have
 
+- [] Setup theme
 - [] Delete response
 - [] Install @vercel/analytics
 - [*] Search form responses
