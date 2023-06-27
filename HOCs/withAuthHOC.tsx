@@ -30,7 +30,7 @@ function withAuthHOC<P>(WrappedComponent: React.ComponentType<P>) {
     });
 
     if (user.isLoading && userRequired) {
-      return <Loading />;
+      return <Loading variant="SCREEN" />;
     }
 
     if (user.isError && userRequired) {
@@ -38,7 +38,7 @@ function withAuthHOC<P>(WrappedComponent: React.ComponentType<P>) {
       logout()
       return null;
     }
-    
+
     if(!user.isLoading && !user.isError) login(user.data)
 
     return <WrappedComponent user={user.data} {...props} authStatus={result} />;
