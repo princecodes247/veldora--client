@@ -14,12 +14,19 @@ import { Textarea } from "../ui/textarea";
 import { useMutate } from "@/hooks/useMutate";
 import { createBucket } from "@/services/BucketService";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { clientUrl } from "@/constants";
+import { IBucketData } from "@/interfaces";
 
 export default function CreateBucketDialog() {
+  const router = useRouter()
   const createBucketMutation = useMutate(createBucket, {
     loadingMessage: "",
-    onSuccessFunction: () => {
+    onSuccessFunction: ({data}: {
+      data: IBucketData
+    }) => {
       setOpen(false);
+      router.push(clientUrl + "/bucket/" + data._id)
     },
   });
   const [open, setOpen] = useState(false);
