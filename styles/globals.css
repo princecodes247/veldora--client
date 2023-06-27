@@ -76,3 +76,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+  .auth_bg {
+    background: url("/branding/bg1.png") no-repeat;
+    background-size: cover;
+  }
