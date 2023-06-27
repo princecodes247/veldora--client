@@ -13,7 +13,7 @@
 - [*] Add logo and branding
 - [*] Loading page
 - [*] Connect settings page
-- [] Add logo to auth pages
+- [*] Add logo to auth pages
 - [] Setup how to
 - [] Add empty states
 - [] Landing page
