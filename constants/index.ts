@@ -34,3 +34,56 @@ export const companySocials = {
 export const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "Veldora";
 
 export const clientUrl = process.env.NEXT_PUBLIC_CLIENT_URL ?? "localhost:3000";
+
+export const featuresList = [
+  {
+    title: "Seamless Integrations",
+    description: "Plug Veldora into your workflows like a well-oiled machine.",
+  },
+  {
+    title: "Data Analytics",
+    description: "Discover insights and patterns through Veldora's powerful tools.",
+  },
+  {
+    title: "Form Submission",
+    description: "Create custom forms to collect the data your business needs.",
+  },
+  {
+    title: "Security First",
+    description: "Safeguard your data with our industry-leading security measures.",
+  },
+  {
+    title: "Intuitive Interface",
+    description: "Effortlessly manage data with our user-friendly dashboard.",
+  },
+  {
+    title: "Rapid Support",
+    description: "Our team's got your back 24/7—come rain, hail, or asteroid attack.",
+  },
+]
+
+export const faqsList = [
+  {
+    question: "Do I need backend development skills to get started?",
+    answer: "Not at all! Veldora's user-friendly interface allows anyone to dive into data management without prior backend knowledge.",
+  },
+  {
+    question: "Are my forms and data secure?",
+    answer: "Absolutely. Veldora is built on a foundation of strong security practices to ensure your data's safety.",
+  },
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
