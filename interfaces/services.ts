@@ -28,7 +28,7 @@ export interface IWallet {
     userID: string,
       email: string,
       phone: string,
-      metadata: { username: string }
+      metadata: { username: string; theme: "light" | "dark" }
   }
 
 export interface ResponseBody<T> {

@@ -12,8 +12,10 @@
 - [*] Add user data in nav
 - [*] Add logo and branding
 - [*] Loading page
+- [*] Connect settings page
+- [] Add logo to auth pages
+- [] Setup how to
 - [] Add empty states
-- [] Connect settings page
 - [] Landing page
 
 ### Nice to have

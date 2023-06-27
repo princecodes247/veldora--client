@@ -18,8 +18,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "@/contexts/Auth.context";
+import { useMutate } from "@/hooks/useMutate";
+import { updateUser } from "@/services/UserService";
 // import { toast } from "@/components/ui/use-toast"
 
 const profileFormSchema = z.object({
@@ -41,21 +43,30 @@ const profileFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
-// This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
-    email: ""
-
-};
 
 export function ProfileForm() {
+  const { userData } = useContext(AuthContext);
+  // This can come from your database or API.
+  const defaultValues: Partial<ProfileFormValues> = {
+      email: userData?.email ?? "",
+      username: userData?.metadata?.username ?? ""
+  
+  };
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
     mode: "onChange",
   });
 
-  const { userData } = useContext(AuthContext);
+  useEffect(() => {
+    form.setValue("email", userData?.email ?? "")
+  form.setValue("username", userData?.metadata?.username ?? "")
+  }, [userData])
 
+  const profileInfoMutation = useMutate(updateUser, {
+    loadingMessage: "Updating Profile",
+    successMessage: "Profile Updated"
+  })
   function onSubmit(data: ProfileFormValues) {
     // toast({
     //   title: "You submitted the following values:",
@@ -65,6 +76,12 @@ export function ProfileForm() {
     //     </pre>
     //   ),
     // })
+    profileInfoMutation.mutate({
+      email: data?.email,
+      user_metadata: {username: data?.username}
+    })
+
+    
   }
 
   
@@ -75,6 +92,7 @@ export function ProfileForm() {
         <FormField
           control={form.control}
           name="username"
+          defaultValue={userData?.metadata?.username}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
@@ -91,6 +109,7 @@ export function ProfileForm() {
         <FormField
           control={form.control}
           name="email"
+          defaultValue={userData?.email}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>

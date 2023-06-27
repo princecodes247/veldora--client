@@ -17,16 +17,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useMutate } from "@/hooks/useMutate";
+import { updateUser } from "@/services/UserService";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "@/contexts/Auth.context";
 // import { toast } from "@/components/ui/use-toast";
 
 const appearanceFormSchema = z.object({
   theme: z.enum(["light", "dark"], {
     required_error: "Please select a theme.",
   }),
-  font: z.enum(["inter", "manrope", "system"], {
-    invalid_type_error: "Select a font",
-    required_error: "Please select a font.",
-  }),
+  // font: z.enum(["inter", "manrope", "system"], {
+  //   invalid_type_error: "Select a font",
+  //   required_error: "Please select a font.",
+  // }),
 });
 
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>;
@@ -37,26 +41,33 @@ const defaultValues: Partial<AppearanceFormValues> = {
 };
 
 export function AppearanceForm() {
+  const { userData } = useContext(AuthContext);
+
   const form = useForm<AppearanceFormValues>({
     resolver: zodResolver(appearanceFormSchema),
     defaultValues,
   });
 
-  function onSubmit(data: AppearanceFormValues) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // });
-  }
+  useEffect(() => {
+    form.setValue("theme", userData?.metadata.theme ?? "light")
+  }, [userData])
 
+  const profileInfoMutation = useMutate(updateUser, {
+    loadingMessage: "Updating Theme",
+    successMessage: "Theme Updated"
+  })
+  function onSubmit(data: AppearanceFormValues) {
+  
+    profileInfoMutation.mutate({
+      user_metadata: {theme: data?.theme}
+    })
+
+    
+  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
+        {/* <FormField
           control={form.control}
           name="font"
           render={({ field }) => (
@@ -84,7 +95,7 @@ export function AppearanceForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <FormField
           control={form.control}
           name="theme"

@@ -13,3 +13,20 @@ export const getUser = (userRequired: boolean = true) => {
     headers: authHeaders(),
   });
 };
+
+export const updateUser = (userData: Partial<{
+  "email": string;
+  "phone": string;
+  "user_metadata": Partial<{
+    username: string;
+    theme: string;
+  }>
+}>) => {
+  return api.patch(
+    servicePrefix + "/me",
+    userData,
+    {
+      headers: authHeaders(),
+    },
+  );
+};
