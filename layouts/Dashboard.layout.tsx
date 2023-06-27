@@ -4,7 +4,7 @@ import { IUserData } from "@/interfaces/services";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  user: IUserData;
+  user?: IUserData;
 }
 
 function DashboardLayout({ children, user }: DashboardLayoutProps) {

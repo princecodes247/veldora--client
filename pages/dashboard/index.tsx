@@ -46,12 +46,13 @@ function Dashboard() {
         </div>
 
         <Tabs defaultValue="grid-view" className="space-y-4">
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-col md:flex-row">
             <Search
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="flex-1"
             />
+            <div className="flex gap-2">
             <TabsList>
               <TabsTrigger value="grid-view">
                 <LayoutGrid size={18} />
@@ -66,10 +67,8 @@ function Dashboard() {
                 Notifications
               </TabsTrigger> */}
             </TabsList>
-            {/* <Button>
-                <p className="mr-2">Create New</p> <Plus size={14} />
-              </Button> */}
             <CreateBucketDialog />
+            </div>
           </div>
 
           <TabsContent value="grid-view" className="space-y-4">
