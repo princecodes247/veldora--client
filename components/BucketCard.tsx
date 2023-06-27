@@ -69,8 +69,11 @@ export function BucketCard({
           {/* <DollarSign className="w-4 h-4 text-muted-foreground" /> */}
         </CardHeader>
         <CardContent className={clsx(listView && "py-4")}>
-          <div className="text-sm text-muted-foreground">
-            www.veldora.com/{bucket._id}
+          <div  className="text-xs text-muted-foreground">
+            www.veldora.com/bucket/{bucket._id}
+          </div>
+          <div className="text-sm mt-2 text-muted-foreground">
+            {bucket.description }
           </div>
           <div className="mt-4 flex justify-between">
             <p className="text-xs text-muted-foreground">

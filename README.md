@@ -8,11 +8,12 @@
 - [*] Get and paginate forms and form responses
 - [*] Form analytics design
 - [*] Connect Form analytics
+- [*] Search for forms
+- [] Delete response
+- [] Add empty states
 - [] Connect settings page
 - [] Landing page
 - [] Loading page
-- [] Delete response
-- [] Search for forms
 
 ### Nice to have
 
