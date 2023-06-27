@@ -10,11 +10,12 @@
 - [*] Connect Form analytics
 - [] Connect settings page
 - [] Landing page
+- [] Loading page
 - [] Delete response
+- [] Search for forms
 
 ### Nice to have
 
-- [] Search for forms
 - [] Install @vercel/analytics
 - [*] Search form responses
 - [] Send data to email anonymously
