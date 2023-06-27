@@ -9,7 +9,6 @@
 - [*] Form analytics design
 - [*] Connect Form analytics
 - [*] Search for forms
-- [] Delete response
 - [] Add empty states
 - [] Connect settings page
 - [] Landing page
@@ -17,6 +16,7 @@
 
 ### Nice to have
 
+- [] Delete response
 - [] Install @vercel/analytics
 - [*] Search form responses
 - [] Send data to email anonymously

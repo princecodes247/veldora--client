@@ -57,7 +57,7 @@ export function DataTableToolbar<TData>({
       </div>
       <div className="flex gap-2">
         <DataTableViewOptions table={table} />
-        <Button
+        {/* <Button
           variant={"ghost"}
           className="h-8"
           disabled={false}
@@ -65,7 +65,7 @@ export function DataTableToolbar<TData>({
         >
           <Trash className="w-4 h-4 mr-2" />
           Delete
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
