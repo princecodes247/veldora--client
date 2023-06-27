@@ -69,7 +69,7 @@ export function NotificationsForm() {
               <FormLabel>Notify me about...</FormLabel>
               <FormControl>
                 <RadioGroup
-                  onValueChange={field.onChange}
+                  onValueChange={(option: "all" | "mentions" | "none" ) => field.onChange(option)}
                   defaultValue={field.value}
                   className="flex flex-col space-y-1"
                 >
@@ -200,7 +200,7 @@ export function NotificationsForm() {
               <FormControl>
                 <Checkbox
                   checked={field.value}
-                  onCheckedChange={field.onChange}
+                  onCheckedChange={(checked) => field.onChange(checked ? true : false)}
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
