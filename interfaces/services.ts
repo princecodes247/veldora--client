@@ -27,7 +27,7 @@ export interface IWallet {
   export interface IUserData {
     userID: string,
       email: string,
-      phone: string,
+      phone?: string,
       metadata: { username: string; theme: "light" | "dark" }
   }
 

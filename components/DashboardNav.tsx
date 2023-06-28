@@ -5,9 +5,10 @@ import { UserNav } from "./UserNav";
 import { Search } from "./Search";
 import wordmarkImg from "@/public/branding/wordmark_alt.svg"
 import { Logo } from "./Logo";
+import { IUserData } from "@/interfaces/services";
 
 export function DashboardNav({user}: {
-  user: any;
+  user: IUserData;
 }) {
   return (
     <div className="border-b">
