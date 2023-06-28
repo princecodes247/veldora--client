@@ -89,12 +89,16 @@ h1 {
   }
   body {
     position: relative;
-    background: #010101;
+    
     
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
-  main {
+.home_bg {
+  background: #010101;
+}
+
+  .home_main {
     position: relative;
     color: white;
   }

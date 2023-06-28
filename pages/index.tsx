@@ -17,21 +17,22 @@ export default function Home() {
   const {docX, docY,} = useMouse(mouseTrackRef);
 
   return (
-    <>
+    < >
+
     <Header/>
       <div 
       style={ {
         transform: `translate(${docX - 100 + "px"}, ${docY - 100 - y + "px"})`
       }}
       className="cursor_glow"></div>
+      <main className="home_main" ref={mouseTrackRef}>
       <div className="bg_grid"></div>
-      <main ref={mouseTrackRef}>
         <Head>
           <title>Veldora</title>
           <meta name="description" content="Form data managment" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <section className="flex flex-col items-center justify-center h-screen gap-6 p-6 py-14 md:p-24">
+        <section className="relative flex flex-col items-center justify-center h-screen gap-6 p-6 py-14 md:p-24">
      
           <h1 className="text-5xl text-center">
             Streamline Your Workflow with Veldora
@@ -44,7 +45,7 @@ export default function Home() {
           </p>
           <Button variant="secondary">Get Started</Button>
         </section>
-        <section className="text-center peer py-8 transition-all  tracking-[0.4em] duration-500 cursor-pointer hover:tracking-[0.45em] text-white">
+        <section className="aqws relative text-center peer py-8 transition-all  tracking-[0.4em] duration-500 cursor-pointer hover:tracking-[0.45em] text-white">
           <h3>Powerful Tools. Limitless Possibilities.</h3>
         </section>
         <section className=" p-6 py-14 md:p-24 relative rounded-3xl transition-border duration-900 border-t border-slate-900 pt-20">
@@ -66,7 +67,7 @@ export default function Home() {
           </h2> */}
         </section>
   
-        <section className="p-6 py-14 md:p-24">
+        <section className="relative p-6 py-14 md:p-24">
           <h2 className="text-2xl font-semibold md:text-4xl">
             Key Veldora Features
           </h2>
@@ -78,14 +79,14 @@ export default function Home() {
             )}
           </div>
         </section>
-        <section className="grid p-6 py-8 md:p-18 md:grid-cols-3 lg:grid-cols-6">
+        <section className="relative grid p-6 py-8 md:p-18 md:grid-cols-3 lg:grid-cols-6">
           {React.Children.toArray(
             [0, 0, 0, 0, 0, 0].map((feature) => (
               <div className="p-6 text-6xl text-center">💯</div>
             )),
           )}
         </section>
-        <section className="p-6 py-14 md:p-24">
+        <section className="relative p-6 py-14 md:p-24">
           <h2 className="text-2xl font-semibold md:text-4xl">
             Frequently Asked Questions
           </h2>
@@ -100,7 +101,7 @@ export default function Home() {
             )}
           </div>
         </section>
-        <section className="flex flex-col gap-6 p-6 py-14 md:p-24">
+        <section className="relative flex flex-col gap-6 p-6 py-14 md:p-24">
           <h2 className="text-2xl font-semibold text-center md:text-3xl">
             Stay Updated and Snag Exclusive Offers
           </h2>
@@ -111,6 +112,9 @@ export default function Home() {
         </section>
         <Footer />
       </main>
+       <div className="absolute inset-0 bg-[#010101] -z-10">
+
+    </div>
     </>
   );
 }
