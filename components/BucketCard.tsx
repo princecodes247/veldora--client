@@ -6,6 +6,7 @@ import { cva } from "class-variance-authority";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
 import { IBucketData } from "@/interfaces";
+import { apiUrl } from "@/constants";
 
 const bucketCardVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -69,10 +70,10 @@ export function BucketCard({
           {/* <DollarSign className="w-4 h-4 text-muted-foreground" /> */}
         </CardHeader>
         <CardContent className={clsx(listView && "py-4")}>
-          <div  className="text-xs text-muted-foreground">
-            www.veldora.com/bucket/{bucket._id}
+          <div  className="text-xs w-full truncate text-muted-foreground">
+            {apiUrl}/bucket/{bucket._id}
           </div>
-          <div className="text-sm mt-2 text-muted-foreground">
+          <div className="text-sm mt-2 w-full truncate text-muted-foreground">
             {bucket.description }
           </div>
           <div className="mt-4 flex justify-between">
