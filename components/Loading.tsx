@@ -10,7 +10,7 @@ export function Loading({
     <div className="h-screen flex items-center justify-center">
       <Skeleton className="bg-transparent">
 
-      <div className="w-24 animate-pulse text-[#171123] md:w-32">
+      <div className="w-16 animate-pulse text-[#171123] md:w-32">
       <Logo variant="base"/>
       </div>
       </Skeleton>
