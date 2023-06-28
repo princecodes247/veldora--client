@@ -11,7 +11,7 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 // @ts-ignore
 // const {dark} = lazy(() => import('react-syntax-highlighter/dist/esm/styles/prism'));
 export function HowToSetup({id}:{id: string}) {
-  const targetLink = `${apiUrl}/bucket/${id}`
+  const targetLink = `${apiUrl}/buckets/${id}`
   const step1CodeString = `
   ${targetLink}
   `;
