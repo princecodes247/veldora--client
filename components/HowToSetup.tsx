@@ -30,9 +30,9 @@ export function HowToSetup({id}:{id: string}) {
   `;
   return (
     <Suspense fallback={<Loading variant="INLINE"/>}>
-      <div className="p-8 rounded ">
+      <div className="p-8 rounded-xl border">
  
- <div className="pb-16">
+ <div className="pb-16 ">
    <p><b>Step 1</b> - Copy your bucket link</p>
    <SyntaxHighlighter  language="http">
  {step1CodeString}

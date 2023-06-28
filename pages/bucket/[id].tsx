@@ -15,6 +15,8 @@ import DashboardLayout from "@/layouts/Dashboard.layout";
 import DeleteBucketDialog from "@/components/dialogs/DeleteBucket.dialog";
 import { BucketPage404 } from "@/components/errors/Error";
 import { HowToSetup } from "@/components/HowToSetup";
+import { apiUrl } from "@/constants";
+import { BucketConfig } from "@/components/BucketConfig";
 
 export default function Bucket() {
   const router = useRouter();
@@ -60,12 +62,12 @@ export default function Bucket() {
          </h2>
          <p>{bucket.data?.description ?? ""}</p>
          <div className="flex gap-2 items-center">
-         <p className="text-xs">www.veldora.com/bucket/{bucket.data?._id ?? ""}</p>
+         <p className="text-xs">{apiUrl}/buckets/{bucket.data?._id ?? ""}</p>
          <TooltipProvider>
 <Tooltip open={isCopied} >
  <TooltipTrigger asChild>
-   
-         <Button onClick={() => handleCopy(bucket.data?._id ?? "4")} variant={"ghost"} size={"icon"}>
+ 
+         <Button onClick={() => handleCopy(apiUrl + "/buckets/" + (bucket.data?._id ?? ""))} variant={"ghost"} size={"icon"}>
            <Copy size={15}/>
          </Button>
  </TooltipTrigger>
@@ -85,10 +87,14 @@ export default function Bucket() {
         !submissions.isLoading && (
           <Tabs defaultValue={submissions.data?.length === 0 ? "how" : "submissions"} className="space-y-4">
          <TabsList>
+           <TabsTrigger value="how">How to Use</TabsTrigger>
            <TabsTrigger value="summary">Summary</TabsTrigger>
            <TabsTrigger value="submissions">Submissions</TabsTrigger>
-           <TabsTrigger value="how">How to Use</TabsTrigger>
+           <TabsTrigger value="config">Configuration</TabsTrigger>
          </TabsList>
+         <TabsContent value="how" className="space-y-4">
+          <HowToSetup id={bucket.data?._id ?? ""}/>
+         </TabsContent>
          <TabsContent value="summary" className="space-y-4">
            <BucketAnalytics bucket={bucket.data} />
          </TabsContent>
@@ -114,9 +120,10 @@ export default function Bucket() {
              )}
            />
          </TabsContent>
-         <TabsContent value="how" className="space-y-4">
-          <HowToSetup id={bucket.data?._id ?? ""}/>
+         <TabsContent value="config" className="space-y-4">
+          <BucketConfig bucket={bucket.data}/>
          </TabsContent>
+         
        </Tabs>
         )
        }
