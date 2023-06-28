@@ -1,16 +1,15 @@
+import { apiUrl } from "@/constants";
 import axios from "axios";
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3050/api/v1";
-
 const api = axios.create({
-  baseURL: baseURL.toString(),
+  baseURL: apiUrl.toString(),
   maxBodyLength: Infinity,
   headers: {
     "Content-Type": "application/json",
   },
 });
 const uninterceptedApi = axios.create({
-  baseURL: baseURL.toString(),
+  baseURL: apiUrl.toString(),
   maxBodyLength: Infinity,
   headers: {
     "Content-Type": "application/json",
@@ -48,5 +47,5 @@ const authHeaders = (extraConfig?: { [key: string]: string | undefined }) => {
     ...extraConfig,
   };
 };
-export { baseURL, authHeaders, uninterceptedApi };
+export { apiUrl as baseURL, authHeaders, uninterceptedApi };
 export default api;

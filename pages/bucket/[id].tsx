@@ -115,7 +115,7 @@ export default function Bucket() {
            />
          </TabsContent>
          <TabsContent value="how" className="space-y-4">
-          <HowToSetup/>
+          <HowToSetup id={bucket.data?._id ?? ""}/>
          </TabsContent>
        </Tabs>
         )
