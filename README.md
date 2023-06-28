@@ -14,8 +14,9 @@
 - [*] Loading page
 - [*] Connect settings page
 - [*] Add logo to auth pages
-- [] Add empty states (On form empty state, link to setup)
+- [*] Add empty states (On form empty state, link to setup)
 - [] Setup how to and onboarding (Use the number of user logins then highlight the create button and make setup the default)
+- [] Fix submission table pagination bar not responsive
 - [] Landing page
 
 ### Nice to have
