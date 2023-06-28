@@ -92,7 +92,7 @@ function Dashboard() {
                     </div>
 
                     <h2 className="text-xl mt-4 md:text-3xl">Oops! No bucket created yet!</h2>
-    <p className="mx-auto my-4 text-center text-gray-500 max-w-[600px]"> Fear not! Let's create an army of buckets now!</p>
+    <p className="mx-auto my-4 text-center text-gray-500 max-w-[600px]"> Fear not! Let&apos;s create an army of buckets now!</p>
       <Button variant="outline" onClick={() => setOpenCreateBucket(true)}>Create form bucket 🚀</Button>
                   </div>
                 )
