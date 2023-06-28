@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import withAuthHOC from "@/HOCs/withAuthHOC";
 import { BucketCardSkeleton } from "@/components/BucketCardSkeleton";
 import DashboardLayout from "@/layouts/Dashboard.layout";
+import { BucketPage404 } from "@/components/errors/Error";
 
 function Dashboard() {
   const [page, setPage] = useState(0);
@@ -70,8 +71,17 @@ function Dashboard() {
             <CreateBucketDialog />
             </div>
           </div>
+              
 
-          <TabsContent value="grid-view" className="space-y-4">
+          {
+            buckets.isError ? (
+              <div>
+                <BucketPage404 type="GET_BUCKETS_FAILURE"/>
+              </div>
+
+            ) : (
+              <>
+              <TabsContent value="grid-view" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {React.Children.toArray(
                 buckets.isLoading &&
@@ -112,6 +122,9 @@ function Dashboard() {
               )}
             </div>
           </TabsContent>
+              </>
+            )
+          }
         </Tabs>
       </div>
     </DashboardLayout>

@@ -123,7 +123,16 @@ export const animeQuotes: IAnimeQuote[] = [
 ]
 
 
-
+export const displayErrorMessages = {
+  GET_BUCKETS_FAILURE: {
+    title: "Well, this is awkward.",
+    body: "The form buckets went on strike demanding better working conditions. We're negotiating a fair deal with them"
+  }, 
+  INVALID_BUCKET: {
+    title: "Oops! It seems like this bucket got lost in the cloud.",
+    body: "We're sorry, but we can't find this bucket."
+  }
+}
 
 
 

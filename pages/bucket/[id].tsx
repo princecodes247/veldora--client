@@ -13,7 +13,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { useState } from "react";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import DeleteBucketDialog from "@/components/dialogs/DeleteBucket.dialog";
-import { BucketPage404 } from "@/components/errors/BucketPage404";
+import { BucketPage404 } from "@/components/errors/Error";
 
 export default function Bucket() {
   const router = useRouter();
@@ -45,7 +45,7 @@ export default function Bucket() {
         </Head>
         {
         bucket.isError && (
-          <BucketPage404/>
+          <BucketPage404 type="INVALID_BUCKET"/>
         )
 }
        {
