@@ -77,7 +77,66 @@
   }
 }
 
-  .auth_bg {
+h1 {
+  font-family: 'Zodiak', serif;
+}
+.auth_bg {
     background: url("/branding/bg1.png") no-repeat;
     background-size: cover;
   }
+  body {
+    position: relative;
+    background: #efefef;
+    
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  main {
+    position: relative;
+  }
+  .cursor_glow {
+    width: 200px;
+    height: 200px;
+    filter: blur(200px);
+    background-color: hsl(41, 98%, 39%);
+    /* background-color: #0b0f14; */
+    /* background-color: #171123; */
+    animation: hueRot 6s infinite;
+    position: fixed;
+    top: 0%;
+    bottom: auto;
+    left: 0%;
+    right: auto;
+    z-index: -2;
+    will-change: transform; 
+    transform: translate(200px, 300px);
+    /* transform: translate3d(attr("data-xpos"), attr("data-ypos"), 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); */
+    /* transform-style: preserve-3d; */
+}
+
+  .bg_grid {
+    height: 100%;
+    min-height: 100%;
+    background-image: url(/grid.svg);
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: 200px;
+    display: block;
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    z-index: 0;
+}
+
+@keyframes hueRot {
+  0% {
+    filter: hue-rotate(0deg) blur(120px);
+  }
+
+  100% {
+    filter: hue-rotate(360deg) blur(120px);
+  }
+  
+}

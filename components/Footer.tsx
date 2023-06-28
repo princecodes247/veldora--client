@@ -8,8 +8,10 @@ export function Footer() {
     <div className="w-24">
     <Logo variant="base"/>
     </div>
-    
-    <p className="">© Veldora 2023. All Rights Reserved.</p>
+    <p className="text-gray-400 font-semibold">
+    Simplify, Optimize, Succeed with Veldora
+    </p>
+    <p className="text-gray-600 text-sm">© Veldora 2023. All Rights Reserved.</p>
 </footer>
 </>
 

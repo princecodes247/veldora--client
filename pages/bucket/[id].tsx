@@ -14,6 +14,7 @@ import { useState } from "react";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import DeleteBucketDialog from "@/components/dialogs/DeleteBucket.dialog";
 import { BucketPage404 } from "@/components/errors/Error";
+import { HowToSetup } from "@/components/HowToSetup";
 
 export default function Bucket() {
   const router = useRouter();
@@ -77,10 +78,12 @@ export default function Bucket() {
          </div>
        </div>
        <div>
-       <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/>
+       {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
        </div>
        </div>
-       <Tabs defaultValue="submissions" className="space-y-4">
+       {
+        !submissions.isLoading && (
+          <Tabs defaultValue={submissions.data?.length === 0 ? "how" : "submissions"} className="space-y-4">
          <TabsList>
            <TabsTrigger value="summary">Summary</TabsTrigger>
            <TabsTrigger value="submissions">Submissions</TabsTrigger>
@@ -112,14 +115,11 @@ export default function Bucket() {
            />
          </TabsContent>
          <TabsContent value="how" className="space-y-4">
-           <div>
-             Step 1 - Copy your bucket link
-           </div>
-           <div>
-             Step 2 - Paste in your form action (Use POST method)
-           </div>
+          <HowToSetup/>
          </TabsContent>
        </Tabs>
+        )
+       }
      </div>
     
         )
