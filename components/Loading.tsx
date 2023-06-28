@@ -8,7 +8,7 @@ export function Loading({
   variant: "SCREEN" | "INLINE" | "TEXT"
 }) {
   return (
-    <div className={clsx("flex items-center justify-center", variant === "SCREEN" && "h-screen")}>
+    <div className={clsx("flex items-center justify-center", variant === "SCREEN" && "h-[80vh] md:h-screen")}>
       <Skeleton className="bg-transparent">
 
       <div className="w-16 animate-pulse text-[#171123] md:w-32">

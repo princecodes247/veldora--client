@@ -26,7 +26,8 @@ export default function Home() {
       style={ {
         transform: `translate(${docX - 100 + "px"}, ${docY - 100 - y + "px"})`
       }}
-      className="cursor_glow"></div>
+      className="md:cursor_glow hidden md:block"></div>
+      <div className="md:hidden cursor_glow_mobile"></div>
       <main className="home_main" ref={mouseTrackRef}>
       <div className="bg_grid"></div>
         <Head>
@@ -36,14 +37,13 @@ export default function Home() {
         </Head>
         <section className="relative flex flex-col items-center justify-center h-screen gap-6 p-6 py-14 md:p-24">
      
-          <h1 className="md:text-6xl text-3xl text-center">
-            Streamline Your Workflow with Veldora
+          <h1 className="md:text-6xl text-3xl max-w-[900px] text-center">
+            Speed Up Your Workflow with Veldora
           </h1>
           <p className="mx-auto text-gray-400 max-w-[660px] px-6 text-center">
             Simplify your life and work smarter, not harder. Veldora offers a
-            seamless platform to effortlessly organize your data, collaborate
-            with your team, and optimize your workflow. Experience the beauty of
-            efficiency and take control of your tasks like never before.
+            seamless platform to setup your forms, analyze the data and boost your speed. Experience the beauty of
+            efficiency and take control of your forms like never before.
           </p>
           <Link href="/dashboard">
 
@@ -85,6 +85,14 @@ export default function Home() {
               )),
             )}
           </div>
+         <div className="flex items-center justify-center">
+         <Link href="/dashboard" className="">
+
+<Button variant="secondary" className="font-semibold px-6">Get Started
+<ArrowRight size={15} className="-mr-2 ml-2"/>
+</Button>
+</Link>
+         </div>
         </section>
         <section className="relative grid p-6 py-8 md:p-18 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {React.Children.toArray(
@@ -100,13 +108,14 @@ export default function Home() {
           <div className="grid gap-8 pt-16 md:grid-cols-2">
             {React.Children.toArray(
               faqsList.map((faq) => (
-                <div>
+                <div className="max-w-[600px]">
                   <h4 className="mb-2 font-semibold text-lg md:text-lg">{faq.question}</h4>
                   <p>{faq.answer}</p>
                 </div>
               )),
             )}
           </div>
+          
         </section>
         <section className="relative flex flex-col gap-6 p-6 py-14 md:p-24">
           <h2 className="text-2xl font-semibold text-center md:text-3xl">
