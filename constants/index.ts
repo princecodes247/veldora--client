@@ -3,6 +3,9 @@ import { z } from "zod";
 import integrationIcon from "@/public/icons/integration_icon.json";
 import interfaceIcon from "@/public/icons/interface_icon.json";
 import supportIcon from "@/public/icons/support_icon.json";
+import securityIcon from "@/public/icons/security_icon.json";
+import analyticsIcon from "@/public/icons/analytics_icon.json";
+import submissionIcon from "@/public/icons/submission_icon.json";
 // import integrationIcon from "@/public/icons/integration_icon.json";
 // import integrationIcon from "@/public/icons/integration_icon.json";
 // We're keeping a simple non-relational schema here.
@@ -47,18 +50,18 @@ export const featuresList = [
     description: "Plug Veldora into your workflows like a well-oiled machine.",
   },
   {
-    icon: integrationIcon,
+    icon: analyticsIcon,
     title: "Data Analytics",
     description:
       "Discover insights and patterns through Veldora's powerful tools.",
   },
   {
-    icon: integrationIcon,
+    icon: submissionIcon,
     title: "Form Submission",
     description: "Create custom forms to collect the data your business needs.",
   },
   {
-    icon: integrationIcon,
+    icon: securityIcon,
     title: "Security First",
     description:
       "Safeguard your data with our industry-leading security measures.",

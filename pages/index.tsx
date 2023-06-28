@@ -6,7 +6,9 @@ import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { faqsList, featuresList } from "@/constants";
+import { ArrowRight } from "lucide-react";
 import Head from "next/head";
+import Link from "next/link";
 import React, { useEffect } from "react";
 import { useMouse, useWindowScroll } from "react-use"
 
@@ -34,7 +36,7 @@ export default function Home() {
         </Head>
         <section className="relative flex flex-col items-center justify-center h-screen gap-6 p-6 py-14 md:p-24">
      
-          <h1 className="text-5xl text-center">
+          <h1 className="md:text-6xl text-3xl text-center">
             Streamline Your Workflow with Veldora
           </h1>
           <p className="mx-auto text-gray-400 max-w-[660px] px-6 text-center">
@@ -43,7 +45,12 @@ export default function Home() {
             with your team, and optimize your workflow. Experience the beauty of
             efficiency and take control of your tasks like never before.
           </p>
-          <Button variant="secondary">Get Started</Button>
+          <Link href="/dashboard">
+
+          <Button variant="secondary" className="font-semibold px-6">Get Started
+          <ArrowRight size={15} className="-mr-2 ml-2"/>
+          </Button>
+          </Link>
         </section>
         <section className="aqws relative text-center peer py-8 transition-all  tracking-[0.4em] duration-500 cursor-pointer hover:tracking-[0.45em] text-white">
           <h3>Powerful Tools. Limitless Possibilities.</h3>
@@ -79,10 +86,10 @@ export default function Home() {
             )}
           </div>
         </section>
-        <section className="relative grid p-6 py-8 md:p-18 md:grid-cols-3 lg:grid-cols-6">
+        <section className="relative grid p-6 py-8 md:p-18 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {React.Children.toArray(
             [0, 0, 0, 0, 0, 0].map((feature) => (
-              <div className="p-6 text-6xl text-center">💯</div>
+              <div className="p-2 sm:p-6 text-white grayscale-[100] brightness-[600%] opacity-10 text-6xl text-center">💯</div>
             )),
           )}
         </section>
@@ -90,7 +97,7 @@ export default function Home() {
           <h2 className="text-2xl font-semibold md:text-4xl">
             Frequently Asked Questions
           </h2>
-          <div className="grid gap-8 pt-8 md:grid-cols-2">
+          <div className="grid gap-8 pt-16 md:grid-cols-2">
             {React.Children.toArray(
               faqsList.map((faq) => (
                 <div>
