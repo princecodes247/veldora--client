@@ -91,7 +91,7 @@ h1 {
     position: relative;
     
     
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    
   }
 
 .home_bg {
@@ -101,6 +101,7 @@ h1 {
   .home_main {
     position: relative;
     color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
   .cursor_glow {
     width: 170px;
