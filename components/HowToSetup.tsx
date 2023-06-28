@@ -38,7 +38,7 @@ export function HowToSetup({id}:{id: string}) {
 </SyntaxHighlighter>
  </div>
  <div className="pb-16">
-   <p><b>Step 2</b> - Paste in your form action (Use POST method) and that's it 🥂</p>
+   <p><b>Step 2</b> - Paste in your form action (Use POST method) and that&apos;s it 🥂</p>
    <div className="rounded-md p-1">
    <SyntaxHighlighter  language="xml">
  {step2CodeString}
