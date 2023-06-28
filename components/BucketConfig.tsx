@@ -14,14 +14,27 @@ import { Textarea } from "./ui/textarea";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { useState } from "react";
 import { IBucketData } from "@/interfaces";
+import { useMutate } from "@/hooks/useMutate";
+import { updateBucket } from "@/services/BucketService";
 
 export function BucketConfig({bucket}: {bucket?: IBucketData}) {
     const [bucketName, setBucketName] = useState(bucket?.name ?? "")
     const [bucketDescription, setBucketDescription] = useState(bucket?.description ?? "")
     const [responseStyle, setResponseStyle] = useState(bucket?.responseStyle ?? "default")
     const [customRedirect, setCustomRedirect] = useState(bucket?.customRedirect ?? "")
+
+    const updateBucketMutation = useMutate(updateBucket, {
+        loadingMessage: "Updating Mutation"
+    })
+
+    const handleSubmit = () => updateBucketMutation.mutate({id: bucket?._id ??"", bucketData: {
+        customRedirect,
+        description: bucketDescription,
+        name: bucketName,
+        responseStyle
+    }})
   return (
-    <Card>
+    <Card className="max-w-[700px]">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">Extra Configurations</CardTitle>
         <CardDescription>
@@ -62,11 +75,11 @@ export function BucketConfig({bucket}: {bucket?: IBucketData}) {
         </div>
        {responseStyle === "custom" && <div className="grid gap-2">
           <Label htmlFor="text">Custom Redirect</Label>
-          <Input id="text" type="text" placeholder="https://redirect.com" />
+          <Input id="text" value={customRedirect} onChange={(e) => setCustomRedirect(e.target.value)}  type="text" placeholder="https://redirect.com" />
         </div>}
       </CardContent>
       <CardFooter>
-        <Button className="w-full">Create account</Button>
+        <Button onClick={handleSubmit} disabled={(responseStyle === "custom" && customRedirect.trim.length === 0) || bucketDescription.trim().length === 0 || bucketName.trim().length === 0} className="w-full">Create account</Button>
       </CardFooter>
     </Card>
   );

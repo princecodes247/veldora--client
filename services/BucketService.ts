@@ -91,3 +91,16 @@ export const getBuckets = ({
     {},
   );
 };
+
+export const updateBucket = ({
+  bucketData,
+  id
+}:{id:string, bucketData: Partial<Pick<IBucketData, "customRedirect" | "description" | "name" | "responseStyle">>}) => {
+  return api.patch(
+    servicePrefix + id,
+    bucketData,
+    {
+      headers: authHeaders(),
+    },
+  );
+};
