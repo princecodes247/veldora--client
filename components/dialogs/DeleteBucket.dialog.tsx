@@ -46,13 +46,13 @@ export default function DeleteBucketDialog({id, name}: {id: string; name: string
     <AlertDialogHeader>
       <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
       <AlertDialogDescription>
-        This action cannot be undone. This will permanently delete <b>"{name}"</b>
+        This action cannot be undone. This will permanently delete <b>&quot;{name}&quot;</b>
         and remove your data from our servers.
       </AlertDialogDescription>
     </AlertDialogHeader>
     <div className="flex flex-col gap-4">
             <Label htmlFor="name" className="">
-            To confirm, type "{name}" in the box below
+            To confirm, type &quot;{name}&quot; in the box below
             </Label>
             <Input
               id="name"

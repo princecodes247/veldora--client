@@ -61,7 +61,7 @@ export function ProfileForm() {
   useEffect(() => {
     form.setValue("email", userData?.email ?? "")
   form.setValue("username", userData?.metadata?.username ?? "")
-  }, [userData])
+  }, [userData, form])
 
   const profileInfoMutation = useMutate(updateUser, {
     loadingMessage: "Updating Profile",

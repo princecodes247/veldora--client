@@ -50,7 +50,7 @@ export function AppearanceForm() {
 
   useEffect(() => {
     form.setValue("theme", userData?.metadata.theme ?? "light")
-  }, [userData])
+  }, [userData, form])
 
   const profileInfoMutation = useMutate(updateUser, {
     loadingMessage: "Updating Theme",
