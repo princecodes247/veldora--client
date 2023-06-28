@@ -59,3 +59,7 @@ export interface ISubmissionData {
   };
 }
 
+export interface IAnimeQuote {
+  body: string
+  author: string;
+}

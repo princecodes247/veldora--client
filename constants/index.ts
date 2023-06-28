@@ -1,3 +1,4 @@
+import { IAnimeQuote } from "@/interfaces";
 import { z } from "zod";
 
 // We're keeping a simple non-relational schema here.
@@ -73,7 +74,7 @@ export const faqsList = [
   },
 ]
 
-export const animeQuotes = [
+export const animeQuotes: IAnimeQuote[] = [
   {
     body: "Believe in the me that believes in you!",
     author: "Kamina",

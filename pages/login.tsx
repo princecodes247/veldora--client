@@ -7,6 +7,7 @@ import { Command } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import authBG from "@/public/bg_1.jpg"
+import AnimeQuote from "@/components/AnimeQuote";
 
 export default function Login() {
   useEffect(() => {
@@ -32,12 +33,7 @@ export default function Login() {
              Veldora
           </div>
           <div className="relative z-20 mt-auto">
-            <blockquote className="space-y-2">
-              <p className="text-lg">
-                &ldquo;Being is.&rdquo;
-              </p>
-              <footer className="text-sm"></footer>
-            </blockquote>
+            <AnimeQuote/>
           </div>
         </div>
         <div className="lg:p-8 pt-12">

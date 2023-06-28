@@ -1,8 +1,9 @@
 import { animeQuotes } from '@/constants';
+import { IAnimeQuote } from '@/interfaces';
 import React, { useEffect, useState } from 'react';
 
 const AnimeQuote: React.FC = () => {
-  const [randomQuote, setRandomQuote] = useState<any>(null); // Replace 'any' with the appropriate type
+  const [randomQuote, setRandomQuote] = useState<IAnimeQuote | null>(null);
 
   useEffect(() => {
     // Function to pick a random quote
@@ -18,10 +19,13 @@ const AnimeQuote: React.FC = () => {
   return (
     <div>
       {randomQuote && (
-        <div>
-          <p>{randomQuote.body}</p>
-          <p>- {randomQuote.author}</p>
-        </div>
+       
+        <blockquote className="space-y-2">
+        <p className="text-lg">
+          &ldquo;{randomQuote.body}&rdquo;
+        </p>
+        <footer className="text-sm">- {randomQuote.author}</footer>
+      </blockquote>
       )}
     </div>
   );
