@@ -13,12 +13,18 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "../ui/textarea";
 import { useMutate } from "@/hooks/useMutate";
 import { createBucket } from "@/services/BucketService";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useRouter } from "next/router";
 import { clientUrl } from "@/constants";
 import { IBucketData } from "@/interfaces";
 
-export default function CreateBucketDialog() {
+export default function CreateBucketDialog({
+  open,
+  setOpen
+}: {
+  open: boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
+}) {
   const router = useRouter()
   const createBucketMutation = useMutate(createBucket, {
     loadingMessage: "",
@@ -29,7 +35,7 @@ export default function CreateBucketDialog() {
       router.push(clientUrl + "/bucket/" + data._id)
     },
   });
-  const [open, setOpen] = useState(false);
+  
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   return (
@@ -78,7 +84,7 @@ export default function CreateBucketDialog() {
                 name,
               })
             }
-            disabled={createBucketMutation.isLoading}
+            disabled={createBucketMutation.isLoading || name.trim().length === 0}
             type="submit"
           >
             {createBucketMutation.isLoading

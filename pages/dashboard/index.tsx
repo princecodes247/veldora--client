@@ -12,6 +12,8 @@ import withAuthHOC from "@/HOCs/withAuthHOC";
 import { BucketCardSkeleton } from "@/components/BucketCardSkeleton";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import { BucketPage404 } from "@/components/errors/Error";
+import { Logo } from "@/components/Logo";
+import { Button } from "@/components/ui/button";
 
 function Dashboard() {
   const [page, setPage] = useState(0);
@@ -22,7 +24,7 @@ function Dashboard() {
   });
 
   console.log({ buckets: buckets.data?.pages });
-
+  const [openCreateBucket, setOpenCreateBucket] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
 
@@ -68,7 +70,7 @@ function Dashboard() {
                 Notifications
               </TabsTrigger> */}
             </TabsList>
-            <CreateBucketDialog />
+            <CreateBucketDialog open={openCreateBucket} setOpen={setOpenCreateBucket}/>
             </div>
           </div>
               
@@ -81,12 +83,27 @@ function Dashboard() {
 
             ) : (
               <>
+                 {
+                !buckets.isLoading &&
+                buckets.data?.pages[0]?.data?.length === 0 && (
+                  <div className="flex py-12 flex-col items-center min-h-[40vh] justify-center">
+                    <div className="w-16 text-gray-300 md:w-24">
+                      <Logo variant="plain"/>
+                    </div>
+
+                    <h2 className="text-xl mt-4 md:text-3xl">Oops! No bucket created yet!</h2>
+    <p className="mx-auto my-4 text-center text-gray-500 max-w-[600px]"> Fear not! Let's create an army of buckets now!</p>
+      <Button variant="outline" onClick={() => setOpenCreateBucket(true)}>Create form bucket 🚀</Button>
+                  </div>
+                )
+              }
               <TabsContent value="grid-view" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {React.Children.toArray(
                 buckets.isLoading &&
                   [0, 0, 0, 0, 0, 0].map(() => <BucketCardSkeleton />),
               )}
+           
               {React.Children.toArray(
                 !buckets.isLoading &&
                   buckets.data?.pages?.map((group) =>
