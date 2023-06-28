@@ -1,6 +1,10 @@
 import { IAnimeQuote } from "@/interfaces";
 import { z } from "zod";
-
+import integrationIcon from "@/public/icons/integration_icon.json";
+import interfaceIcon from "@/public/icons/interface_icon.json";
+import supportIcon from "@/public/icons/support_icon.json";
+// import integrationIcon from "@/public/icons/integration_icon.json";
+// import integrationIcon from "@/public/icons/integration_icon.json";
 // We're keeping a simple non-relational schema here.
 // IRL, you will have a schema for your data models.
 export const taskSchema = z.object({
@@ -38,30 +42,39 @@ export const clientUrl = process.env.NEXT_PUBLIC_CLIENT_URL ?? "localhost:3000";
 
 export const featuresList = [
   {
+    icon: integrationIcon,
     title: "Seamless Integrations",
     description: "Plug Veldora into your workflows like a well-oiled machine.",
   },
   {
+    icon: integrationIcon,
     title: "Data Analytics",
-    description: "Discover insights and patterns through Veldora's powerful tools.",
+    description:
+      "Discover insights and patterns through Veldora's powerful tools.",
   },
   {
+    icon: integrationIcon,
     title: "Form Submission",
     description: "Create custom forms to collect the data your business needs.",
   },
   {
+    icon: integrationIcon,
     title: "Security First",
-    description: "Safeguard your data with our industry-leading security measures.",
+    description:
+      "Safeguard your data with our industry-leading security measures.",
   },
   {
+    icon: interfaceIcon,
     title: "Intuitive Interface",
     description: "Effortlessly manage data with our user-friendly dashboard.",
   },
   {
+    icon: supportIcon,
     title: "Rapid Support",
-    description: "Our team's got your back 24/7—come rain, hail, or asteroid attack.",
+    description:
+      "Our team's got your back 24/7—come rain, hail, or asteroid attack.",
   },
-]
+];
 
 export const faqsList = [
   {

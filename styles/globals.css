@@ -77,8 +77,11 @@
   }
 }
 
+
+
 h1 {
-  font-family: 'Zodiak', serif;
+  /* font-family: 'Zodiak', serif; */
+  font-weight: bold;
 }
 .auth_bg {
     background: url("/branding/bg1.png") no-repeat;
@@ -86,22 +89,25 @@ h1 {
   }
   body {
     position: relative;
-    background: #efefef;
+    background: #010101;
     
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   main {
     position: relative;
+    color: white;
   }
   .cursor_glow {
-    width: 200px;
-    height: 200px;
-    filter: blur(200px);
-    background-color: hsl(41, 98%, 39%);
+    width: 170px;
+    height: 170px;
+    filter: blur(120px);
+    background-color: hsl(41, 98%, 69%);
     /* background-color: #0b0f14; */
-    /* background-color: #171123; */
-    animation: hueRot 6s infinite;
+    /* background-color: #171123;
+      */
+      /* background-color: #efefef; */
+    /* animation: hueRot 6s alternate infinite; */
     position: fixed;
     top: 0%;
     bottom: auto;
@@ -110,8 +116,7 @@ h1 {
     z-index: -2;
     will-change: transform; 
     transform: translate(200px, 300px);
-    /* transform: translate3d(attr("data-xpos"), attr("data-ypos"), 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); */
-    /* transform-style: preserve-3d; */
+    opacity: 0.7;
 }
 
   .bg_grid {
@@ -132,11 +137,25 @@ h1 {
 
 @keyframes hueRot {
   0% {
-    filter: hue-rotate(0deg) blur(120px);
+    filter: hue-rotate(0deg) blur(130px);
   }
 
   100% {
-    filter: hue-rotate(360deg) blur(120px);
+    filter: hue-rotate(30deg) blur(130px);
   }
   
+}
+.fade_line {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.0) 0%, rgba(143, 143, 143, 0.67) 50%, rgba(0, 0, 0, 0) 100%);
+  
+}
+
+.fade_line-parent {
+  z-index: -4;
+  
+  background:conic-gradient(from 90deg at 50% 50%, #00000000 50%, #000 50%),radial-gradient(rgba(200,200,200,0.2) 0%, transparent 80%);
+}
+
+.highlight_text {
+  color: #FDBB30;
 }

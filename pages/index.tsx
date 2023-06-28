@@ -1,4 +1,8 @@
+import AnimatedIcon from "@/components/AnimatedIcon";
+import FeatureCard from "@/components/FeatureCard";
 import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { faqsList, featuresList } from "@/constants";
@@ -14,6 +18,7 @@ export default function Home() {
 
   return (
     <>
+    <Header/>
       <div 
       style={ {
         transform: `translate(${docX - 100 + "px"}, ${docY - 100 - y + "px"})`
@@ -31,23 +36,34 @@ export default function Home() {
           <h1 className="text-5xl text-center">
             Streamline Your Workflow with Veldora
           </h1>
-          <p className="mx-auto max-w-[660px] px-6 text-center">
+          <p className="mx-auto text-gray-400 max-w-[660px] px-6 text-center">
             Simplify your life and work smarter, not harder. Veldora offers a
             seamless platform to effortlessly organize your data, collaborate
             with your team, and optimize your workflow. Experience the beauty of
             efficiency and take control of your tasks like never before.
           </p>
-          <Button>Get Started</Button>
+          <Button variant="secondary">Get Started</Button>
         </section>
-        <section className="text-center tracking-[0.4em] text-gray-300">
+        <section className="text-center peer py-8 transition-all  tracking-[0.4em] duration-500 cursor-pointer hover:tracking-[0.45em] text-white">
           <h3>Powerful Tools. Limitless Possibilities.</h3>
         </section>
-        <section className="p-6 py-14 md:p-24">
+        <section className=" p-6 py-14 md:p-24 relative rounded-3xl transition-border duration-900 border-t border-slate-900 pt-20">
+          <div aria-hidden="true" className="fade_line-parent top-0 left-1/2 h-[200px] w-full max-w-[200px] md:max-w-[400px] user-select-none center pointer-events-none absolute max-w-full -translate-x-1/2 -translate-y-1/2"></div>
+          <div aria-hidden="true" className="fade_line top-0 left-1/2 w-[300px] max-w-[300px] user-select-none center pointer-events-none absolute h-px max-w-full -translate-x-1/2 -translate-y-1/2"></div>
           <p className="text-gray-500">Revolutionize</p>
 
           <h2 className="max-w-[600px] text-2xl font-semibold md:text-4xl">
-            Data submission and analytics just got a whole lot sexier!
+            Data submission and analytics just got a whole lot {" "}
+             <span className="highlight_text">
+            sexier!
+              </span>
           </h2>
+          {/* <h2 className="max-w-[600px] text-2xl font-semibold md:text-4xl">
+
+            Implement before <span className="highlight_text">
+              tea
+              </span>
+          </h2> */}
         </section>
   
         <section className="p-6 py-14 md:p-24">
@@ -57,10 +73,7 @@ export default function Home() {
           <div className="grid gap-6 py-12 md:grid-cols-2 lg:grid-cols-3">
             {React.Children.toArray(
               featuresList.map((feature) => (
-                <div className="mt-4">
-                  <h4 className="mb-2 font-semibold text-lg md:text-lg">{feature.title}</h4>
-                  <p className="max-w-[400px] text-gray-700">{feature.description}</p>
-                </div>
+                <FeatureCard feature={feature}/>
               )),
             )}
           </div>
@@ -93,7 +106,7 @@ export default function Home() {
           </h2>
           <div className="mx-auto flex max-w-[300px] gap-2">
             <Input type="text" placeholder="name@email.com" />
-            <Button>Subcribe</Button>
+            <Button variant="outline" className="bg-transparent hover:text-primary">Subscribe</Button>
           </div>
         </section>
         <Footer />

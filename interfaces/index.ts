@@ -63,3 +63,9 @@ export interface IAnimeQuote {
   body: string
   author: string;
 }
+
+export interface FeatureData {
+    icon: any;
+    title: string;
+    description: string;
+}
