@@ -12,6 +12,7 @@
     "@faker-js/faker": "^8.0.2",
     "@hookform/resolvers": "^3.1.1",
     "@passageidentity/passage-elements": "^1.9.3",
+    "@radix-ui/react-alert-dialog": "^1.0.4",
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.4",

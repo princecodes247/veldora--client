@@ -14,12 +14,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className="h-screen flex items-center justify-center">
-        <h1>VELDORA</h1>
+        <h1 className="text-5xl">VELDORA</h1>
       </section>
       <section className="p-6 py-14 md:p-24">
       <p>Revolutionize</p>
 
-<h2 className="text-2xl md:text-4xl">Data submission and analytics just got a whole lot sexier!</h2>
+<h2 className="text-2xl md:text-4xl max-w-[600px]">Data submission and analytics just got a whole lot sexier!</h2>
       </section>
 
       <section className="p-6 py-14 md:p-24">

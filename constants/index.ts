@@ -73,8 +73,53 @@ export const faqsList = [
   },
 ]
 
-
-
+export const animeQuotes = [
+  {
+    body: "Believe in the me that believes in you!",
+    author: "Kamina",
+  },
+  {
+    body: "Sometimes the best way to solve your own problems is to help someone else",
+    author: "Uncle Iroh, ATLA",
+  },
+  {
+    body: "In this world, wherever there is light, there are also shadows.",
+    author: "Ryuk, Death Note",
+  },
+  {
+    body: "Hard work betrays none, but dreams betray many.",
+    author: "Hachiman Hikigaya",
+  },
+  {
+    body: "No matter how deep the night, it always turns to day, eventually.",
+    author: "Simon, Gurren Lagann",
+  },
+  {
+    body: "The true measure of a shinobi is not how he lives, but how he dies.",
+    author: "Jiraiya, Naruto",
+  },
+  {
+    body: "If you don't give up, you can keep running forever.",
+    author: "Katsuki Bakugo, My Hero Academia",
+  },
+  {
+    body: "Hard work is worthless for those that don't believe in themselves.",
+    author: "Naruto Uzumaki, Naruto",
+  },
+  {
+    body: "Hard work may not always lead to success, but it will never go unnoticed.",
+    author: "Rock Lee, Naruto",
+  },
+  {
+    body: "In order to achieve your dreams, you must embrace the challenges that come your way.",
+    author: "Yuno Gasai, Future Diary",
+  },
+    {
+    body: "No matter how hard or impossible it is, never lose sight of your goal.",
+    author: "Edward Elric, Fullmetal Alchemist",
+  },
+  
+]
 
 
 

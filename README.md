@@ -14,8 +14,8 @@
 - [*] Loading page
 - [*] Connect settings page
 - [*] Add logo to auth pages
-- [] Setup how to
-- [] Add empty states
+- [] Add empty states (On form empty state, link to setup)
+- [] Setup how to and onboarding (Use the number of user logins then highlight the create button and make setup the default)
 - [] Landing page
 
 ### Nice to have

@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import Image from "next/image"
 import Link from "next/link"
 import { Command } from "lucide-react"
-
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import authBG from "@/public/bg_1.jpg"
 
 export default function Login() {
   useEffect(() => {
@@ -21,7 +21,10 @@ export default function Login() {
       <div className="container relative min-h-[100vh] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
   
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div className="absolute inset-0 bg-zinc-900" />
+          <div className="absolute inset-0 bg-zinc-900">
+            <img src={authBG.src} className="w-full h-full object-cover" alt="" />
+            <div className="absolute inset-0 bg-zinc-900/80"/>
+          </div>
           <div className="relative z-20 flex gap-4 items-center text-lg font-medium">
             <div className="w-8 h-16">
             <Logo variant="base"/>

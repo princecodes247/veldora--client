@@ -73,8 +73,8 @@ export const createBucket = ({
   );
 };
 
-export const deleteBucket = ({ id }: { id: number }) => {
-  return api.post(servicePrefix + "remove" + id + "/", {});
+export const deleteBucket = ({ id }: { id: string }) => {
+  return api.delete(servicePrefix + id + "/", {});
 };
 
 export const getBuckets = ({
