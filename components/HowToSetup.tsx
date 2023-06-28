@@ -11,20 +11,21 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 // @ts-ignore
 // const {dark} = lazy(() => import('react-syntax-highlighter/dist/esm/styles/prism'));
 export function HowToSetup({id}:{id: string}) {
+  const targetLink = `${apiUrl}/bucket/${id}`
   const step1CodeString = `
-  ${apiUrl}/${id}
+  ${targetLink}
   `;
   const step2CodeString = `
-  <form action="${apiUrl}/${id}">
+  <form action="${targetLink}">
   </form>
   `;
   const step3CodeString = `
-  <img src="${apiUrl}/${id}/view" alt="Veldora analytics"/>
+  <img src="${targetLink}/view" alt="Veldora analytics"/>
   `;
 
   const step4CodeString = `
-  <form action="${apiUrl}/${id}">
-    <img src="${apiUrl}/${id}/view" alt="Veldora analytics"/>
+  <form action="${targetLink}">
+    <img src="${targetLink}/view" alt="Veldora analytics"/>
   </form>
   `;
   return (
