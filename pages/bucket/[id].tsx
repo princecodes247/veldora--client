@@ -39,6 +39,9 @@ export default function Bucket() {
   setIsCopied(false)
   }, 1000)
  }
+
+ const [tab, setTab] = useState(submissions.data?.length === 0 ? "how" : "submissions")
+
   return (
     <DashboardLayout>
         <Head>
@@ -86,9 +89,9 @@ export default function Bucket() {
        </div>
        {
         !submissions.isLoading && (
-          <Tabs defaultValue={submissions.data?.length === 0 ? "how" : "submissions"} className="space-y-4 ">
+          <Tabs value={tab} onValueChange={setTab} className="space-y-4 ">
          <div className="w-full overflow-auto">
-         <TabsList className="">
+         <TabsList  className="">
            <TabsTrigger value="how">How to Use</TabsTrigger>
            <TabsTrigger value="summary">Summary</TabsTrigger>
            <TabsTrigger value="submissions">Submissions</TabsTrigger>
@@ -100,7 +103,7 @@ export default function Bucket() {
           <HowToSetup id={bucket.data?._id ?? ""}/>
          </TabsContent>
          <TabsContent value="summary" className="space-y-4">
-           <BucketAnalytics bucket={bucket.data} />
+           <BucketAnalytics goToSetupTab={() => {setTab("how")}} bucket={bucket.data} />
          </TabsContent>
          <TabsContent value="submissions" className="space-y-4">
            <DataTable

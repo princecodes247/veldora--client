@@ -1,10 +1,4 @@
-import {
-  Activity,
-  BarChart,
-  Users,
-  Vote,
-} from "lucide-react";
-
+import { Activity, BarChart, Users, Vote } from "lucide-react";
 
 import {
   Card,
@@ -16,14 +10,23 @@ import {
 import { Overview } from "@/components/Overview";
 import { GeographicDistribution } from "@/components/GeographicDistribution";
 import { IBucketDataWithStats } from "@/interfaces";
+import { ConnectAnalyticsWarning } from "./ConnectAnalyticsWarning";
 
 export default function BucketAnalytics({
   bucket,
+  goToSetupTab,
 }: {
   bucket?: IBucketDataWithStats;
+  goToSetupTab: () => void;
 }) {
   return (
     <>
+      {((bucket?.stats?.submissionCount ?? 0) > 0 && ((bucket?.views?.length ?? 0) === 0)) && (
+        <ConnectAnalyticsWarning
+          onClick={goToSetupTab}
+          id={bucket?._id ?? ""}
+        />
+      )}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -96,7 +99,10 @@ export default function BucketAnalytics({
         <Card className="col-span-3">
           <CardHeader>
             <CardTitle>Geographic Distribution</CardTitle>
-            <CardDescription>You reached {bucket?.stats?.countries?.length ?? 0} countries this month.</CardDescription>
+            <CardDescription>
+              You reached {bucket?.stats?.countries?.length ?? 0} countries this
+              month.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <GeographicDistribution data={bucket?.stats?.countries ?? []} />
