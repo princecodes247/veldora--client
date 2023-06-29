@@ -1,23 +1,37 @@
-import AnimatedIcon from "@/components/AnimatedIcon";
+
 import FeatureCard from "@/components/FeatureCard";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { Logo } from "@/components/Logo";
+import ReactPlayer from 'react-player'
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { faqsList, featuresList } from "@/constants";
 import { ArrowRight } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useMouse, useWindowScroll } from "react-use"
+import { VideoPlayer } from "@/components/VideoPlayer";
+import { useMutate } from "@/hooks/useMutate";
+import { subscribeToNewsletter } from "@/services/BucketService";
 
 export default function Home() {
   
     const mouseTrackRef = React.useRef(null);
     const {y} = useWindowScroll();
   const {docX, docY,} = useMouse(mouseTrackRef);
-
+  const [email, setEmail] = useState("")
+  const subscribeMutation = useMutate(subscribeToNewsletter, {
+    loadingMessage: "Subscribing to newsletter",
+    successMessage: "Subscribed",
+    onSuccessFunction: () => {
+      setEmail("")
+    }
+  })
+  const handleSubscribe = () => {
+    subscribeMutation.mutate(email)
+    
+  }
   return (
     < >
 
@@ -66,6 +80,9 @@ export default function Home() {
             sexier!
               </span>
           </h2>
+
+        {/* <VideoPlayer/> */}
+            
         </section>
   
         <section className="relative p-6 py-14 md:p-24">
@@ -116,8 +133,8 @@ export default function Home() {
             Stay Updated and Snag Exclusive Offers
           </h2>
           <div className="mx-auto flex flex-col md:flex-row md:max-w-[500px] w-full gap-2">
-            <Input className="bg-transparent focus:outline-" type="text" placeholder="name@email.com" />
-            <Button variant="secondary" className="">Subscribe</Button>
+            <Input value={email} onChange={(e) => setEmail(e.target.value)} className="bg-transparent focus:outline-" type="text" placeholder="name@email.com" />
+            <Button variant="secondary" onClick={handleSubscribe} className="">Subscribe</Button>
           </div>
         </section>
         <Footer />
