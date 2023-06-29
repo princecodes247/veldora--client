@@ -107,7 +107,7 @@
     */
     /* background-color: #efefef; */
   /* animation: hueRot 6s alternate infinite; */
-  position: fixed;
+  position: absolute;
   top: 0%;
   bottom: auto;
   left: 0%;
