@@ -20,12 +20,12 @@ export function HowToSetup({id}:{id: string}) {
   </form>
   `;
   const step3CodeString = `
-  <img src="${targetLink}/view" alt="Veldora analytics"/>
+  <img src="${targetLink}/view" hidden alt="Veldora analytics"/>
   `;
 
   const step4CodeString = `
   <form action="${targetLink}" method="POST">
-    <img src="${targetLink}/view" alt="Veldora analytics"/>
+    <img src="${targetLink}/view" hidden alt="Veldora analytics"/>
   </form>
   `;
   return (
