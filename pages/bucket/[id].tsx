@@ -17,6 +17,7 @@ import { BucketPage404 } from "@/components/errors/Error";
 import { HowToSetup } from "@/components/HowToSetup";
 import { apiUrl } from "@/constants";
 import { BucketConfig } from "@/components/BucketConfig";
+import { Loading } from "@/components/Loading";
 
 export default function Bucket() {
   const router = useRouter();
@@ -58,8 +59,16 @@ export default function Bucket() {
           <BucketPage404 type="INVALID_BUCKET"/>
         )
 }
+
+{
+        (bucket.isLoading && submissions.isLoading ) && (
+          <div className="h-[85vh] border flex justify-center items-center">
+            <div className="w-16 animate-pulse text-[#171123] md:w-32 text-gray-300"><Loading variant="INLINE"/></div>
+          </div>
+        )
+}
        {
-        !bucket.isError && !submissions.isError && (
+        !bucket.isError && !submissions.isError && !bucket.isLoading && !submissions.isLoading && (
           
        <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
        <div className="flex w-full justify-between">
