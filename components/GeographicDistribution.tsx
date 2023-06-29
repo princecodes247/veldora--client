@@ -1,4 +1,5 @@
 import React from "react";
+import { NoData } from "./errors/NoData";
 
 export function GeographicDistribution({
   data
@@ -26,6 +27,7 @@ data: {
           ))
         )
       }
+      {data?.length === 0 && <NoData/>}
     </div>
   );
 }

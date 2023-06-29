@@ -10,7 +10,7 @@ import BucketAnalytics from "@/components/BucketAnalytics";
 import { Copy, Trash } from "lucide-react";
 import useCopyToClipboard from "@/hooks/useCopyToClipboard";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import DeleteBucketDialog from "@/components/dialogs/DeleteBucket.dialog";
 import { BucketPage404 } from "@/components/errors/Error";
@@ -41,6 +41,9 @@ export default function Bucket() {
  }
 
  const [tab, setTab] = useState(submissions.data?.length === 0 ? "how" : "submissions")
+ useEffect(() => {
+  setTab(submissions.data?.length === 0 ? "how" : "submissions")
+ }, [submissions.isLoading])
 
   return (
     <DashboardLayout>
