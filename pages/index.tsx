@@ -32,7 +32,7 @@ export default function Home() {
       <div className="bg_grid"></div>
         <Head>
           <title>Veldora</title>
-          <meta name="description" content="Form data managment" />
+          <meta name="description" content="Form data managment made easy" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <section className="relative flex flex-col items-center justify-center h-screen gap-6 p-6 py-14 md:p-24">
