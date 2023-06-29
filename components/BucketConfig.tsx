@@ -79,7 +79,7 @@ export function BucketConfig({bucket}: {bucket?: IBucketData}) {
         </div>}
       </CardContent>
       <CardFooter>
-        <Button onClick={handleSubmit} disabled={(responseStyle === "custom" && customRedirect.trim.length === 0) || bucketDescription.trim().length === 0 || bucketName.trim().length === 0} className="w-full">Create account</Button>
+        <Button onClick={handleSubmit} disabled={(responseStyle === "custom" && customRedirect.trim().length === 0) || bucketDescription.trim().length === 0 || bucketName.trim().length === 0} className="w-full">Update Bucket</Button>
       </CardFooter>
     </Card>
   );
