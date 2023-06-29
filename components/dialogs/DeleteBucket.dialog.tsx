@@ -36,8 +36,8 @@ export default function DeleteBucketDialog({id, name}: {id: string; name: string
   const [nameToCompare, setNameToCompare] = useState("");
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-  <AlertDialogTrigger>
-  <Button variant="destructive">
+  <AlertDialogTrigger className="border w-full">
+  <Button variant="destructive" className="w-full">
               <Trash size={16} className="mr-2"/>
               Delete Bucket
             </Button>

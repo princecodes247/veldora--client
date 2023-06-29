@@ -16,6 +16,7 @@ import { useState } from "react";
 import { IBucketData } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
 import { updateBucket } from "@/services/BucketService";
+import DeleteBucketDialog from "./dialogs/DeleteBucket.dialog";
 
 export function BucketConfig({bucket}: {bucket?: IBucketData}) {
     const [bucketName, setBucketName] = useState(bucket?.name ?? "")
@@ -34,6 +35,7 @@ export function BucketConfig({bucket}: {bucket?: IBucketData}) {
         responseStyle
     }})
   return (
+    <>
     <Card className="max-w-[700px]">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">Extra Configurations</CardTitle>
@@ -78,9 +80,24 @@ export function BucketConfig({bucket}: {bucket?: IBucketData}) {
           <Input id="text" value={customRedirect} onChange={(e) => setCustomRedirect(e.target.value)}  type="text" placeholder="https://redirect.com" />
         </div>}
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-col gap-2">
         <Button onClick={handleSubmit} disabled={(responseStyle === "custom" && customRedirect.trim().length === 0) || bucketDescription.trim().length === 0 || bucketName.trim().length === 0} className="w-full">Update Bucket</Button>
       </CardFooter>
     </Card>
+    <Card className="max-w-[700px]">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-2xl">Delete Bucket</CardTitle>
+        <CardDescription>
+          Delete your form bucket
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+    
+      </CardContent>
+      <CardFooter className="flex flex-col gap-2">
+        <DeleteBucketDialog id={bucket?._id ?? ""} name={bucket?.name ?? ""}/>
+      </CardFooter>
+    </Card>
+    </>
   );
 }
