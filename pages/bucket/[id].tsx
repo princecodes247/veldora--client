@@ -54,15 +54,15 @@ export default function Bucket() {
        {
         !bucket.isError && (
           
-       <div className="flex-1 space-y-4 p-4 pt-6">
+       <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
        <div className="flex w-full justify-between">
        <div className="flex w-full flex-col space-y-2">
          <h2 className="text-2xl w-full md:text-3xl font-bold tracking-tight">
            {bucket.data?.name ?? ""}
          </h2>
          <p className="w-full">{bucket.data?.description ?? ""}</p>
-         <div className="flex w-full flex-col md:flex-row gap-2 md:items-center">
-         <p className="text-xs w-full">{apiUrl}/buckets/{bucket.data?._id ?? ""}</p>
+         <div className="flex w-full flex-col md:flex-row gap-2 justify-start md:items-center">
+         <p className="text-xs w-full md:w-fit">{apiUrl}/buckets/{bucket.data?._id ?? ""}</p>
          <TooltipProvider>
 <Tooltip open={isCopied} >
  <TooltipTrigger asChild>
