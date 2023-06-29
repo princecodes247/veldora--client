@@ -11,7 +11,9 @@ const servicePrefix = "/buckets/";
 const submissionsPrefix = "/submissions/";
 
 export const getBucket = (id: string) => {
-  return api.get<ResponseBody<IBucketDataWithStats>>(servicePrefix + id, {});
+  return api.get<ResponseBody<IBucketDataWithStats>>(servicePrefix + id, {
+    headers: authHeaders(),
+  });
 };
 
 export const getUserBuckets = ({
@@ -41,7 +43,9 @@ export const getSubmissions = ({
 }>) => {
   return api.get<ResponseBody<ISubmissionData[]>>(
     `${submissionsPrefix}?bucket=${id}&page=${page}&pageSize=${pageSize}`,
-    {},
+    {
+      headers: authHeaders(),
+    },
   );
 };
 
@@ -88,19 +92,25 @@ export const getBuckets = ({
 }>) => {
   return api.get<GetBucketsData>(
     `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
-    {},
+    {
+      headers: authHeaders(),
+    },
   );
 };
 
 export const updateBucket = ({
   bucketData,
-  id
-}:{id:string, bucketData: Partial<Pick<IBucketData, "customRedirect" | "description" | "name" | "responseStyle">>}) => {
-  return api.patch(
-    servicePrefix + id,
-    bucketData,
-    {
-      headers: authHeaders(),
-    },
-  );
+  id,
+}: {
+  id: string;
+  bucketData: Partial<
+    Pick<
+      IBucketData,
+      "customRedirect" | "description" | "name" | "responseStyle"
+    >
+  >;
+}) => {
+  return api.patch(servicePrefix + id, bucketData, {
+    headers: authHeaders(),
+  });
 };
