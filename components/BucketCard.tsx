@@ -58,14 +58,14 @@ export function BucketCard({
             listView && "py-4",
           )}
         >
-          <CardTitle className="flex gap-4">
+          <CardTitle className="flex w-full gap-4">
             <Avatar className="h-8 w-8">
               <AvatarImage src="/avatars/01.png" alt="UU" />
               <AvatarFallback className="text-sm">
                 {bucket.name.slice(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <span className="text-xl font-bold">{bucket.name}</span>
+            <span className="text-xl w-full truncate font-bold">{bucket.name}</span>
           </CardTitle>
           {/* <DollarSign className="w-4 h-4 text-muted-foreground" /> */}
         </CardHeader>
