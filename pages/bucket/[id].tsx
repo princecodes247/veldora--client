@@ -54,15 +54,15 @@ export default function Bucket() {
        {
         !bucket.isError && (
           
-       <div className="flex-1 space-y-4 p-8 pt-6">
-       <div className="flex justify-between">
-       <div className="flex flex-col space-y-2">
-         <h2 className="text-3xl font-bold tracking-tight">
+       <div className="flex-1 space-y-4 p-4 pt-6">
+       <div className="flex w-full justify-between">
+       <div className="flex w-full flex-col space-y-2">
+         <h2 className="text-2xl w-full md:text-3xl font-bold tracking-tight">
            {bucket.data?.name ?? ""}
          </h2>
-         <p>{bucket.data?.description ?? ""}</p>
-         <div className="flex gap-2 items-center">
-         <p className="text-xs">{apiUrl}/buckets/{bucket.data?._id ?? ""}</p>
+         <p className="w-full">{bucket.data?.description ?? ""}</p>
+         <div className="flex w-full flex-col md:flex-row gap-2 md:items-center">
+         <p className="text-xs w-full">{apiUrl}/buckets/{bucket.data?._id ?? ""}</p>
          <TooltipProvider>
 <Tooltip open={isCopied} >
  <TooltipTrigger asChild>
@@ -85,13 +85,16 @@ export default function Bucket() {
        </div>
        {
         !submissions.isLoading && (
-          <Tabs defaultValue={submissions.data?.length === 0 ? "how" : "submissions"} className="space-y-4">
-         <TabsList>
+          <Tabs defaultValue={submissions.data?.length === 0 ? "how" : "submissions"} className="space-y-4 ">
+         <div className="w-full overflow-auto">
+         <TabsList className="">
            <TabsTrigger value="how">How to Use</TabsTrigger>
            <TabsTrigger value="summary">Summary</TabsTrigger>
            <TabsTrigger value="submissions">Submissions</TabsTrigger>
            <TabsTrigger value="config">Configuration</TabsTrigger>
          </TabsList>
+
+         </div>
          <TabsContent value="how" className="space-y-4">
           <HowToSetup id={bucket.data?._id ?? ""}/>
          </TabsContent>
