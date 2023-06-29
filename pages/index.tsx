@@ -52,7 +52,7 @@ export default function Home() {
           </Button>
           </Link>
         </section>
-        <section className="aqws relative text-center peer py-8 transition-all  tracking-[0.4em] duration-500 cursor-pointer hover:tracking-[0.45em] text-white">
+        <section className="relative text-center peer py-8 transition-all  md:tracking-[0.4em] duration-500 cursor-pointer  md:hover:tracking-[0.45em] text-white">
           <h3>Powerful Tools. Limitless Possibilities.</h3>
         </section>
         <section className=" p-6 py-14 md:p-24 relative rounded-3xl transition-border duration-900 border-t border-slate-900 pt-20">

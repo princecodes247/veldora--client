@@ -14,7 +14,7 @@ export function Logo({
     </svg>
     
     
-    <svg className={clsx(variant === "base" ? "block" : variant === "wordmark" ? "hidden" :  variant === "responsive" ?  "hidden md:block": "hidden")} width="" height="" viewBox="0 0 196 241" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={clsx(variant === "base" ? "block" : variant === "wordmark" ? "hidden" :  variant === "responsive" ?  "block md:hidden": "hidden")} width="" height="" viewBox="0 0 196 241" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M111.627 126.075L82.5325 178.445L77.6834 187.173L52.579 142.72L0.64876 41.4474C-1.33678 37.5753 1.47505 32.9735 5.82657 32.9735H157.208L134.902 57.2187L106.778 88.2526L70.8948 126.075H111.627Z" fill="currentColor"/>
     <path d="M121.615 119.83H86.1906L192.392 5.35933L149.827 96.4512L149.162 97.8745H150.733H193.587L57.1441 234.419L122.481 121.331L123.348 119.83H121.615Z" fill="#FDBB30" stroke="#FDBB30" stroke-width="2"/>
     </svg>
