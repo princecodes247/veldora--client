@@ -16,7 +16,7 @@ export function HowToSetup({id}:{id: string}) {
   ${targetLink}
   `;
   const step2CodeString = `
-  <form action="${targetLink}">
+  <form action="${targetLink}" method="POST">
   </form>
   `;
   const step3CodeString = `
@@ -24,7 +24,7 @@ export function HowToSetup({id}:{id: string}) {
   `;
 
   const step4CodeString = `
-  <form action="${targetLink}">
+  <form action="${targetLink}" method="POST">
     <img src="${targetLink}/view" alt="Veldora analytics"/>
   </form>
   `;

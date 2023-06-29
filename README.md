@@ -17,11 +17,11 @@
 - [*] Add empty states (On form empty state, link to setup)
 - [*] Landing page
 - [*] Fix submission table pagination bar not responsive
-- [] Setup how to and onboarding (Use the number of user logins then highlight the create button and make setup the default)
+- [*] Setup how to and onboarding (Use the number of user logins then highlight the create button and make setup the default)
+- [*] Add method to docs
+- [*] Fix geographic chart
+- [*] Add return page, return response and custom return page choice
 - [] Add video or image to Landing page
-- [] Add method to docs
-- [] Fix geographic chart
-- [] Add return page, return response and custom return page choice
 
 
 ### Nice to have
