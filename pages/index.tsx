@@ -66,12 +66,6 @@ export default function Home() {
             sexier!
               </span>
           </h2>
-          {/* <h2 className="max-w-[600px] text-2xl font-semibold md:text-4xl">
-
-            Implement before <span className="highlight_text">
-              tea
-              </span>
-          </h2> */}
         </section>
   
         <section className="relative p-6 py-14 md:p-24">
