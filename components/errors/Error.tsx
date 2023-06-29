@@ -18,7 +18,7 @@ export function BucketPage404({
     <Logo variant="error"/>
     </div>
     
-    <h2 className="text-xl md:text-3xl">{message.title}</h2>
+    <h2 className="text-xl text-center max-w-[600px] md:text-3xl">{message.title}</h2>
     <p className="mx-auto text-center text-gray-500 max-w-[600px]"> {message.body}</p>
       <Link href="/dashboard">
       <Button>Go back to dashboard</Button>
