@@ -12,7 +12,7 @@ export function Footer() {
     <p className="text-gray-400 font-semibold">
     Simplify, Optimize, Succeed with Veldora
     </p>
-    <Link href="www.github.com/princecodes247" className="text-gray-600 text-sm hover:text-white">
+    <Link href="www.github.com/princecodes247" className="text-gray-600 text-sm hover:underline hover:text-white">
     <p className="">Built by @princecodes247</p>
     </Link>
 </footer>
