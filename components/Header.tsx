@@ -15,7 +15,7 @@ export function Header() {
       </div>
       <div className="flex items-center justify-center">
         <Link href="/dashboard">
-        <Button variant="outline" className="font-semibold px-6">Get Started
+        <Button variant="outline" className="border bg-transparent text-white font-semibold px-6">Get Started
         <ArrowRight size={15} className="-mr-2 ml-2"/>
         </Button>
         </Link>
