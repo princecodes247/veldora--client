@@ -14,11 +14,11 @@ export function ConnectAnalyticsWarning({id, onClick}: {id: string; onClick: () 
       <AlertTriangleIcon className="h-4 w-4" />
       <AlertTitle>Warning</AlertTitle>
       <AlertDescription>
-        You haven't setup up your form analytics {" "}
+        You haven&apos;t setup up your form analytics {" "}
         <button className="underline" onClick={() => {
             onClick();
             router.push(`#analytics-setup`)
-        }}> Let's fix it</button>
+        }}> Let&apos;s fix it</button>
       </AlertDescription>
     </Alert>
   )
