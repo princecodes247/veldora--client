@@ -22,13 +22,13 @@
 - [*] Fix geographic chart
 - [*] Add return page, return response and custom return page choice
 - [] Add video or image to Landing page
+- [] Install @vercel/analytics
 
 
 ### Nice to have
 
 - [] Setup theme
 - [] Delete response
-- [] Install @vercel/analytics
 - [*] Search form responses
 - [] Send data to email anonymously
 

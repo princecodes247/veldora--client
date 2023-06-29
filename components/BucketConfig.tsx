@@ -25,7 +25,7 @@ export function BucketConfig({bucket}: {bucket?: IBucketData}) {
     const [customRedirect, setCustomRedirect] = useState(bucket?.customRedirect ?? "")
 
     const updateBucketMutation = useMutate(updateBucket, {
-        loadingMessage: "Updating Mutation"
+        loadingMessage: "Updating Bucket"
     })
 
     const handleSubmit = () => updateBucketMutation.mutate({id: bucket?._id ??"", bucketData: {
