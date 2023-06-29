@@ -45,11 +45,11 @@ export function BucketCard({
   listView?: boolean;
 }) {
   return (
-    <Link href="/bucket/[id]" as={"/bucket/" + bucket._id}>
+    <Link href="/bucket/[id]" className="w-full" as={"/bucket/" + bucket._id}>
       <Card
         className={clsx(
           "hover:shadow-md",
-          listView && "flex flex-col justify-between gap-2 md:flex-row",
+          listView ? "flex flex-col justify-between gap-2 md:flex-row" : "",
         )}
       >
         <CardHeader
@@ -60,7 +60,7 @@ export function BucketCard({
         >
           <CardTitle className="flex gap-4">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="/avatars/01.png" alt="@shadcn" />
+              <AvatarImage src="/avatars/01.png" alt="UU" />
               <AvatarFallback className="text-sm">
                 {bucket.name.slice(0, 2).toUpperCase()}
               </AvatarFallback>

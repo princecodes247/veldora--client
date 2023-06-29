@@ -98,7 +98,7 @@ function Dashboard() {
                 )
               }
               <TabsContent value="grid-view" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {React.Children.toArray(
                 buckets.isLoading &&
                   [0, 0, 0, 0, 0, 0].map(() => <BucketCardSkeleton />),
