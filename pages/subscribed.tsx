@@ -3,12 +3,18 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import authBG from "@/public/bg_1.jpg";
 import AnimeQuote from "@/components/AnimeQuote";
+import Head from "next/head";
 
 export default function Subscribed() {
   
 
   return (
     <>
+     <Head>
+        <title>Subscribed Successfully - Veldora</title>
+        <meta name="description" content="Form data management made easy" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="container relative min-h-[100vh] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900">

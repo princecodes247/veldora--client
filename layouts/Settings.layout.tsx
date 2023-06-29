@@ -2,6 +2,7 @@ import Image from "next/image";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import { Separator } from "@/components/ui/separator";
 import { SidebarNav } from "@/components/settings/SettingsSidebarNav";
+import Head from "next/head";
 
 const sidebarNavItems = [
   {
@@ -22,7 +23,11 @@ interface SettingsLayoutProps {
 export default function SettingsLayout({ children }: SettingsLayoutProps) {
   return (
     <DashboardLayout>
-      
+       <Head>
+        <title>Settings - Veldora</title>
+        <meta name="description" content="Form data management made easy" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="">
         <div className="block space-y-6 p-10 pb-16">
           <div className="space-y-0.5">

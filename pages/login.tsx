@@ -1,11 +1,7 @@
 import { Logo } from "@/components/Logo";
 import Head from "next/head";
 import { useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Command } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+
 import authBG from "@/public/bg_1.jpg";
 import AnimeQuote from "@/components/AnimeQuote";
 
@@ -18,6 +14,11 @@ export default function Login() {
 
   return (
     <>
+    <Head>
+        <title>Login - Veldora</title>
+        <meta name="description" content="Form data management made easy" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="container relative min-h-[100vh] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900">
