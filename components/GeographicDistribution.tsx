@@ -16,7 +16,7 @@ data: {
             <div className="flex items-center">
          
           <div className="ml-4 space-y-1">
-            <p className="text-sm font-medium leading-none">{country.name}</p>
+            <p className="text-sm font-medium leading-none">{country.name.length > 0 ? country.name : "Unknown"}</p>
             <p className="text-sm text-muted-foreground">
               {/* {country.name} */}
             </p>
