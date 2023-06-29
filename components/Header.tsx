@@ -8,7 +8,7 @@ export function Header() {
   return (
     <header className="flex font-semibold justify-between px-2 sm:px-6 z-10 top-0 w-full sticky top-0 border-b border-transparent backdrop-blur-sm transition duration-200 ease-in-out border-white/10  bg-black/50 backdrop-blur-md">
       <div className="relative p-8 py-4 text-white">
-        <Link href="/" className="block w-16 sm:w-32 h-8">
+        <Link href="/" className="block w-8 sm:w-32 ">
 
         <Logo variant="responsive" />
         </Link>
