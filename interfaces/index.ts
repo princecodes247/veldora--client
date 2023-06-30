@@ -49,7 +49,10 @@ export interface IBucketDataWithStats extends IBucketData {
     countries: [];
     devices: [];
     submissionCount: 3;
-    dailySubmissions: [];
+    dailySubmissions: {
+      count: number;
+      date: string;
+    }[];
   };
 }
 

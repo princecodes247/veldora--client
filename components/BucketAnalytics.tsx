@@ -51,7 +51,8 @@ export default function BucketAnalytics({
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {bucket?.views?.length ?? 0}
+              {/* Calculate the number of people */}
+              {Math.min(Math.floor(((bucket?.stats?.submissionCount ?? 0) / (bucket?.views?.length ?? 1) * 100)), 100)}%
             </div>
             <p className="text-xs text-muted-foreground">
               {/* +180.1% from last month */}
@@ -79,7 +80,7 @@ export default function BucketAnalytics({
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {bucket?.views?.length ?? 0}
+              {(bucket?.stats?.dailySubmissions && bucket?.stats?.dailySubmissions[bucket?.stats?.dailySubmissions?.length - 1].count) ?? 0}
             </div>
             <p className="text-xs text-muted-foreground">
               {/* +201 since last hour  */}

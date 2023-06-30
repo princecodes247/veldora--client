@@ -81,7 +81,7 @@ export function HowToSetup({id}:{id: string}) {
 
    <h3 id="analytics-setup" className="text-2xl font-semibold">Additional Steps</h3>
    <div className="pb-12 pt-6">
-   <p><b></b> - Add this to your form for analytics</p>
+   <p><b></b> - Add this to your form to get data for the view analytics</p>
    <CodeBoard code={step3CodeString} language="xml"/>
  </div>
  <div className="pb-16">
