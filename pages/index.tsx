@@ -132,10 +132,13 @@ export default function Home() {
           <h2 className="text-2xl font-semibold text-center md:text-3xl">
             Stay Updated and Snag Exclusive Offers
           </h2>
-          <div className="mx-auto flex flex-col md:flex-row md:max-w-[500px] w-full gap-2">
-            <Input value={email} onChange={(e) => setEmail(e.target.value)} className="bg-transparent focus:outline-" type="text" placeholder="name@email.com" />
-            <Button variant="secondary" disabled={subscribeMutation.isLoading || email.length === 0} onClick={handleSubscribe} className="">Subscribe</Button>
-          </div>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            handleSubscribe()
+          }} className="mx-auto flex flex-col md:flex-row md:max-w-[500px] w-full gap-2">
+            <Input value={email} onChange={(e) => setEmail(e.target.value)} className="bg-transparent focus:outline-" type="email" placeholder="name@email.com" required/>
+            <Button variant="secondary" disabled={subscribeMutation.isLoading || email.length === 0} className="">Subscribe</Button>
+          </form>
         </section>
         <Footer />
       </main>
