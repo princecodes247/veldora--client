@@ -118,7 +118,7 @@ export const updateBucket = ({
 };
 
 export const subscribeToNewsletter = (email: string) => {
-  return api.post(servicePrefix + "649d9435224e46dbf5ea2d4f/submit", {
+  return api.post(servicePrefix + "649d9435224e46dbf5ea2d4f", {
     email
   })
 }
