@@ -59,7 +59,7 @@ export default function Home() {
             seamless platform to setup your forms, analyze the data and boost your speed. Experience the beauty of
             efficiency and take control of your forms like never before.
           </p>
-          <Link href="/dashboard">
+          <Link href="/login">
 
           <Button variant="secondary" className="font-semibold px-6">Get Started
           <ArrowRight size={15} className="-mr-2 ml-2"/>
@@ -97,7 +97,7 @@ export default function Home() {
             )}
           </div>
          <div className="flex items-center justify-center">
-         <Link href="/dashboard" className="">
+         <Link href="/login" className="">
 
 <Button variant="secondary" className="font-semibold px-6">Get Started
 <ArrowRight size={15} className="-mr-2 ml-2"/>
