@@ -3,6 +3,10 @@ import api, { authHeaders, uninterceptedApi } from "./config";
 
 const servicePrefix = "/users";
 
+export const wakeUpCall = () => {
+  return uninterceptedApi.get<IUserData>(servicePrefix);
+};
+
 export const getUser = (userRequired: boolean = true) => {
   if (userRequired) {
     return api.get<IUserData>(servicePrefix + "/me", {
