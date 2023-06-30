@@ -34,15 +34,22 @@ export const getUserBuckets = ({
 };
 export const getSubmissions = ({
   id,
-  page = 1,
+  page,
   pageSize,
 }: Partial<{
   id: string;
   page?: number;
   pageSize?: number;
 }>) => {
-  return api.get<ResponseBody<ISubmissionData[]>>(
-    `${submissionsPrefix}?bucket=${id}&page=${page}&pageSize=${pageSize}`,
+  return api.get<{
+    data: ISubmissionData[]
+    pageInfo: {
+      "hasNextPage": boolean,
+      "nextPage": number | null
+      pages: number
+  }
+  }>(
+    `${submissionsPrefix}?bucket=${id}&page=${page}&limit=${pageSize}`,
     {
       headers: authHeaders(),
     },

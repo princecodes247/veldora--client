@@ -10,7 +10,7 @@ import BucketAnalytics from "@/components/BucketAnalytics";
 import { Copy, Trash } from "lucide-react";
 import useCopyToClipboard from "@/hooks/useCopyToClipboard";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import DeleteBucketDialog from "@/components/dialogs/DeleteBucket.dialog";
 import { BucketPage404 } from "@/components/errors/Error";
@@ -18,6 +18,7 @@ import { HowToSetup } from "@/components/HowToSetup";
 import { apiUrl } from "@/constants";
 import { BucketConfig } from "@/components/BucketConfig";
 import { Loading } from "@/components/Loading";
+import { PaginationState, Updater } from "@tanstack/react-table";
 
 export default function Bucket() {
   const router = useRouter();
@@ -26,10 +27,17 @@ export default function Bucket() {
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });
+  const [{ pageIndex, pageSize }, setPagination] =
+  useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+
+
   const submissions = useSubmissions({
     id: id ?? "",
-    page: 1,
-    pageSize: 10,
+    page: pageIndex,
+    pageSize,
   });
   const [isCopied, setIsCopied] = useState(false)
   const {copiedText, copy} = useCopyToClipboard()
@@ -41,9 +49,9 @@ export default function Bucket() {
   }, 1000)
  }
 
- const [tab, setTab] = useState(submissions.data?.length === 0 ? "how" : "submissions")
+ const [tab, setTab] = useState(submissions.data?.data?.length === 0 ? "how" : "submissions")
  useEffect(() => {
-  setTab(submissions.data?.length === 0 ? "how" : "submissions")
+  setTab(submissions.data?.data?.length === 0 ? "how" : "submissions")
  }, [submissions.isLoading])
 
   return (
@@ -120,7 +128,7 @@ export default function Bucket() {
          <TabsContent value="submissions" className="space-y-4">
            <DataTable
              data={
-               submissions?.data?.map((submission) => {
+               submissions?.data?.data?.map((submission) => {
                  console.log({ submission });
                  return {
                    ...submission,
@@ -131,12 +139,16 @@ export default function Bucket() {
              columns={submissionColumns(
                Array.from(
                  new Set(
-                   submissions?.data?.flatMap((submission) =>
+                   submissions?.data?.data?.flatMap((submission) =>
                      Object.keys(submission.data),
                    ),
                  ),
                ),
              )}
+             pageIndex={pageIndex}
+            pageSize={pageSize}
+             pageCount={submissions.data.pageInfo.pages}
+             onPaginationChange={setPagination}
            />
          </TabsContent>
          <TabsContent value="config" className="space-y-4">
