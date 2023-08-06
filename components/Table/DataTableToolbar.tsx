@@ -1,23 +1,24 @@
 import { Table } from "@tanstack/react-table";
 import { Trash, X } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTableViewOptions } from "./DataTableViewOptions";
-
 import { priorities, statuses } from "@/constants/data";
 import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
+  onDelete: (table: Table<TData>) => void
 }
 
 export function DataTableToolbar<TData>({
   table,
+  onDelete
 }: DataTableToolbarProps<TData>) {
   const isFiltered =
     table.getPreFilteredRowModel().rows.length >
     table.getFilteredRowModel().rows.length;
+
 
   return (
     <div className="flex items-center justify-between">
@@ -57,15 +58,19 @@ export function DataTableToolbar<TData>({
       </div>
       <div className="flex gap-2">
         <DataTableViewOptions table={table} />
-        {/* <Button
-          variant={"ghost"}
+        {
+          table.getSelectedRowModel().rows.length > 0 &&
+        <Button
+        variant={"ghost"}
           className="h-8"
           disabled={false}
-          onClick={() => console.log({selectedrows: table.getSelectedRowModel()})}
+          onClick={() => onDelete(table)}
         >
           <Trash className="w-4 h-4 mr-2" />
-          Delete
-        </Button> */}
+          
+          Delete {table.getSelectedRowModel().rows.length} row{table.getSelectedRowModel().rows.length > 1 && "s"}
+        </Button>
+        }
       </div>
     </div>
   );

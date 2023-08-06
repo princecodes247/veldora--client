@@ -34,6 +34,7 @@ export interface IBucketData {
   submissionsCount: number;
   responseStyle?: "default" | "json" | "params" | "custom"
   customRedirect?: string
+  accessToken: string;
   views: {
     country: string;
     device: string;

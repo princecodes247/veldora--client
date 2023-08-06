@@ -31,6 +31,7 @@ import { DataTableToolbar } from "./DataTableToolbar";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  deleteFunction: (rows: TData[]) => void;
   pageCount: number,
   pageIndex: number,
   pageSize: number
@@ -44,6 +45,7 @@ export function DataTable<TData, TValue>({
   pageIndex,
 pageSize,
   onPaginationChange,
+  deleteFunction
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -88,7 +90,8 @@ pageSize,
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar onDelete={(table) => deleteFunction(table.getSelectedRowModel().rows.map(row => row.original))} table={table} />
+      
       <div className="border rounded-md">
         <Table>
           <TableHeader>

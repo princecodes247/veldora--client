@@ -129,3 +129,19 @@ export const subscribeToNewsletter = (email: string) => {
     email
   })
 }
+
+export const deleteSubmissions = ({ ids }: { ids: string[] }) => {
+  return api.post(submissionsPrefix + "delete", {
+    ids
+  }, {
+    headers: authHeaders(),
+  });
+};
+
+export const regenerateAPIToken = ({ id }: { id: string }) => {
+  return api.post(servicePrefix + "regenerate-access-token", {
+    id
+  }, {
+    headers: authHeaders(),
+  });
+};

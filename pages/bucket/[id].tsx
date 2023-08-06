@@ -19,6 +19,10 @@ import { apiUrl } from "@/constants";
 import { BucketConfig } from "@/components/BucketConfig";
 import { Loading } from "@/components/Loading";
 import { PaginationState, Updater } from "@tanstack/react-table";
+import { BucketStructure } from "@/components/BucketStructure";
+import { ISubmissionData } from "@/interfaces";
+import { useMutate } from "@/hooks/useMutate";
+import { deleteSubmissions } from "@/services/BucketService";
 
 export default function Bucket() {
   const router = useRouter();
@@ -54,6 +58,14 @@ export default function Bucket() {
   setTab(submissions.data?.data?.length === 0 ? "how" : "submissions")
  }, [submissions.isLoading])
 
+
+ 
+ const deleteSubmissionsMutation = useMutate(deleteSubmissions, {
+  successMessage: "Submissions Deleted",
+  onSuccessFunction: () => {
+    submissions.refetch()
+  }
+})
   return (
     <DashboardLayout>
         <Head>
@@ -76,7 +88,7 @@ export default function Bucket() {
         )
 }
        {
-        !bucket.isError && !submissions.isError && !bucket.isLoading && !submissions.isLoading && (
+        !bucket.isError && !submissions.isError && (!bucket.isLoading || !submissions.isLoading) && (
           
        <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
        <div className="flex w-full justify-between">
@@ -113,8 +125,10 @@ export default function Bucket() {
          <div className="w-full overflow-auto">
          <TabsList  className="">
            <TabsTrigger value="how">How to Use</TabsTrigger>
+           {/* <TabsTrigger value="api">Bucket API</TabsTrigger> */}
            <TabsTrigger value="summary">Summary</TabsTrigger>
            <TabsTrigger value="submissions">Submissions</TabsTrigger>
+           {/* <TabsTrigger value="structure">Bucket Structure</TabsTrigger> */}
            <TabsTrigger value="config">Configuration</TabsTrigger>
          </TabsList>
 
@@ -127,6 +141,7 @@ export default function Bucket() {
          </TabsContent>
          <TabsContent value="submissions" className="space-y-4">
            <DataTable
+           deleteFunction={(rows) => deleteSubmissionsMutation.mutate({ids: rows.map(row => row._id)})}
              data={
                submissions?.data?.data?.map((submission) => {
                  console.log({ submission });
@@ -136,6 +151,7 @@ export default function Bucket() {
                  };
                }) ?? []
              }
+             
              columns={submissionColumns(
                Array.from(
                  new Set(
@@ -151,8 +167,12 @@ export default function Bucket() {
              onPaginationChange={setPagination}
            />
          </TabsContent>
+         <TabsContent value="structure" className="space-y-4">
+          <BucketStructure bucket={bucket.data}/>
+         </TabsContent>
+
          <TabsContent value="config" className="space-y-4">
-          <BucketConfig bucket={bucket.data}/>
+          <BucketConfig bucket={bucket}/>
          </TabsContent>
          
        </Tabs>
