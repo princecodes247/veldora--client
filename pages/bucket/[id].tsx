@@ -9,7 +9,12 @@ import useSubmissions from "@/hooks/useSubmissions";
 import BucketAnalytics from "@/components/BucketAnalytics";
 import { Copy, Trash } from "lucide-react";
 import useCopyToClipboard from "@/hooks/useCopyToClipboard";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useEffect, useMemo, useState } from "react";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import DeleteBucketDialog from "@/components/dialogs/DeleteBucket.dialog";
@@ -31,157 +36,163 @@ export default function Bucket() {
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });
-  const [{ pageIndex, pageSize }, setPagination] =
-  useState<PaginationState>({
+  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
-  })
-
+  });
 
   const submissions = useSubmissions({
     id: id ?? "",
     page: pageIndex,
     pageSize,
   });
-  const [isCopied, setIsCopied] = useState(false)
-  const {copiedText, copy} = useCopyToClipboard()
- const handleCopy = (text: string) => {
-  copy(text)
-  setIsCopied(true)
-  setTimeout(() => {
-  setIsCopied(false)
-  }, 1000)
- }
+  const [isCopied, setIsCopied] = useState(false);
+  const { copiedText, copy } = useCopyToClipboard();
+  const handleCopy = (text: string) => {
+    copy(text);
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 1000);
+  };
 
- const [tab, setTab] = useState(submissions.data?.data?.length === 0 ? "how" : "submissions")
- useEffect(() => {
-  setTab(submissions.data?.data?.length === 0 ? "how" : "submissions")
- }, [submissions.isLoading])
+  const [tab, setTab] = useState(
+    submissions.data?.data?.length === 0 ? "how" : "submissions",
+  );
+  useEffect(() => {
+    setTab(submissions.data?.data?.length === 0 ? "how" : "submissions");
+  }, [submissions.isLoading]);
 
-
- 
- const deleteSubmissionsMutation = useMutate(deleteSubmissions, {
-  successMessage: "Submissions Deleted",
-  onSuccessFunction: () => {
-    submissions.refetch()
-  }
-})
+  const deleteSubmissionsMutation = useMutate(deleteSubmissions, {
+    successMessage: "Submissions Deleted",
+    onSuccessFunction: () => {
+      submissions.refetch();
+    },
+  });
   return (
     <DashboardLayout>
-        <Head>
-          <title>{bucket.data?.name ?? ""} - Veldora</title>
-          
-          <meta name="description" content="Form data managment made easy" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        {
-        (bucket.isError || submissions.isError) && (
-          <BucketPage404 type="INVALID_BUCKET"/>
-        )
-}
+      <Head>
+        <title>{bucket.data?.name ?? ""} - Veldora</title>
 
-{
-        (bucket.isLoading && submissions.isLoading ) && (
-          <div className="h-[85vh] border flex justify-center items-center">
-            <div className="w-16 animate-pulse text-[#171123] md:w-32 text-gray-300"><Loading variant="INLINE"/></div>
+        <meta name="description" content="Form data managment made easy" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      {(bucket.isError || submissions.isError) && (
+        <BucketPage404 type="INVALID_BUCKET" />
+      )}
+
+      {bucket.isLoading && submissions.isLoading && (
+        <div className="flex h-[85vh] items-center justify-center border">
+          <div className="w-16 animate-pulse text-[#171123] text-gray-300 md:w-32">
+            <Loading variant="INLINE" />
           </div>
-        )
-}
-       {
-        !bucket.isError && !submissions.isError && (!bucket.isLoading || !submissions.isLoading) && (
-          
-       <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-       <div className="flex w-full justify-between">
-       <div className="flex w-full flex-col space-y-2">
-         <h2 className="text-2xl w-full md:text-3xl font-bold tracking-tight">
-           {bucket.data?.name ?? ""}
-         </h2>
-         <p className="w-full">{bucket.data?.description ?? ""}</p>
-         <div className="flex w-full flex-col md:flex-row gap-2 justify-start md:items-center">
-         <p className="text-xs w-full md:w-fit">{apiUrl}/buckets/{bucket.data?._id ?? ""}</p>
-         <TooltipProvider>
-<Tooltip open={isCopied} >
- <TooltipTrigger asChild>
- 
-         <Button onClick={() => handleCopy(apiUrl + "/buckets/" + (bucket.data?._id ?? ""))} variant={"ghost"} size={"icon"}>
-           <Copy size={15}/>
-         </Button>
- </TooltipTrigger>
- <TooltipContent>
-   <p>Copied to clipboard</p>
- </TooltipContent>
-</Tooltip>
-</TooltipProvider>
+        </div>
+      )}
+      {!bucket.isError &&
+        !submissions.isError &&
+        (!bucket.isLoading || !submissions.isLoading) && (
+          <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
+            <div className="flex w-full justify-between">
+              <div className="flex w-full flex-col space-y-2">
+                <h2 className="w-full text-2xl font-bold tracking-tight md:text-3xl">
+                  {bucket.data?.name ?? ""}
+                </h2>
+                <p className="w-full">{bucket.data?.description ?? ""}</p>
+                <div className="flex w-full flex-col justify-start gap-2 md:flex-row md:items-center">
+                  <p className="w-full text-xs md:w-fit">
+                    {apiUrl}/buckets/{bucket.data?._id ?? ""}
+                  </p>
+                  <TooltipProvider>
+                    <Tooltip open={isCopied}>
+                      <TooltipTrigger asChild>
+                        <Button
+                          onClick={() =>
+                            handleCopy(
+                              apiUrl + "/buckets/" + (bucket.data?._id ?? ""),
+                            )
+                          }
+                          variant={"ghost"}
+                          size={"icon"}
+                        >
+                          <Copy size={15} />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Copied to clipboard</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+              </div>
+              <div>
+                {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
+              </div>
+            </div>
+            {!submissions.isLoading && (
+              <Tabs value={tab} onValueChange={setTab} className="space-y-4 ">
+                <div className="w-full overflow-auto">
+                  <TabsList className="">
+                    <TabsTrigger value="how">How to Use</TabsTrigger>
+                    {/* <TabsTrigger value="api">Bucket API</TabsTrigger> */}
+                    <TabsTrigger value="summary">Summary</TabsTrigger>
+                    <TabsTrigger value="submissions">Submissions</TabsTrigger>
+                    {/* <TabsTrigger value="structure">Bucket Structure</TabsTrigger> */}
+                    <TabsTrigger value="config">Configuration</TabsTrigger>
+                  </TabsList>
+                </div>
+                <TabsContent value="how" className="space-y-4">
+                  <HowToSetup id={bucket.data?._id ?? ""} />
+                </TabsContent>
+                <TabsContent value="summary" className="space-y-4">
+                  <BucketAnalytics
+                    goToSetupTab={() => {
+                      setTab("how");
+                    }}
+                    bucket={bucket.data}
+                  />
+                </TabsContent>
+                <TabsContent value="submissions" className="space-y-4">
+                  <DataTable
+                    deleteFunction={(rows) =>
+                      deleteSubmissionsMutation.mutate({
+                        ids: rows.map((row) => row._id),
+                      })
+                    }
+                    data={
+                      submissions?.data?.data?.map((submission) => {
+                        console.log({ submission });
+                        return {
+                          ...submission,
+                          ...submission.data,
+                        };
+                      }) ?? []
+                    }
+                    columns={submissionColumns(
+                      Array.from(
+                        new Set(
+                          submissions?.data?.data?.flatMap((submission) =>
+                            Object.keys(submission.data),
+                          ),
+                        ),
+                      ),
+                    )}
+                    pageIndex={pageIndex}
+                    pageSize={pageSize}
+                    pageCount={submissions.data.pageInfo.pages}
+                    onPaginationChange={setPagination}
+                  />
+                </TabsContent>
+                <TabsContent value="structure" className="space-y-4">
+                  <BucketStructure bucket={bucket.data} />
+                </TabsContent>
 
-         </div>
-       </div>
-       <div>
-       {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
-       </div>
-       </div>
-       {
-        !submissions.isLoading && (
-          <Tabs value={tab} onValueChange={setTab} className="space-y-4 ">
-         <div className="w-full overflow-auto">
-         <TabsList  className="">
-           <TabsTrigger value="how">How to Use</TabsTrigger>
-           {/* <TabsTrigger value="api">Bucket API</TabsTrigger> */}
-           <TabsTrigger value="summary">Summary</TabsTrigger>
-           <TabsTrigger value="submissions">Submissions</TabsTrigger>
-           {/* <TabsTrigger value="structure">Bucket Structure</TabsTrigger> */}
-           <TabsTrigger value="config">Configuration</TabsTrigger>
-         </TabsList>
-
-         </div>
-         <TabsContent value="how" className="space-y-4">
-          <HowToSetup id={bucket.data?._id ?? ""}/>
-         </TabsContent>
-         <TabsContent value="summary" className="space-y-4">
-           <BucketAnalytics goToSetupTab={() => {setTab("how")}} bucket={bucket.data} />
-         </TabsContent>
-         <TabsContent value="submissions" className="space-y-4">
-           <DataTable
-           deleteFunction={(rows) => deleteSubmissionsMutation.mutate({ids: rows.map(row => row._id)})}
-             data={
-               submissions?.data?.data?.map((submission) => {
-                 console.log({ submission });
-                 return {
-                   ...submission,
-                   ...submission.data,
-                 };
-               }) ?? []
-             }
-             
-             columns={submissionColumns(
-               Array.from(
-                 new Set(
-                   submissions?.data?.data?.flatMap((submission) =>
-                     Object.keys(submission.data),
-                   ),
-                 ),
-               ),
-             )}
-             pageIndex={pageIndex}
-            pageSize={pageSize}
-             pageCount={submissions.data.pageInfo.pages}
-             onPaginationChange={setPagination}
-           />
-         </TabsContent>
-         <TabsContent value="structure" className="space-y-4">
-          <BucketStructure bucket={bucket.data}/>
-         </TabsContent>
-
-         <TabsContent value="config" className="space-y-4">
-          <BucketConfig bucket={bucket}/>
-         </TabsContent>
-         
-       </Tabs>
-        )
-       }
-     </div>
-    
-        )
-       }
+                <TabsContent value="config" className="space-y-4">
+                  <BucketConfig bucket={bucket.data} />
+                </TabsContent>
+              </Tabs>
+            )}
+          </div>
+        )}
     </DashboardLayout>
   );
 }
