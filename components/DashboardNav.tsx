@@ -3,23 +3,28 @@ import TeamSwitcher from "./TeamSwitcher";
 import { MainNav } from "./MainNav";
 import { UserNav } from "./UserNav";
 import { Search } from "./Search";
-import wordmarkImg from "@/public/branding/wordmark_alt.svg"
+import wordmarkImg from "@/public/branding/wordmark_alt.svg";
 import { Logo } from "./Logo";
 import { IUserData } from "@/interfaces/services";
 import Link from "next/link";
+import { docsUrl } from "@/constants";
 
-export function DashboardNav({user}: {
-  user: IUserData;
-}) {
+export function DashboardNav({ user }: { user: IUserData }) {
   return (
     <div className="border-b">
-      <div className="flex items-center h-16 px-6 md:px-8">
+      <div className="flex h-16 items-center px-6 md:px-8">
         <div className="hidden md:flex">{/* <TeamSwitcher /> */}</div>
-        <Link href="/dashboard" className="w-8 md:w-8 block text-[#171123]">
-          <Logo variant="base"/>
+        <Link href="/dashboard" className="block w-8 text-[#171123] md:w-8">
+          <Logo variant="base" />
         </Link>
         <MainNav className="mx-4" />
-        <div className="flex items-center ml-auto space-x-4">
+        <div className="ml-auto flex items-center space-x-4">
+          <Link
+            href={docsUrl}
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          >
+            Docs
+          </Link>
           <div className="hidden md:block">{/* <Search /> */}</div>
           <UserNav user={user} />
         </div>

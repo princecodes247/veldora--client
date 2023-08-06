@@ -15,10 +15,12 @@ import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { useState } from "react";
 import { IBucketData, IBucketDataWithStats } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
-import { updateBucket } from "@/services/BucketService";
+import { regenerateAPIToken, updateBucket } from "@/services/BucketService";
 import DeleteBucketDialog from "./dialogs/DeleteBucket.dialog";
+import { APITokenInput } from "./APITokenInput";
 
 export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
+  const [apiToken, setAPIToken] = useState(bucket?.accessToken ?? "");
   const [bucketName, setBucketName] = useState(bucket?.name ?? "");
   const [bucketDescription, setBucketDescription] = useState(
     bucket?.description ?? "",
@@ -32,6 +34,14 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
 
   const updateBucketMutation = useMutate(updateBucket, {
     loadingMessage: "Updating Bucket",
+  });
+
+  const regenerateAPITokenMutation = useMutate(regenerateAPIToken, {
+    loadingMessage: "Regenerating API Token",
+    successMessage: "API Token Regenerated",
+    onSuccessFunction: (data) => {
+      setAPIToken(data.data);
+    },
   });
 
   const handleSubmit = () =>
@@ -48,7 +58,7 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
     <>
       <Card className="max-w-[700px]">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Extra Configurations</CardTitle>
+          <CardTitle className="text-2xl">General Configurations</CardTitle>
           <CardDescription>
             You can change details about your form here.
           </CardDescription>
@@ -114,6 +124,60 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
               />
             </div>
           )}
+        </CardContent>
+        <CardFooter className="flex flex-col gap-2">
+          <Button
+            onClick={handleSubmit}
+            disabled={
+              (responseStyle === "custom" &&
+                customRedirect.trim().length === 0) ||
+              bucketDescription.trim().length === 0 ||
+              bucketName.trim().length === 0
+            }
+            className="w-full"
+          >
+            Update Bucket
+          </Button>
+        </CardFooter>
+      </Card>
+      <Card className="max-w-[700px]">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl">Security</CardTitle>
+          <CardDescription></CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="text">Authorized domains</Label>
+            <p>
+              Add domain to allow your API request. Add valid domain url. For
+              example https://example.com or https://for.example.com
+            </p>
+            <div className="flex gap-2">
+              <Input
+                id="text"
+                value={bucketName}
+                onChange={(e) => setBucketName(e.target.value)}
+                type="text"
+                placeholder="Bucket Name"
+              />
+              <Button className="whitespace-nowrap" variant={"secondary"}>
+                Add domain
+              </Button>
+            </div>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="text">API Token</Label>
+
+            <APITokenInput
+              token={apiToken}
+              regenerateFunction={() =>
+                regenerateAPITokenMutation.mutate({
+                  id: bucket?._id ?? "",
+                })
+              }
+              isRegenerating={regenerateAPITokenMutation.isLoading}
+            />
+          </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-2">
           <Button

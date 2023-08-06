@@ -132,11 +132,13 @@ export default function Bucket() {
               <Tabs value={tab} onValueChange={setTab} className="space-y-4 ">
                 <div className="w-full overflow-auto">
                   <TabsList className="">
-                    <TabsTrigger value="how">How to Use</TabsTrigger>
+                    {/* <TabsTrigger value="how">How to Use</TabsTrigger> */}
                     {/* <TabsTrigger value="api">Bucket API</TabsTrigger> */}
                     <TabsTrigger value="summary">Summary</TabsTrigger>
                     <TabsTrigger value="submissions">Submissions</TabsTrigger>
-                    {/* <TabsTrigger value="structure">Bucket Structure</TabsTrigger> */}
+                    {/* <TabsTrigger value="structure">
+                      Bucket Structure
+                    </TabsTrigger> */}
                     <TabsTrigger value="config">Configuration</TabsTrigger>
                   </TabsList>
                 </div>
