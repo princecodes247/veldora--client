@@ -43,7 +43,7 @@ export const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "Veldora";
 
 export const clientUrl = process.env.NEXT_PUBLIC_CLIENT_URL ?? "localhost:3000";
 export const apiUrl =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3050/api/v1";
+  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3050/v1";
 
 export const featuresList = [
   {
@@ -84,13 +84,15 @@ export const featuresList = [
 export const faqsList = [
   {
     question: "Do I need backend development skills to get started?",
-    answer: "Not at all! Veldora's user-friendly interface allows anyone to dive into data management without prior backend knowledge.",
+    answer:
+      "Not at all! Veldora's user-friendly interface allows anyone to dive into data management without prior backend knowledge.",
   },
   {
     question: "Are my forms and data secure?",
-    answer: "Absolutely. Veldora is built on a foundation of strong security practices to ensure your data's safety.",
+    answer:
+      "Absolutely. Veldora is built on a foundation of strong security practices to ensure your data's safety.",
   },
-]
+];
 
 export const animeQuotes: IAnimeQuote[] = [
   {
@@ -133,30 +135,19 @@ export const animeQuotes: IAnimeQuote[] = [
     body: "In order to achieve your dreams, you must embrace the challenges that come your way.",
     author: "Yuno Gasai, Future Diary",
   },
-    {
+  {
     body: "No matter how hard or impossible it is, never lose sight of your goal.",
     author: "Edward Elric, Fullmetal Alchemist",
   },
-  
-]
-
+];
 
 export const displayErrorMessages = {
   GET_BUCKETS_FAILURE: {
     title: "Well, this is awkward.",
-    body: "The form buckets went on strike demanding better working conditions. We're negotiating a fair deal with them"
-  }, 
+    body: "The form buckets went on strike demanding better working conditions. We're negotiating a fair deal with them",
+  },
   INVALID_BUCKET: {
     title: "Oops! It seems like this bucket got lost in the cloud.",
-    body: "We're sorry, but we can't find this bucket."
-  }
-}
-
-
-
-
-
-
-
-
-
+    body: "We're sorry, but we can't find this bucket.",
+  },
+};
