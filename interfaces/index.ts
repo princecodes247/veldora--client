@@ -19,8 +19,6 @@ export enum DeviceType {
   Web = "web",
 }
 
-
-
 export enum LoadingType {
   FULLSCREEN = "fullscreen",
   INLINE = "inline",
@@ -32,9 +30,10 @@ export interface IBucketData {
   name: string;
   description: string;
   submissionsCount: number;
-  responseStyle?: "default" | "json" | "params" | "custom"
-  customRedirect?: string
+  responseStyle?: "default" | "json" | "params" | "custom";
+  customRedirect?: string;
   accessToken: string;
+  whiteList?: string[];
   views: {
     country: string;
     device: string;
@@ -66,12 +65,12 @@ export interface ISubmissionData {
 }
 
 export interface IAnimeQuote {
-  body: string
+  body: string;
   author: string;
 }
 
 export interface FeatureData {
-    icon: any;
-    title: string;
-    description: string;
+  icon: any;
+  title: string;
+  description: string;
 }

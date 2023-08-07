@@ -15,9 +15,14 @@ import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { useState } from "react";
 import { IBucketData, IBucketDataWithStats } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
-import { regenerateAPIToken, updateBucket } from "@/services/BucketService";
+import {
+  regenerateAPIToken,
+  updateBucket,
+  updateWhitelist,
+} from "@/services/BucketService";
 import DeleteBucketDialog from "./dialogs/DeleteBucket.dialog";
 import { APITokenInput } from "./APITokenInput";
+import { DomainWhitelist } from "./DomainWhitelist";
 
 export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
   const [apiToken, setAPIToken] = useState(bucket?.accessToken ?? "");
@@ -44,6 +49,14 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
     },
   });
 
+  const updateWhitelistMutation = useMutate(updateWhitelist, {
+    loadingMessage: "Regenerating API Token",
+    successMessage: "API Token Regenerated",
+    onSuccessFunction: (data) => {
+      setAPIToken(data.data);
+    },
+  });
+
   const handleSubmit = () =>
     updateBucketMutation.mutate({
       id: bucket?._id ?? "",
@@ -54,6 +67,7 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
         responseStyle,
       },
     });
+
   return (
     <>
       <Card className="max-w-[700px]">
@@ -152,18 +166,16 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
               Add domain to allow your API request. Add valid domain url. For
               example https://example.com or https://for.example.com
             </p>
-            <div className="flex gap-2">
-              <Input
-                id="text"
-                value={bucketName}
-                onChange={(e) => setBucketName(e.target.value)}
-                type="text"
-                placeholder="Bucket Name"
-              />
-              <Button className="whitespace-nowrap" variant={"secondary"}>
-                Add domain
-              </Button>
-            </div>
+            <DomainWhitelist
+              initialDomains={bucket?.whiteList ?? []}
+              isLoading={updateWhitelistMutation.isLoading}
+              onAddDomain={(domains) =>
+                updateWhitelistMutation.mutate({
+                  id: bucket?._id ?? "",
+                  domains,
+                })
+              }
+            />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="text">API Token</Label>
