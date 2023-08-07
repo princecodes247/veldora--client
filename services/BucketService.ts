@@ -158,7 +158,7 @@ export const updateWhitelist = ({
   id: string;
   domains: string[];
 }) => {
-  return api.post(
+  return api.post<IBucketDataWithStats>(
     servicePrefix + id + "/update-whitelist",
     {
       whiteList: domains,

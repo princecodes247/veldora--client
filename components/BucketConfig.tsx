@@ -26,6 +26,7 @@ import { DomainWhitelist } from "./DomainWhitelist";
 
 export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
   const [apiToken, setAPIToken] = useState(bucket?.accessToken ?? "");
+  const [whitelist, setWhitelist] = useState(bucket?.whiteList ?? []);
   const [bucketName, setBucketName] = useState(bucket?.name ?? "");
   const [bucketDescription, setBucketDescription] = useState(
     bucket?.description ?? "",
@@ -50,10 +51,10 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
   });
 
   const updateWhitelistMutation = useMutate(updateWhitelist, {
-    loadingMessage: "Regenerating API Token",
-    successMessage: "API Token Regenerated",
-    onSuccessFunction: (data) => {
-      setAPIToken(data.data);
+    loadingMessage: "Updating Whitelist",
+    successMessage: "Whitelist Updated",
+    onSuccessFunction: (data: IBucketDataWithStats) => {
+      setWhitelist(data?.whiteList ?? []);
     },
   });
 
@@ -167,7 +168,7 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
               example https://example.com or https://for.example.com
             </p>
             <DomainWhitelist
-              initialDomains={bucket?.whiteList ?? []}
+              initialDomains={whitelist}
               isLoading={updateWhitelistMutation.isLoading}
               onAddDomain={(domains) =>
                 updateWhitelistMutation.mutate({
