@@ -21,6 +21,7 @@ export function DashboardNav({ user }: { user: IUserData }) {
         <div className="ml-auto flex items-center space-x-4">
           <Link
             href={docsUrl}
+            target="_blank"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             Docs
