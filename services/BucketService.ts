@@ -42,18 +42,15 @@ export const getSubmissions = ({
   pageSize?: number;
 }>) => {
   return api.get<{
-    data: ISubmissionData[]
+    data: ISubmissionData[];
     pageInfo: {
-      "hasNextPage": boolean,
-      "nextPage": number | null
-      pages: number
-  }
-  }>(
-    `${submissionsPrefix}?bucket=${id}&page=${page}&limit=${pageSize}`,
-    {
-      headers: authHeaders(),
-    },
-  );
+      hasNextPage: boolean;
+      nextPage: number | null;
+      pages: number;
+    };
+  }>(`${submissionsPrefix}?bucket=${id}&page=${page}&limit=${pageSize}`, {
+    headers: authHeaders(),
+  });
 };
 
 export const createBucket = ({
@@ -126,22 +123,48 @@ export const updateBucket = ({
 
 export const subscribeToNewsletter = (email: string) => {
   return api.post(servicePrefix + "649d9435224e46dbf5ea2d4f", {
-    email
-  })
-}
-
-export const deleteSubmissions = ({ ids }: { ids: string[] }) => {
-  return api.post(submissionsPrefix + "delete", {
-    ids
-  }, {
-    headers: authHeaders(),
+    email,
   });
 };
 
+export const deleteSubmissions = ({ ids }: { ids: string[] }) => {
+  return api.post(
+    submissionsPrefix + "delete",
+    {
+      ids,
+    },
+    {
+      headers: authHeaders(),
+    },
+  );
+};
+
 export const regenerateAPIToken = ({ id }: { id: string }) => {
-  return api.post(servicePrefix + "regenerate-access-token", {
-    id
-  }, {
-    headers: authHeaders(),
-  });
+  return api.post(
+    servicePrefix + "regenerate-access-token",
+    {
+      id,
+    },
+    {
+      headers: authHeaders(),
+    },
+  );
+};
+
+export const updateWhitelist = ({
+  id,
+  domains,
+}: {
+  id: string;
+  domains: string[];
+}) => {
+  return api.post<IBucketDataWithStats>(
+    servicePrefix + id + "/update-whitelist",
+    {
+      whiteList: domains,
+    },
+    {
+      headers: authHeaders(),
+    },
+  );
 };
