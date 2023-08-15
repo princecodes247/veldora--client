@@ -28,6 +28,7 @@ import { BucketStructure } from "@/components/BucketStructure";
 import { ISubmissionData } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
 import { deleteSubmissions } from "@/services/BucketService";
+import { DashboardInnerNav } from "@/components/DashboardInnerNav";
 
 export default function Bucket() {
   const router = useRouter();
@@ -70,7 +71,7 @@ export default function Bucket() {
     },
   });
   return (
-    <DashboardLayout>
+    <DashboardLayout subNav={<DashboardInnerNav />}>
       <Head>
         <title>{bucket.data?.name ?? ""} - Veldora</title>
 
@@ -129,69 +130,35 @@ export default function Bucket() {
               </div>
             </div>
             {!submissions.isLoading && (
-              <Tabs value={tab} onValueChange={setTab} className="space-y-4 ">
-                <div className="w-full overflow-auto">
-                  <TabsList className="">
-                    {/* <TabsTrigger value="how">How to Use</TabsTrigger> */}
-                    {/* <TabsTrigger value="api">Bucket API</TabsTrigger> */}
-                    <TabsTrigger value="summary">Summary</TabsTrigger>
-                    <TabsTrigger value="submissions">Submissions</TabsTrigger>
-                    {/* <TabsTrigger value="structure">
-                      Bucket Structure
-                    </TabsTrigger> */}
-                    <TabsTrigger value="config">Configuration</TabsTrigger>
-                  </TabsList>
-                </div>
-                <TabsContent value="how" className="space-y-4">
-                  <HowToSetup id={bucket.data?._id ?? ""} />
-                </TabsContent>
-                <TabsContent value="summary" className="space-y-4">
-                  <BucketAnalytics
-                    goToSetupTab={() => {
-                      setTab("how");
-                    }}
-                    bucket={bucket.data}
-                  />
-                </TabsContent>
-                <TabsContent value="submissions" className="space-y-4">
-                  <DataTable
-                    deleteFunction={(rows) =>
-                      deleteSubmissionsMutation.mutate({
-                        ids: rows.map((row) => row._id),
-                      })
-                    }
-                    data={
-                      submissions?.data?.data?.map((submission) => {
-                        console.log({ submission });
-                        return {
-                          ...submission,
-                          ...submission.data,
-                        };
-                      }) ?? []
-                    }
-                    columns={submissionColumns(
-                      Array.from(
-                        new Set(
-                          submissions?.data?.data?.flatMap((submission) =>
-                            Object.keys(submission.data),
-                          ),
-                        ),
+              <DataTable
+                deleteFunction={(rows) =>
+                  deleteSubmissionsMutation.mutate({
+                    ids: rows.map((row) => row._id),
+                  })
+                }
+                data={
+                  submissions?.data?.data?.map((submission) => {
+                    console.log({ submission });
+                    return {
+                      ...submission,
+                      ...submission.data,
+                    };
+                  }) ?? []
+                }
+                columns={submissionColumns(
+                  Array.from(
+                    new Set(
+                      submissions?.data?.data?.flatMap((submission) =>
+                        Object.keys(submission.data),
                       ),
-                    )}
-                    pageIndex={pageIndex}
-                    pageSize={pageSize}
-                    pageCount={submissions.data.pageInfo.pages}
-                    onPaginationChange={setPagination}
-                  />
-                </TabsContent>
-                <TabsContent value="structure" className="space-y-4">
-                  <BucketStructure bucket={bucket.data} />
-                </TabsContent>
-
-                <TabsContent value="config" className="space-y-4">
-                  <BucketConfig bucket={bucket.data} />
-                </TabsContent>
-              </Tabs>
+                    ),
+                  ),
+                )}
+                pageIndex={pageIndex}
+                pageSize={pageSize}
+                pageCount={submissions.data.pageInfo.pages}
+                onPaginationChange={setPagination}
+              />
             )}
           </div>
         )}

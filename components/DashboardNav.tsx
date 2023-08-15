@@ -9,10 +9,16 @@ import { IUserData } from "@/interfaces/services";
 import Link from "next/link";
 import { docsUrl } from "@/constants";
 
-export function DashboardNav({ user }: { user: IUserData }) {
+export function DashboardNav({
+  user,
+  children,
+}: {
+  user: IUserData;
+  children?: React.ReactNode;
+}) {
   return (
     <div className="border-b">
-      <div className="flex h-16 items-center px-6 md:px-8">
+      <div className="flex items-center px-6 py-2 md:px-8">
         <div className="hidden md:flex">{/* <TeamSwitcher /> */}</div>
         <Link href="/dashboard" className="block w-8 text-[#171123] md:w-8">
           <Logo variant="base" />
@@ -30,6 +36,7 @@ export function DashboardNav({ user }: { user: IUserData }) {
           <UserNav user={user} />
         </div>
       </div>
+      <div>{children}</div>
     </div>
   );
 }

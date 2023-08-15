@@ -20,22 +20,20 @@ import { IBucketData } from "@/interfaces";
 
 export default function CreateBucketDialog({
   open,
-  setOpen
+  setOpen,
 }: {
-  open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-  const router = useRouter()
+  const router = useRouter();
   const createBucketMutation = useMutate(createBucket, {
     loadingMessage: "",
-    onSuccessFunction: ({data}: {
-      data: IBucketData
-    }) => {
+    onSuccessFunction: ({ data }: { data: IBucketData }) => {
       setOpen(false);
-      router.push(clientUrl + "/bucket/" + data._id)
+      router.push(clientUrl + "/" + data._id);
     },
   });
-  
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   return (
@@ -84,7 +82,9 @@ export default function CreateBucketDialog({
                 name,
               })
             }
-            disabled={createBucketMutation.isLoading || name.trim().length === 0}
+            disabled={
+              createBucketMutation.isLoading || name.trim().length === 0
+            }
             type="submit"
           >
             {createBucketMutation.isLoading

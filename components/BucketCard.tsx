@@ -45,7 +45,7 @@ export function BucketCard({
   listView?: boolean;
 }) {
   return (
-    <Link href="/bucket/[id]" className="w-full" as={"/bucket/" + bucket._id}>
+    <Link href="/[id]" className="w-full" as={"/" + bucket._id}>
       <Card
         className={clsx(
           "hover:shadow-md",
@@ -65,16 +65,18 @@ export function BucketCard({
                 {bucket.name.slice(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <span className="text-xl w-full truncate font-bold">{bucket.name}</span>
+            <span className="w-full truncate text-xl font-bold">
+              {bucket.name}
+            </span>
           </CardTitle>
           {/* <DollarSign className="w-4 h-4 text-muted-foreground" /> */}
         </CardHeader>
         <CardContent className={clsx(listView && "py-4")}>
-          <div  className="text-xs w-full truncate text-muted-foreground">
+          <div className="w-full truncate text-xs text-muted-foreground">
             {apiUrl}/bucket/{bucket._id}
           </div>
-          <div className="text-sm mt-2 w-full truncate text-muted-foreground">
-            {bucket.description }
+          <div className="mt-2 w-full truncate text-sm text-muted-foreground">
+            {bucket.description}
           </div>
           <div className="mt-4 flex justify-between">
             <p className="text-xs text-muted-foreground">

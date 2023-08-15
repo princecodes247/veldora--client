@@ -7,24 +7,32 @@ import { useContext } from "react";
 interface DashboardLayoutProps {
   children: React.ReactNode;
   user?: IUserData;
+  subNav?: React.ReactNode;
 }
 
-function DashboardLayout({ children, user }: DashboardLayoutProps) {
-  const {userData} = useContext(AuthContext)
+function DashboardLayout({ children, user, subNav }: DashboardLayoutProps) {
+  const { userData } = useContext(AuthContext);
   return (
     <div>
-      <DashboardNav user={user ?? userData ?? {
-        email: "",
-        phone: "",
-        userID: "",
-        metadata: {
-          theme: "light",
-          username:""
+      <DashboardNav
+        user={
+          user ??
+          userData ?? {
+            email: "",
+            phone: "",
+            userID: "",
+            metadata: {
+              theme: "light",
+              username: "",
+            },
+          }
         }
-      }} />
+      >
+        {subNav}
+      </DashboardNav>
       {children}
     </div>
   );
 }
 
-export default withAuthHOC(DashboardLayout)
+export default withAuthHOC(DashboardLayout);

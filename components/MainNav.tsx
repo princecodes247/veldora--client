@@ -19,7 +19,7 @@ export function MainNav({
           "text-muted-foreground",
         )}
       >
-        Overview
+        Veldora
       </Link>
       {/* <Link
         href="/dashboard/analytics"

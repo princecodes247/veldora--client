@@ -4,26 +4,35 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarNav } from "@/components/settings/SettingsSidebarNav";
 import Head from "next/head";
 
-const sidebarNavItems = [
+const sidebarNavItems = (id: string = "...") => [
   {
-    title: "Account",
-    href: "/settings",
+    title: "General",
+    href: `/${id}/settings`,
   },
-  // {
-  //   title: "Appearance",
-  //   href: "/settings/appearance",
-  // },
 
+  {
+    title: "Schema",
+    href: `/${id}/settings/schema`,
+  },
+  {
+    title: "Actions",
+    href: `/${id}/settings/actions`,
+  },
+  {
+    title: "Security",
+    href: `/${id}/settings/security`,
+  },
 ];
 
 interface SettingsLayoutProps {
   children: React.ReactNode;
+  id: string;
 }
 
-export default function SettingsLayout({ children }: SettingsLayoutProps) {
+export default function SettingsLayout({ children, id }: SettingsLayoutProps) {
   return (
-    <DashboardLayout>
-       <Head>
+    <>
+      <Head>
         <title>Settings - Veldora</title>
         <meta name="description" content="Form data management made easy" />
         <link rel="icon" href="/favicon.ico" />
@@ -39,12 +48,12 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
           <Separator className="my-6" />
           <div className="flex flex-col gap-8 space-y-8 md:flex-row lg:flex-row lg:space-x-12 lg:space-y-0">
             <aside className="">
-              <SidebarNav items={sidebarNavItems} />
+              <SidebarNav items={sidebarNavItems(id)} />
             </aside>
             {children}
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </>
   );
 }
