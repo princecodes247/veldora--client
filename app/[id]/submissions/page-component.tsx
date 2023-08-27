@@ -87,7 +87,7 @@ export default function BucketSubmissionsPage() {
 
       {bucket.isLoading && submissions.isLoading && (
         <div className="flex h-[85vh] items-center justify-center border">
-          <div className="w-16 animate-pulse text-[#171123] text-gray-300 md:w-32">
+          <div className="w-16 animate-pulse text-[#171123] md:w-32">
             <Loading variant="INLINE" />
           </div>
         </div>
