@@ -1,9 +1,10 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Head from "next/head";
 import { DataTable } from "@/components/Table/DataTable";
 import { submissionColumns } from "@/constants/mock/Columns";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import useBucket from "@/hooks/useBucket";
 import useSubmissions from "@/hooks/useSubmissions";
 import BucketAnalytics from "@/components/BucketAnalytics";
@@ -29,10 +30,12 @@ import { ISubmissionData } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
 import { deleteSubmissions } from "@/services/BucketService";
 import { DashboardInnerNav } from "@/components/DashboardInnerNav";
+import { PageHeader } from "@/components/PageHeader";
 
-export default function Bucket() {
+export default function BucketConfigPage() {
   const router = useRouter();
-  const { id } = router.query as { id: string };
+  const pathname = usePathname();
+  const id = pathname?.split("/")[1] ?? "";
 
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
@@ -71,7 +74,7 @@ export default function Bucket() {
     },
   });
   return (
-    <DashboardLayout subNav={<DashboardInnerNav />}>
+    <>
       <Head>
         <title>{bucket.data?.name ?? ""} - Veldora</title>
 
@@ -84,7 +87,7 @@ export default function Bucket() {
 
       {bucket.isLoading && submissions.isLoading && (
         <div className="flex h-[85vh] items-center justify-center border">
-          <div className="w-16 animate-pulse text-[#171123] text-gray-300 md:w-32">
+          <div className="w-16 animate-pulse text-[#171123]  md:w-32">
             <Loading variant="INLINE" />
           </div>
         </div>
@@ -92,43 +95,14 @@ export default function Bucket() {
       {!bucket.isError &&
         !submissions.isError &&
         (!bucket.isLoading || !submissions.isLoading) && (
-          <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
-            <div className="flex w-full justify-between">
-              <div className="flex w-full flex-col space-y-2">
-                <h2 className="w-full text-2xl font-bold tracking-tight md:text-3xl">
-                  {bucket.data?.name ?? ""}
-                </h2>
-                <p className="w-full">{bucket.data?.description ?? ""}</p>
-                <div className="flex w-full flex-col justify-start gap-2 md:flex-row md:items-center">
-                  <p className="w-full text-xs md:w-fit">
-                    {apiUrl}/buckets/{bucket.data?._id ?? ""}
-                  </p>
-                  <TooltipProvider>
-                    <Tooltip open={isCopied}>
-                      <TooltipTrigger asChild>
-                        <Button
-                          onClick={() =>
-                            handleCopy(
-                              apiUrl + "/buckets/" + (bucket.data?._id ?? ""),
-                            )
-                          }
-                          variant={"ghost"}
-                          size={"icon"}
-                        >
-                          <Copy size={15} />
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Copied to clipboard</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-              </div>
-              <div>
-                {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
-              </div>
-            </div>
+          <div className="flex-1 p-4 pt-6 space-y-4 md:p-8">
+            <PageHeader
+              // title={bucket.data?.name ?? ""}
+              // description={bucket.data?.description ?? ""}
+              title="Bucket Configurations"
+              description="Configure your bucket to your liking"
+            />
+
             {!submissions.isLoading && (
               <Tabs value={tab} onValueChange={setTab} className="space-y-4 ">
                 <div className="w-full overflow-auto">
@@ -196,6 +170,6 @@ export default function Bucket() {
             )}
           </div>
         )}
-    </DashboardLayout>
+    </>
   );
 }

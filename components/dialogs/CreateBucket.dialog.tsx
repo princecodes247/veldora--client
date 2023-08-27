@@ -14,7 +14,7 @@ import { Textarea } from "../ui/textarea";
 import { useMutate } from "@/hooks/useMutate";
 import { createBucket } from "@/services/BucketService";
 import { Dispatch, SetStateAction, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { clientUrl } from "@/constants";
 import { IBucketData } from "@/interfaces";
 

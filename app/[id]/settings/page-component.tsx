@@ -1,9 +1,10 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Head from "next/head";
 import { DataTable } from "@/components/Table/DataTable";
 import { submissionColumns } from "@/constants/mock/Columns";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import useBucket from "@/hooks/useBucket";
 import useSubmissions from "@/hooks/useSubmissions";
 import BucketAnalytics from "@/components/BucketAnalytics";
@@ -31,9 +32,10 @@ import { useMutate } from "@/hooks/useMutate";
 import { deleteSubmissions } from "@/services/BucketService";
 import { DashboardInnerNav } from "@/components/DashboardInnerNav";
 
-export default function Bucket() {
+export default function BucketSettingsPage() {
   const router = useRouter();
-  const { id } = router.query as { id: string };
+  const pathname = usePathname();
+  const id = pathname?.split("/")[1] ?? "";
 
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
@@ -72,7 +74,7 @@ export default function Bucket() {
     },
   });
   return (
-    <DashboardLayout subNav={<DashboardInnerNav />}>
+    <>
       <SettingsLayout id={id ?? ""}>
         <Head>
           <title>{bucket.data?.name ?? ""} - Veldora</title>
@@ -86,7 +88,7 @@ export default function Bucket() {
 
         {bucket.isLoading && submissions.isLoading && (
           <div className="flex h-[85vh] items-center justify-center border">
-            <div className="w-16 animate-pulse text-[#171123] text-gray-300 md:w-32">
+            <div className="w-16 animate-pulse text-[#171123] md:w-32">
               <Loading variant="INLINE" />
             </div>
           </div>
@@ -104,6 +106,6 @@ export default function Bucket() {
             </div>
           )}
       </SettingsLayout>
-    </DashboardLayout>
+    </>
   );
 }

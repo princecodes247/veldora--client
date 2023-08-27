@@ -1,5 +1,5 @@
 import { Row } from "@tanstack/react-table";
-import { Copy, MoreHorizontal, Pen, Star, Tags, Trash } from "lucide-react";
+import { Copy, MoreHorizontal, Star, Tags, Trash } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -41,7 +41,7 @@ export function DataTableRowActions<TData>({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem>
-          <Pen className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+          {/* <Pen className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" /> */}
           Edit
         </DropdownMenuItem>
         <DropdownMenuItem>

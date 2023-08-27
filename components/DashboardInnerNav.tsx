@@ -14,7 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -57,37 +57,28 @@ const components: { title: string; href: string; description: string }[] = [
 export function DashboardInnerNav() {
   // GEt id from router
   const router = useRouter();
-  const { id } = router.query;
+  const pathname = usePathname();
+  const id = pathname?.split("/")[1] ?? "";
 
   return (
     <NavigationMenu className="px-4 pb-1">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <Link href="/[id]" as={`/${id}`} legacyBehavior passHref>
+          <Link href="/[id]" as={`/${id}`}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Summary
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link
-            href="/[id]/submissions"
-            as={`/${id}/submissions`}
-            legacyBehavior
-            passHref
-          >
+          <Link href="/[id]/submissions" as={`/${id}/submissions`}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Submissions
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link
-            href="/[id]/configuration"
-            as={`/${id}/configuration`}
-            legacyBehavior
-            passHref
-          >
+          <Link href="/[id]/configuration" as={`/${id}/configuration`}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Configuration
             </NavigationMenuLink>
@@ -101,12 +92,7 @@ export function DashboardInnerNav() {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link
-            href="/[id]/settings"
-            as={`/${id}/settings`}
-            legacyBehavior
-            passHref
-          >
+          <Link href="/[id]/settings" as={`/${id}/settings`}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Settings
             </NavigationMenuLink>

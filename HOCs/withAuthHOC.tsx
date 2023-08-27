@@ -1,7 +1,9 @@
+"use client";
+
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { verifyAuth } from "@/services/AuthService";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import useUser from "@/hooks/useUser";
 import { Loading } from "@/components/Loading";
 import { AuthContext } from "@/contexts/Auth.context";
@@ -35,11 +37,11 @@ function withAuthHOC<P>(WrappedComponent: React.ComponentType<P>) {
 
     if (user.isError && userRequired) {
       localStorage.removeItem("token");
-      logout()
+      logout();
       return null;
     }
 
-    if(!user.isLoading && !user.isError) login(user.data)
+    if (!user.isLoading && !user.isError) login(user.data);
 
     return <WrappedComponent {...props} authStatus={result} />;
   };
