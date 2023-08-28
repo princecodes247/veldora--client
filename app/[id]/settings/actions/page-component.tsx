@@ -101,7 +101,9 @@ export default function BucketActionsSettingsPage() {
                 {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
               </div>
             </div>
-            <div>Actions</div>
+            <div className="flex items-center justify-center">
+              Coming Soon...
+            </div>
           </div>
         )}
     </>
