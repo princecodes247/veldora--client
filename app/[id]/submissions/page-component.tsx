@@ -1,35 +1,18 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Head from "next/head";
 import { DataTable } from "@/components/Table/DataTable";
 import { submissionColumns } from "@/constants/mock/Columns";
 import { usePathname, useRouter } from "next/navigation";
 import useBucket from "@/hooks/useBucket";
 import useSubmissions from "@/hooks/useSubmissions";
-import BucketAnalytics from "@/components/BucketAnalytics";
-import { Copy, Trash } from "lucide-react";
 import useCopyToClipboard from "@/hooks/useCopyToClipboard";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 import { useEffect, useMemo, useState } from "react";
-import DashboardLayout from "@/layouts/Dashboard.layout";
-import DeleteBucketDialog from "@/components/dialogs/DeleteBucket.dialog";
 import { BucketPage404 } from "@/components/errors/Error";
-import { HowToSetup } from "@/components/HowToSetup";
-import { apiUrl } from "@/constants";
-import { BucketConfig } from "@/components/BucketConfig";
 import { Loading } from "@/components/Loading";
-import { PaginationState, Updater } from "@tanstack/react-table";
-import { BucketStructure } from "@/components/BucketStructure";
-import { ISubmissionData } from "@/interfaces";
+import { PaginationState } from "@tanstack/react-table";
 import { useMutate } from "@/hooks/useMutate";
 import { deleteSubmissions } from "@/services/BucketService";
-import { DashboardInnerNav } from "@/components/DashboardInnerNav";
 import { PageHeader } from "@/components/PageHeader";
 
 export default function BucketSubmissionsPage() {

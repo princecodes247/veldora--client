@@ -25,7 +25,6 @@ import { apiUrl } from "@/constants";
 import { BucketConfig } from "@/components/BucketConfig";
 import { Loading } from "@/components/Loading";
 import { PaginationState, Updater } from "@tanstack/react-table";
-import { BucketStructure } from "@/components/BucketStructure";
 import { ISubmissionData } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
 import { deleteSubmissions } from "@/services/BucketService";

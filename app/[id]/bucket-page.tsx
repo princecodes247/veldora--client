@@ -1,9 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Head from "next/head";
-import { DataTable } from "@/components/Table/DataTable";
-import { submissionColumns } from "@/constants/mock/Columns";
 import { usePathname, useRouter } from "next/navigation";
 import useBucket from "@/hooks/useBucket";
 import useSubmissions from "@/hooks/useSubmissions";
@@ -25,7 +22,6 @@ import { apiUrl } from "@/constants";
 import { BucketConfig } from "@/components/BucketConfig";
 import { Loading } from "@/components/Loading";
 import { PaginationState, Updater } from "@tanstack/react-table";
-import { BucketStructure } from "@/components/BucketStructure";
 import { ISubmissionData } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
 import { deleteSubmissions } from "@/services/BucketService";
