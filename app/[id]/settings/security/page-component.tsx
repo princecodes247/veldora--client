@@ -26,13 +26,17 @@ import { apiUrl } from "@/constants";
 import { BucketConfig } from "@/components/BucketConfig";
 import { Loading } from "@/components/Loading";
 import { PaginationState, Updater } from "@tanstack/react-table";
-import { ISubmissionData } from "@/interfaces";
+import { IBucketDataWithStats, ISubmissionData } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
-import { deleteSubmissions } from "@/services/BucketService";
+import { deleteSubmissions, regenerateAPIToken, updateBucket, updateWhitelist } from "@/services/BucketService";
 import { DashboardInnerNav } from "@/components/DashboardInnerNav";
 import { BucketStructure } from "@/components/BucketStructure";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { DomainWhitelist } from "@/components/DomainWhitelist";
+import { APITokenInput } from "@/components/APITokenInput";
 
-export default function BucketStructurePage() {
+export default function BucketSecuritySettingsPage() {
   const router = useRouter();
   const pathname = usePathname();
   const id = pathname?.split("/")[1] ?? "";
@@ -59,20 +63,45 @@ export default function BucketStructurePage() {
       setIsCopied(false);
     }, 1000);
   };
-
-  const [tab, setTab] = useState(
-    submissions.data?.data?.length === 0 ? "how" : "submissions",
+  const [apiToken, setAPIToken] = useState(bucket.data?.accessToken ?? "");
+  const [whitelist, setWhitelist] = useState(bucket.data?.whiteList ?? []);
+ 
+  const [customRedirect, setCustomRedirect] = useState(
+    bucket.data?.customRedirect ?? "",
   );
-  useEffect(() => {
-    setTab(submissions.data?.data?.length === 0 ? "how" : "submissions");
-  }, [submissions.isLoading]);
 
-  const deleteSubmissionsMutation = useMutate(deleteSubmissions, {
-    successMessage: "Submissions Deleted",
-    onSuccessFunction: () => {
-      submissions.refetch();
+  const updateBucketMutation = useMutate(updateBucket, {
+    loadingMessage: "Updating Bucket",
+  });
+
+  const regenerateAPITokenMutation = useMutate(regenerateAPIToken, {
+    loadingMessage: "Regenerating API Token",
+    successMessage: "API Token Regenerated",
+    onSuccessFunction: (data) => {
+      setAPIToken(data.data);
     },
   });
+
+  const updateWhitelistMutation = useMutate(updateWhitelist, {
+    loadingMessage: "Updating Whitelist",
+    successMessage: "Whitelist Updated",
+    onSuccessFunction: (data: IBucketDataWithStats) => {
+      setWhitelist(data?.whiteList ?? []);
+    },
+  });
+
+  
+
+  const handleSubmit = () =>
+  updateBucketMutation.mutate({
+    id: bucket.data?._id ?? "",
+    bucketData: {
+      customRedirect,
+
+    },
+  });
+
+
   return (
     <>
       <Head>
@@ -95,13 +124,61 @@ export default function BucketStructurePage() {
       {!bucket.isError &&
         !submissions.isError &&
         (!bucket.isLoading || !submissions.isLoading) && (
-          <div className="flex-1 space-y-4 p-4 md:p-8">
-            <div className="flex w-full justify-between">
+          <div className="flex-1 p-4 space-y-4 md:p-8">
+            <div className="flex justify-between w-full">
               <div>
                 {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
               </div>
             </div>
-            {!submissions.isLoading && <BucketStructure bucket={bucket.data} />}
+            <div>
+            <Card className="max-w-[700px]">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl">Security</CardTitle>
+          <CardDescription></CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="text">Authorized domains</Label>
+            <p>
+              Add domain to allow your API request. Add valid domain url. For
+              example https://example.com or https://for.example.com
+            </p>
+            <DomainWhitelist
+              initialDomains={whitelist}
+              isLoading={updateWhitelistMutation.isLoading}
+              onAddDomain={(domains) =>
+                updateWhitelistMutation.mutate({
+                  id: bucket.data?._id ?? "",
+                  domains,
+                })
+              }
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="text">API Token</Label>
+
+            <APITokenInput
+              token={apiToken}
+              regenerateFunction={() =>
+                regenerateAPITokenMutation.mutate({
+                  id: bucket.data?._id ?? "",
+                })
+              }
+              isRegenerating={regenerateAPITokenMutation.isLoading}
+            />
+          </div>
+        </CardContent>
+        <CardFooter className="flex flex-col gap-2">
+          <Button
+            onClick={handleSubmit}
+           
+            className="w-full"
+          >
+            Update Bucket
+          </Button>
+        </CardFooter>
+      </Card>
+            </div>
           </div>
         )}
     </>

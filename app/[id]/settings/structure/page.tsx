@@ -1,6 +1,6 @@
 // Import your Client Component
-import BucketStructurePage from "./page-component";
+import BucketStructureSettingsPage from "./page-component";
 
 export default async function Page() {
-  return <BucketStructurePage />;
+  return <BucketStructureSettingsPage />;
 }

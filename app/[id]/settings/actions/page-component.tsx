@@ -32,7 +32,7 @@ import { deleteSubmissions } from "@/services/BucketService";
 import { DashboardInnerNav } from "@/components/DashboardInnerNav";
 import { BucketStructure } from "@/components/BucketStructure";
 
-export default function BucketStructurePage() {
+export default function BucketActionsSettingsPage() {
   const router = useRouter();
   const pathname = usePathname();
   const id = pathname?.split("/")[1] ?? "";
@@ -101,7 +101,7 @@ export default function BucketStructurePage() {
                 {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
               </div>
             </div>
-            {!submissions.isLoading && <BucketStructure bucket={bucket.data} />}
+            <div>Actions</div>
           </div>
         )}
     </>
