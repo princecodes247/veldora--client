@@ -10,49 +10,126 @@ import {
 } from "./ui/select";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { Button } from "./ui/button";
+import { useReducer, useState } from "react";
+import { Delete, X } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+
+interface DataItem {
+  id: number;
+  name: string;
+  type: string;
+  isOptional: boolean;
+  defaultValue: string;
+}
+
+type Action =
+  | { type: "ADD_ITEM"; payload: DataItem }
+  | { type: "REMOVE_ITEM"; payload: number };
+
+const initialState: DataItem[] = [];
+
+function dataStructureReducer(state: DataItem[], action: Action): DataItem[] {
+  switch (action.type) {
+    case "ADD_ITEM":
+      return [...state, action.payload];
+    case "REMOVE_ITEM":
+      return state.filter((item) => item.id !== action.payload);
+    default:
+      return state;
+  }
+}
 
 export function DataStructureBuilder() {
+  const [dataStructure, dispatch] = useReducer(
+    dataStructureReducer,
+    initialState,
+  );
+
+  const [newInputName, setNewInputName] = useState("");
+  const [newInputType, setNewInputType] = useState("text");
+  const [newInputDefaultValue, setNewInputDefaultValue] = useState("none");
+  const [newInputIsOptional, setNewInputIsOptional] = useState(false);
+
+  const handleAddItem = () => {
+    dispatch({
+      type: "ADD_ITEM",
+      payload: {
+        id: dataStructure.length,
+        name: newInputName,
+        type: newInputType,
+        defaultValue: newInputDefaultValue,
+        isOptional: false,
+      },
+    });
+
+    setNewInputName("");
+    setNewInputType("text");
+    setNewInputDefaultValue("none");
+  };
+
   return (
     <div>
       <div>
         {"{"}
-        <p></p>
+        {dataStructure.length === 0 && (
+          <p className="px-4 py-px text-sm italic text-muted-foreground">
+            ...Any data you collect from your form will be stored...
+          </p>
+        )}
+        {dataStructure.map((item, index) => (
+          <div className="flex items-center gap-2 px-4 py-px">
+            <p className="text-sm text-muted-foreground">
+              {item.name}: {item.type} | {item.defaultValue},
+            </p>
+            <Button
+              className=""
+              onClick={() => {
+                dispatch({
+                  type: "REMOVE_ITEM",
+                  payload: item.id,
+                });
+              }}
+              size="icon"
+              variant="ghost"
+            >
+              <X size={12} />
+            </Button>
+          </div>
+        ))}
         {"}"}
       </div>
-      <div>
+      <div className="my-4 rounded border px-4 py-2 shadow">
+        {/* <p className="font-semibold">Add new data input</p> */}
         <div className="mb-2">
-          <Label htmlFor="text">Input Name</Label>
+          <Label htmlFor="text">New Input Name</Label>
 
-          <Input />
+          <Input
+            placeholder="New Input Name"
+            value={newInputName}
+            onChange={(e) => setNewInputName(e.target.value)}
+          />
         </div>
         <div className="mb-2">
           <Label htmlFor="text">Input Type</Label>
 
-          <Select>
+          <Select
+            onValueChange={(value) => {
+              setNewInputType(value);
+            }}
+            value={newInputType}
+          >
             <SelectTrigger>
-              <SelectValue placeholder="Select a type" />
+              <SelectValue placeholder="Select a input type" />
             </SelectTrigger>
             <SelectContent className="h-36">
-              <SelectItem value="integer">
-                <span className="font-medium">Integer</span> -{" "}
-                <span className="text-muted-foreground">
-                  A whole number, like 42
-                </span>
-              </SelectItem>
-              <SelectItem value="pro">
-                <span className="font-medium">Decimal</span> -{" "}
-                <span className="text-muted-foreground">
-                  A number with a decimal point, like 3.14
-                </span>
-              </SelectItem>
-
               <SelectItem value="text">
                 <span className="font-medium">Text</span> -{" "}
                 <span className="text-muted-foreground">
                   A short string of text, like "Hello World"
                 </span>
               </SelectItem>
-              <SelectItem value="longtext">
+              <SelectItem value="long-text">
                 <span className="font-medium">Long Text</span> -{" "}
                 <span className="text-muted-foreground">
                   A long string of text, like a blog post
@@ -62,6 +139,18 @@ export function DataStructureBuilder() {
                 <span className="font-medium">Email</span> -{" "}
                 <span className="text-muted-foreground">
                   An email address, like "support@veldora.io"
+                </span>
+              </SelectItem>
+              <SelectItem value="integer">
+                <span className="font-medium">Integer</span> -{" "}
+                <span className="text-muted-foreground">
+                  A whole number, like 42
+                </span>
+              </SelectItem>
+              <SelectItem value="decimal">
+                <span className="font-medium">Decimal</span> -{" "}
+                <span className="text-muted-foreground">
+                  A number with a decimal point, like 3.14
                 </span>
               </SelectItem>
               <SelectItem value="url">
@@ -105,14 +194,50 @@ export function DataStructureBuilder() {
           </Select>
         </div>
         <div className="mb-2">
+          <Label htmlFor="text">Optional</Label>
+
+          <RadioGroup
+            className="py-4"
+            value={newInputIsOptional ? "yes" : "no"}
+            onValueChange={(value: "yes" | "no") =>
+              setNewInputIsOptional(value === "yes")
+            }
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="yes" id="yes" />
+              <Label htmlFor="yes">
+                Yes -{" "}
+                <span className="text-muted-foreground">
+                  The input is optional
+                </span>
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="no" id="no" />
+              <Label htmlFor="no">
+                No -{" "}
+                <span className="text-muted-foreground">
+                  The input is required
+                </span>
+              </Label>
+            </div>
+          </RadioGroup>
+        </div>
+
+        <div className="mb-2">
           <Label htmlFor="text">Input Default Value</Label>
 
-          <Select>
+          <Select
+            value={newInputDefaultValue}
+            onValueChange={(value) => {
+              setNewInputDefaultValue(value);
+            }}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Select a default value" />
             </SelectTrigger>
             <SelectContent className="h-36">
-              <SelectItem value="null">
+              <SelectItem value="none">
                 <span className="font-medium">None</span> -{" "}
                 <span className="text-muted-foreground">No default value</span>
               </SelectItem>
@@ -137,6 +262,9 @@ export function DataStructureBuilder() {
             </SelectContent>
           </Select>
         </div>
+        <Button onClick={handleAddItem} variant="outline">
+          Add Input
+        </Button>
       </div>
     </div>
   );

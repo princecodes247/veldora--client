@@ -20,17 +20,6 @@ import { updateBucket } from "@/services/BucketService";
 import { DataStructureBuilder } from "./DataStructureBuilder";
 
 export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
-  const [bucketName, setBucketName] = useState(bucket?.name ?? "");
-  const [bucketDescription, setBucketDescription] = useState(
-    bucket?.description ?? "",
-  );
-  const [responseStyle, setResponseStyle] = useState(
-    bucket?.responseStyle ?? "default",
-  );
-  const [customRedirect, setCustomRedirect] = useState(
-    bucket?.customRedirect ?? "",
-  );
-
   const updateBucketMutation = useMutate(updateBucket, {
     loadingMessage: "Updating Bucket",
   });
@@ -38,12 +27,7 @@ export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
   const handleSubmit = () =>
     updateBucketMutation.mutate({
       id: bucket?._id ?? "",
-      bucketData: {
-        customRedirect,
-        description: bucketDescription,
-        name: bucketName,
-        responseStyle,
-      },
+      bucketData: {},
     });
 
   return (
@@ -59,58 +43,10 @@ export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
           <div className="grid gap-2">
             <DataStructureBuilder />
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="text">Response Style</Label>
-            <RadioGroup
-              className="py-4"
-              value={responseStyle}
-              onValueChange={(
-                value: "default" | "json" | "params" | "custom",
-              ) => setResponseStyle(value)}
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="default" id="default" />
-                <Label htmlFor="default">Default</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="json" id="json" />
-                <Label htmlFor="json">JSON</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="params" id="params" />
-                <Label htmlFor="params">Params</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="custom" id="custom" />
-                <Label htmlFor="custom">Custom</Label>
-              </div>
-            </RadioGroup>
-          </div>
-          {responseStyle === "custom" && (
-            <div className="grid gap-2">
-              <Label htmlFor="text">Custom Redirect</Label>
-              <Input
-                id="text"
-                value={customRedirect}
-                onChange={(e) => setCustomRedirect(e.target.value)}
-                type="text"
-                placeholder="https://redirect.com"
-              />
-            </div>
-          )}
         </CardContent>
         <CardFooter className="flex flex-col gap-2">
-          <Button
-            onClick={handleSubmit}
-            disabled={
-              (responseStyle === "custom" &&
-                customRedirect.trim().length === 0) ||
-              bucketDescription.trim().length === 0 ||
-              bucketName.trim().length === 0
-            }
-            className="w-full"
-          >
-            Update Bucket
+          <Button onClick={handleSubmit} className="w-full">
+            Update Data Structure
           </Button>
         </CardFooter>
       </Card>
