@@ -74,7 +74,7 @@ export function DataStructureBuilder() {
         {"{"}
         {dataStructure.length === 0 && (
           <p className="px-4 py-px text-sm italic text-muted-foreground">
-            ...Any data you collect from your form will be stored...
+            No data: ...Any data you collect from your form will be stored...
           </p>
         )}
         {dataStructure.map((item, index) => (
@@ -99,7 +99,7 @@ export function DataStructureBuilder() {
         ))}
         {"}"}
       </div>
-      <div className="my-4 rounded border px-4 py-2 shadow">
+      <div className="my-4 mt-6 px-4 py-2">
         {/* <p className="font-semibold">Add new data input</p> */}
         <div className="mb-2">
           <Label htmlFor="text">New Input Name</Label>
@@ -262,7 +262,11 @@ export function DataStructureBuilder() {
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleAddItem} variant="outline">
+        <Button
+          disabled={newInputName.trim() === ""}
+          onClick={handleAddItem}
+          variant="outline"
+        >
           Add Input
         </Button>
       </div>
