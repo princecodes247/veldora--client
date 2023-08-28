@@ -23,6 +23,7 @@ import {
 import DeleteBucketDialog from "./dialogs/DeleteBucket.dialog";
 import { APITokenInput } from "./APITokenInput";
 import { DomainWhitelist } from "./DomainWhitelist";
+import { DataStructureBuilder } from "./DataStructureBuilder";
 
 export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
   const [apiToken, setAPIToken] = useState(bucket?.accessToken ?? "");
@@ -99,7 +100,9 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
               placeholder="Bucket Description"
             />
           </div>
-
+          <div className="grid gap-2">
+            <DataStructureBuilder />
+          </div>
           <div className="grid gap-2">
             <Label htmlFor="text">Response Style</Label>
             <RadioGroup

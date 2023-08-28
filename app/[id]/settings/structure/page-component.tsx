@@ -30,8 +30,9 @@ import { ISubmissionData } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
 import { deleteSubmissions } from "@/services/BucketService";
 import { DashboardInnerNav } from "@/components/DashboardInnerNav";
+import { BucketStructure } from "@/components/BucketStructure";
 
-export default function BucketSettingsPage() {
+export default function BucketStructurePage() {
   const router = useRouter();
   const pathname = usePathname();
   const id = pathname?.split("/")[1] ?? "";
@@ -100,7 +101,7 @@ export default function BucketSettingsPage() {
                 {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
               </div>
             </div>
-            {!submissions.isLoading && <BucketConfig bucket={bucket.data} />}
+            {!submissions.isLoading && <BucketStructure bucket={bucket.data} />}
           </div>
         )}
     </>

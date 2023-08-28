@@ -12,8 +12,8 @@ const sidebarNavItems = (id: string = "...") => [
   },
 
   {
-    title: "Schema",
-    href: `/${id}/settings/schema`,
+    title: "Structure",
+    href: `/${id}/settings/structure`,
   },
   {
     title: "Actions",

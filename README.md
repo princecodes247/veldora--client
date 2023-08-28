@@ -24,13 +24,19 @@
 - [] Add video or image to Landing page
 - [] Install @vercel/analytics
 
-
 ### Nice to have
 
-- [] Setup theme
-- [] Delete response
 - [*] Search form responses
+- [] Add Schema to form
+- [] Delete response
 - [] Send data to email anonymously
+- [] Add custom slugs
+- [] Add API references to lead user to docs
+- [] Add actions to form
+- [] Add data import
+- [] Add Logs to summary page
+- [] Add file uploads
+- [] Setup theme
 
 ### Extra Features
 

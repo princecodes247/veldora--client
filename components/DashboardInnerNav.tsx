@@ -73,24 +73,32 @@ export function DashboardInnerNav() {
         <NavigationMenuItem>
           <Link href="/[id]/submissions" as={`/${id}/submissions`}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Submissions
+              Data
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <Link href="/[id]/configuration" as={`/${id}/configuration`}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Configuration
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/[id]/logs" as={`/${id}/logs`} legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Logs
+        </NavigationMenuItem> */}
+        {/* <NavigationMenuItem>
+          <Link
+            href="/[id]/actions"
+            as={`/${id}/actions`}
+            legacyBehavior
+            passHref
+          >
+            <NavigationMenuLink
+              data-state={"open"}
+              className={navigationMenuTriggerStyle()}
+            >
+              Actions
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
         <NavigationMenuItem>
           <Link href="/[id]/settings" as={`/${id}/settings`}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
