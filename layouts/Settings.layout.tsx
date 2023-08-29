@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import { Separator } from "@/components/ui/separator";

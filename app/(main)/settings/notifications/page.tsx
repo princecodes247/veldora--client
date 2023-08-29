@@ -1,10 +1,11 @@
+"use client";
 import { NotificationsForm } from "@/components/settings/NotificationsForm";
 import { Separator } from "@/components/ui/separator";
 import SettingsLayout from "@/layouts/Settings.layout";
 
 export default function SettingsNotificationsPage() {
   return (
-    <SettingsLayout>
+    <SettingsLayout id="">
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-medium">Notifications</h3>
