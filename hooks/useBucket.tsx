@@ -7,10 +7,10 @@ const useBucket = (id: string, handleError = () => {}) => {
     queryFn: async () => {
       try {
         const result = await getBucket(id);
-      console.log({ result: result.data.data });
-      return result.data.data;
+
+        return result.data.data;
       } catch (error) {
-        handleError()
+        handleError();
       }
     },
     // placeholderData: [],

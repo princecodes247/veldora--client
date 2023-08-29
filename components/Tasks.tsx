@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 // Simulate a database read for tasks.
 function getTasks() {
   const tasks = JSON.parse(rawTasks.toString());
-  console.log({ tasks });
+
   return z.array(taskSchema).parse(tasks);
   return tasks;
 }

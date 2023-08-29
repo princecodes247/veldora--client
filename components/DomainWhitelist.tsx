@@ -38,7 +38,7 @@ export function DomainWhitelist({
   });
   const [newDomain, setNewDomain] = useState("");
   const handleAddDomain = (newDomain: string) => {
-    console.log(newDomain);
+    
     onAddDomain([...initialDomains, newDomain]);
     setNewDomain("");
   };

@@ -18,7 +18,7 @@ const useUserBuckets = ({
         page: pageParam,
         pageSize,
       });
-      console.log({ result: result.data });
+
       const buckets = result.data;
       return buckets;
     },

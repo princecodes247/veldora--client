@@ -94,7 +94,6 @@ export default function BucketSubmissionsPage() {
                 }
                 data={
                   submissions?.data?.data?.map((submission) => {
-                    console.log({ submission });
                     return {
                       ...submission,
                       ...submission.data,

@@ -26,12 +26,10 @@ api.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     console.log("interceptor error", error, error?.response?.data?.message);
-    if (
-      error?.response?.data?.message.toLowerCase().includes("unauthorized")
-    ) {
+    if (error?.response?.data?.message.toLowerCase().includes("unauthorized")) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      console.log("interceptor errorssq");
+      console.log("interceptor error");
       window.location.href = "/login";
     }
     return Promise.reject(error);

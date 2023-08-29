@@ -15,10 +15,10 @@ const useSubmissions = ({
     queryFn: async () => {
       const result = await getSubmissions({
         id,
-        page: (page ?? 0),
+        page: page ?? 0,
         pageSize,
       });
-      console.log({ result: result.data });
+
       const submissions = result.data;
       return submissions;
     },

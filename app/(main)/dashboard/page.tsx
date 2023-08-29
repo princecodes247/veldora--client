@@ -24,7 +24,6 @@ function Dashboard() {
     pageSize,
   });
 
-  console.log({ buckets: buckets.data?.pages });
   const [openCreateBucket, setOpenCreateBucket] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
