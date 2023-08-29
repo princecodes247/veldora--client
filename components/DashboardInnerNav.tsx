@@ -73,7 +73,7 @@ export function DashboardInnerNav() {
         <NavigationMenuItem>
           <Link href="/[id]/submissions" as={`/${id}/submissions`}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Data
+              Submissions
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
