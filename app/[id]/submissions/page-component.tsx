@@ -105,7 +105,7 @@ export default function BucketSubmissionsPage() {
                   Array.from(
                     new Set(
                       submissions?.data?.data?.flatMap((submission) =>
-                        Object.keys(submission.data),
+                        Object.keys(submission?.data ?? {}),
                       ),
                     ),
                   ),
