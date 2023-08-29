@@ -48,7 +48,7 @@ export default function SettingsLayout({ children, id }: SettingsLayoutProps) {
           </div> */}
           <PageHeader
             title="Bucket Settings"
-            description="Manage your account settings and set e-mail preferences."
+            description="Manage your bucket settings."
           />
           <Separator className="my-6" />
           <div className="flex flex-col gap-8 space-y-8 md:flex-row lg:flex-row lg:space-x-12 lg:space-y-0">

@@ -74,7 +74,7 @@ export function DataStructureBuilder() {
         {"{"}
         {dataStructure.length === 0 && (
           <p className="px-4 py-px text-sm italic text-muted-foreground">
-            No data: ...Any data you collect from your form will be stored...
+            Flexible: ...Any data sent would be collected
           </p>
         )}
         {dataStructure.map((item, index) => (
