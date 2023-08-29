@@ -31,7 +31,7 @@ import { deleteSubmissions } from "@/services/BucketService";
 import { DashboardInnerNav } from "@/components/DashboardInnerNav";
 import { PageHeader } from "@/components/PageHeader";
 
-export default function BucketLogsPage() {
+export default function BucketActionsPage() {
   const router = useRouter();
   const pathname = usePathname();
   const id = pathname?.split("/")[1] ?? "";
