@@ -27,7 +27,8 @@
 ### Nice to have
 
 - [*] Search form responses
-- [] Add Schema to form
+- [*] Add Schema to form
+- [] Add a modal to display mini API docs
 - [] Delete response
 - [] Send data to email anonymously
 - [] Add custom slugs
