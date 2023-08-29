@@ -3,11 +3,6 @@
 import SettingsLayout from "@/layouts/Settings.layout";
 import { usePathname } from "next/navigation";
 
-export const metadata = {
-  title: "",
-  description: "",
-};
-
 export default function SingleBucketLayout({
   children,
 }: {
