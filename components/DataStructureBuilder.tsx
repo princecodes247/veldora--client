@@ -78,7 +78,7 @@ export function DataStructureBuilder() {
           </p>
         )}
         {dataStructure.map((item, index) => (
-          <div className="flex items-center gap-2 px-4 py-px">
+          <div key={index} className="flex items-center gap-2 px-4 py-px">
             <p className="text-sm text-muted-foreground">
               {item.name}: {item.type} | {item.defaultValue},
             </p>
@@ -126,7 +126,7 @@ export function DataStructureBuilder() {
               <SelectItem value="text">
                 <span className="font-medium">Text</span> -{" "}
                 <span className="text-muted-foreground">
-                  A short string of text, like "Hello World"
+                  A short string of text, like &ldquo;Hello World&rdquo;
                 </span>
               </SelectItem>
               <SelectItem value="long-text">
@@ -138,7 +138,7 @@ export function DataStructureBuilder() {
               <SelectItem value="email">
                 <span className="font-medium">Email</span> -{" "}
                 <span className="text-muted-foreground">
-                  An email address, like "support@veldora.io"
+                  An email address, like &ldquo;support@veldora.io&rdquo;
                 </span>
               </SelectItem>
               <SelectItem value="integer">
@@ -156,13 +156,13 @@ export function DataStructureBuilder() {
               <SelectItem value="url">
                 <span className="font-medium">URL</span> -{" "}
                 <span className="text-muted-foreground">
-                  A URL, like "https://veldora.io"
+                  A URL, like &ldquo;https://veldora.io&rdquo;
                 </span>
               </SelectItem>
               <SelectItem value="phone">
                 <span className="font-medium">Phone</span> -{" "}
                 <span className="text-muted-foreground">
-                  A phone number, like "555-555-5555"
+                  A phone number, like &ldquo;555-555-5555&rdquo;
                 </span>
               </SelectItem>
 
@@ -181,13 +181,13 @@ export function DataStructureBuilder() {
               <SelectItem value="photo">
                 <span className="font-medium">Photo</span> -{" "}
                 <span className="text-muted-foreground">
-                  A photo, like "https://veldora.io/photo.png"
+                  A photo, like &ldquo;https://veldora.io/photo.png&rdquo;
                 </span>
               </SelectItem>
               <SelectItem value="file">
                 <span className="font-medium">File</span> -{" "}
                 <span className="text-muted-foreground">
-                  A file, like "https://veldora.io/file.pdf"
+                  A file, like &ldquo;https://veldora.io/file.pdf&rdquo;
                 </span>
               </SelectItem>
             </SelectContent>
