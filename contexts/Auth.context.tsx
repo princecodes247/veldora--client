@@ -1,7 +1,6 @@
-import { IUserData } from '@/interfaces/services';
-import { useRouter } from 'next/router';
-import React, { createContext, useState } from 'react';
-
+import { IUserData } from "@/interfaces/services";
+import { useRouter } from "next/navigation";
+import React, { createContext, useState } from "react";
 
 interface AuthContextProps {
   userData: IUserData | null;
@@ -14,10 +13,8 @@ export const AuthContext = createContext<AuthContextProps>({
   logout: () => {},
 });
 
-export const AuthProvider  = ({ children }:{
-  children: React.ReactNode
-}) => {
-  const router = useRouter()
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
   const [userData, setUserData] = useState<IUserData | null>(null);
 
   const login = (user: IUserData) => {

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { AuthProvider } from "@/contexts/Auth.context";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function Providers({ children }: React.PropsWithChildren) {
@@ -11,8 +12,10 @@ function Providers({ children }: React.PropsWithChildren) {
 
   return (
     <QueryClientProvider client={client}>
-      {children}
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <AuthProvider>
+        {children}
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

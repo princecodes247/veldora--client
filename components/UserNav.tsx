@@ -1,5 +1,5 @@
 import { CreditCard, LogOut, PlusCircle, Settings, User } from "lucide-react";
-
+import Avvvatars from "avvvatars-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,14 +24,15 @@ export function UserNav({ user }: { user: IUserData }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarImage
+          <Avatar className="h-8 w-8 border">
+            {/* <AvatarImage
               src="/avatars/01.png"
               alt={user?.metadata?.username ?? "UU"}
-            />
-            <AvatarFallback>
+            /> */}
+            <Avvvatars size={32} value={user?.metadata?.username ?? "UU"} />
+            {/* <AvatarFallback>
               {user?.metadata?.username.slice(0, 2).toUpperCase() ?? "UU"}
-            </AvatarFallback>
+            </AvatarFallback> */}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -46,7 +47,7 @@ export function UserNav({ user }: { user: IUserData }) {
             </p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuSeparator /> */}
         <DropdownMenuGroup>
           {/* <DropdownMenuItem>
             <User className="w-4 h-4 mr-2" />
@@ -58,13 +59,13 @@ export function UserNav({ user }: { user: IUserData }) {
             <span>Billing</span>
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem> */}
-          <DropdownMenuItem asChild>
+          {/* <DropdownMenuItem asChild>
             <Link href="/settings" className="cursor-pointer">
-              <Settings className="mr-2 h-4 w-4" />
+              <Settings className="w-4 h-4 mr-2" />
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </Link>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           {/* <DropdownMenuItem>
             <PlusCircle className="w-4 h-4 mr-2" />
             <span>New Team</span>

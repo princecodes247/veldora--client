@@ -41,7 +41,9 @@ function withAuthHOC<P>(WrappedComponent: React.ComponentType<P>) {
       return null;
     }
 
-    if (!user.isLoading && !user.isError) login(user.data);
+    if (!user.isLoading && !user.isError) {
+      login(user.data);
+    }
 
     return <WrappedComponent {...props} authStatus={result} />;
   };
