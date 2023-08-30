@@ -11,6 +11,16 @@ import {
 import { Button } from "./ui/button";
 import { Copy } from "lucide-react";
 import { useCopyToClipboard } from "react-use";
+import { queryParamsColumns } from "@/constants/mock/Columns";
+import { DataTable } from "./Table/DataTable";
+import { IParamData } from "@/interfaces";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Lazy load the react-syntax-highlighter package
@@ -58,11 +68,13 @@ export function BucketHow({
   title,
   description,
   method = "GET",
+  params,
 }: {
   endpoint: string;
   description?: string;
   title: string;
   method: "GET" | "POST" | "DELETE" | "PUT";
+  params?: IParamData[];
 }) {
   const targetLink = `${apiUrl}${endpoint}`;
   const step1CodeString = `
@@ -83,11 +95,49 @@ export function BucketHow({
   `;
   return (
     <Suspense fallback={<Loading variant="INLINE" />}>
-      <div className="max-w-[1200px] rounded-xl border p-3 md:p-8">
-        <h2>{title}</h2>
+      <div>
+        <h2 className="text-xl font-semibold">{title}</h2>
         <p>{description ?? ""}</p>
-        <div className="pb-16">
+      </div>
+      {params && (
+        <div>
+          <h3>Query Params</h3>
+          <DataTable
+            data={params}
+            hideToolbar={true}
+            columns={queryParamsColumns}
+          />
+        </div>
+      )}
+      <div className="max-w-[1200px] rounded-xl border p-3 md:p-8">
+        <div className="pb-0">
           <div className="rounded-md p-1">
+            <div className="mb-6 flex max-w-[400px]">
+              <Select
+                onValueChange={(value) => {
+                  // setNewInputType(value);
+                }}
+                value={"text"}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a input type" />
+                </SelectTrigger>
+                <SelectContent className="h-36">
+                  <SelectItem value="text">
+                    <span className="font-medium">Javascript</span> -{" "}
+                    <span className="text-muted-foreground">Fetch</span>
+                  </SelectItem>
+                  <SelectItem value="long-text">
+                    <span className="font-medium">Javascript</span> -{" "}
+                    <span className="text-muted-foreground">Axios</span>
+                  </SelectItem>
+                  <SelectItem value="email">
+                    <span className="font-medium">Flutter</span> -{" "}
+                    <span className="text-muted-foreground"></span>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <CodeBoard code={step2CodeString} language="xml" />
           </div>
         </div>

@@ -75,18 +75,50 @@ export default function BucketAPIPage() {
                 <TabsTrigger value="get-all">Get All Rows</TabsTrigger>
                 <TabsTrigger value="get-one">Get a Row</TabsTrigger>
 
-                <TabsTrigger value="post">Add a Row</TabsTrigger>
-                <TabsTrigger value="delete">Delete a Row</TabsTrigger>
-                <TabsTrigger value="update">Update a Row</TabsTrigger>
+                <TabsTrigger value="create-one">Add a Row</TabsTrigger>
+                <TabsTrigger value="delete-one">Delete a Row</TabsTrigger>
+                <TabsTrigger value="update-one">Update a Row</TabsTrigger>
               </TabsList>
             </div>
             <div>
               <TabsContent value="get-all" className="space-y-4">
-                <BucketHow title="Get all Submissions" endpoint="get" />
+                <BucketHow
+                  title="Get all Submissions"
+                  endpoint="/get"
+                  method="GET"
+                />
               </TabsContent>
 
               <TabsContent value="get-one" className="space-y-4">
-                <BucketHow title="Get Submission" endpoint="get" />
+                <BucketHow
+                  title="Get Submission"
+                  endpoint="/get"
+                  method="GET"
+                />
+              </TabsContent>
+
+              <TabsContent value="update-one" className="space-y-4">
+                <BucketHow
+                  title="Update a Submission"
+                  endpoint="/get"
+                  method="PUT"
+                />
+              </TabsContent>
+
+              <TabsContent value="create-one" className="space-y-4">
+                <BucketHow
+                  title="Create a Submission"
+                  endpoint="/get"
+                  method="POST"
+                />
+              </TabsContent>
+
+              <TabsContent value="delete-one" className="space-y-4">
+                <BucketHow
+                  title="Delete a Submission"
+                  endpoint="/get"
+                  method="POST"
+                />
               </TabsContent>
             </div>
           </Tabs>
