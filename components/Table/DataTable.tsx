@@ -31,11 +31,12 @@ import { DataTableToolbar } from "./DataTableToolbar";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  deleteFunction: (rows: TData[]) => void;
-  pageCount: number,
-  pageIndex: number,
-  pageSize: number
-  onPaginationChange: OnChangeFn<PaginationState>,
+  deleteFunction?: (rows: TData[]) => void;
+  pageCount?: number;
+  pageIndex?: number;
+  pageSize?: number;
+  onPaginationChange?: OnChangeFn<PaginationState>;
+  hideToolbar?: boolean
 }
 
 export function DataTable<TData, TValue>({
@@ -43,9 +44,10 @@ export function DataTable<TData, TValue>({
   data,
   pageCount,
   pageIndex,
-pageSize,
+  pageSize,
   onPaginationChange,
-  deleteFunction
+  deleteFunction = () => {},
+  hideToolbar = false
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -56,11 +58,11 @@ pageSize,
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const pagination = React.useMemo(
     () => ({
-      pageIndex,
-      pageSize,
+      pageIndex: pageIndex ?? 1,
+      pageSize: pageSize ?? 10,
     }),
-    [pageIndex, pageSize]
-  )
+    [pageIndex, pageSize],
+  );
   const table = useReactTable({
     data,
     columns,
@@ -69,7 +71,7 @@ pageSize,
       columnVisibility,
       rowSelection,
       columnFilters,
-      pagination
+      pagination,
     },
     pageCount,
     onPaginationChange,
@@ -90,8 +92,15 @@ pageSize,
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar onDelete={(table) => deleteFunction(table.getSelectedRowModel().rows.map(row => row.original))} table={table} />
-      
+     {!hideToolbar ? <DataTableToolbar
+        onDelete={(table) =>
+          deleteFunction(
+            table.getSelectedRowModel().rows.map((row) => row.original),
+          )
+        }
+        table={table}
+      /> : ""}
+
       <div className="border rounded-md">
         <Table>
           <TableHeader>
@@ -142,7 +151,7 @@ pageSize,
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {!onPaginationChange ? null : <DataTablePagination table={table} />}
     </div>
   );
 }
