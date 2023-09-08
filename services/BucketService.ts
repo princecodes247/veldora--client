@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { GetBucketsData, ResponseBody } from "../interfaces/services";
+import { PaginatedResponse, ResponseBody } from "../interfaces/services";
 import api, { authHeaders } from "./config";
 import {
   IBucketData,
@@ -25,7 +25,7 @@ export const getUserBuckets = ({
   page: number;
   pageSize: number;
 }>) => {
-  return api.get<GetBucketsData>(
+  return api.get<PaginatedResponse<IBucketData>>(
     `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
     {
       headers: authHeaders(),
@@ -41,16 +41,14 @@ export const getSubmissions = ({
   page?: number;
   pageSize?: number;
 }>) => {
-  return api.get<{
-    data: ISubmissionData[];
-    pageInfo: {
-      hasNextPage: boolean;
-      nextPage: number | null;
-      pages: number;
-    };
-  }>(`${submissionsPrefix}?bucket=${id}&page=${page}&limit=${pageSize}`, {
-    headers: authHeaders(),
-  });
+  return api.get<PaginatedResponse<ISubmissionData>>(
+    `${submissionsPrefix}?bucket=${id}&page=${
+      (page ?? 0) + 1
+    }&limit=${pageSize}`,
+    {
+      headers: authHeaders(),
+    },
+  );
 };
 
 export const createBucket = ({
@@ -96,7 +94,7 @@ export const getBuckets = ({
   page: number;
   pageSize: number;
 }>) => {
-  return api.get<GetBucketsData>(
+  return api.get<PaginatedResponse<IBucketData>>(
     `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
     {
       headers: authHeaders(),

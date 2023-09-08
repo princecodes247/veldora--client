@@ -60,10 +60,10 @@ export default function BucketActionsPage() {
   };
 
   const [tab, setTab] = useState(
-    submissions.data?.data?.length === 0 ? "how" : "submissions",
+    submissions.data?.result?.length === 0 ? "how" : "submissions",
   );
   useEffect(() => {
-    setTab(submissions.data?.data?.length === 0 ? "how" : "submissions");
+    setTab(submissions.data?.result?.length === 0 ? "how" : "submissions");
   }, [submissions.isLoading]);
 
   const deleteSubmissionsMutation = useMutate(deleteSubmissions, {

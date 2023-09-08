@@ -40,14 +40,16 @@ export interface PaginationMeta {
     total: number;
     page: number;
     limit: number;
-    totalPages: number;
+    pages: number;
+    hasNextPage: boolean;
+    nextPage: number;
   };
 }
 
-export interface GetBucketsData
+export interface PaginatedResponse<T>
   extends ResponseBody<
     {
-      result: IBucketData[];
+      result: T[];
     } & PaginationMeta
   > {}
 
