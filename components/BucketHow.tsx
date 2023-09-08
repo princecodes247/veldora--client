@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Input } from "./ui/input";
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Lazy load the react-syntax-highlighter package
@@ -77,27 +78,26 @@ export function BucketHow({
   params?: IParamData[];
 }) {
   const targetLink = `${apiUrl}${endpoint}`;
-  const step1CodeString = `
-  ${targetLink}
-  `;
+
   const step2CodeString = `
   <form action="${targetLink}" method="POST">
   </form>
   `;
-  const step3CodeString = `
-  <img src="${targetLink}/view" hidden alt="Veldora analytics"/>
-  `;
 
-  const step4CodeString = `
-  <form action="${targetLink}" method="POST">
-    <img src="${targetLink}/view" hidden alt="Veldora analytics"/>
-  </form>
-  `;
   return (
     <Suspense fallback={<Loading variant="INLINE" />}>
       <div>
         <h2 className="text-xl font-semibold">{title}</h2>
         <p>{description ?? ""}</p>
+      </div>
+      <div>
+        <div className="flex flex-col gap-2 md:flex-row">
+          <Input value={targetLink} />
+          <Button>
+            <Copy />
+            <p className="ml-2 md:hidden">Copy</p>
+          </Button>
+        </div>
       </div>
       {params && (
         <div>

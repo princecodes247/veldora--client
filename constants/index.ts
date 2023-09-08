@@ -43,7 +43,7 @@ export const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "Veldora";
 
 export const clientUrl = process.env.NEXT_PUBLIC_CLIENT_URL ?? "localhost:3000";
 export const apiUrl =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3050/v1";
+  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3050/api/v1";
 
 export const docsUrl =
   process.env.NEXT_PUBLIC_DOCS_URL ?? "https://docs.veldora.io";
