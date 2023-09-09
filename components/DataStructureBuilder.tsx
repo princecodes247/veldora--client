@@ -83,8 +83,10 @@ export function DataStructureBuilder() {
         )}
         {dataStructure.map((item, index) => (
           <div key={index} className="flex items-center gap-2 px-4 py-px">
-            <p className="text-sm text-muted-foreground">
-              {item.name}: {item.type} | {item.defaultValue},
+            <p className="mb-2 text-sm text-muted-foreground">
+              {item.name}: {item.type} |{" "}
+              {item.isOptional ? "optional" : "required"},{" "}
+              {item.isUnique ? "unique" : ""}, {item.defaultValue}
             </p>
             <Button
               className=""
