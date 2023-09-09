@@ -22,7 +22,7 @@ const useUserBuckets = ({
       const buckets = result.data;
       return buckets;
     },
-    getNextPageParam: (lastPage, pages) => (lastPage?.meta?.page ?? 1) + 1,
+    getNextPageParam: (lastPage, pages) => (lastPage?.data.meta?.page ?? 1) + 1,
   });
 };
 
