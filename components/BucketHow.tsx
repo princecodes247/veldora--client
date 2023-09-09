@@ -22,6 +22,10 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Input } from "./ui/input";
+import {
+  generateIntegrationSnippets,
+  SnippetLanguages,
+} from "@/constants/snippets";
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Lazy load the react-syntax-highlighter package
@@ -70,19 +74,20 @@ export function BucketHow({
   description,
   method = "GET",
   params,
+  withHTML,
 }: {
   endpoint: string;
   description?: string;
   title: string;
   method: "GET" | "POST" | "DELETE" | "PUT";
   params?: IParamData[];
+  withHTML?: boolean;
 }) {
-  const targetLink = `${apiUrl}${endpoint}`;
+  const [currentLanguage, setCurrentLanguage] = useState<SnippetLanguages>(
+    withHTML ? "html" : "fetch",
+  );
 
-  const step2CodeString = `
-  <form action="${targetLink}" method="POST">
-  </form>
-  `;
+  const snippets = generateIntegrationSnippets(endpoint);
 
   return (
     <Suspense fallback={<Loading variant="INLINE" />}>
@@ -92,7 +97,7 @@ export function BucketHow({
       </div>
       <div>
         <div className="flex flex-col gap-2 md:flex-row">
-          <Input value={targetLink} />
+          <Input value={endpoint} />
           <Button>
             <Copy size={14} />
             <p className="ml-2 md:hidden">Copy</p>
@@ -114,31 +119,40 @@ export function BucketHow({
           <div className="rounded-md p-1">
             <div className="mb-6 flex max-w-[400px]">
               <Select
-                onValueChange={(value) => {
-                  // setNewInputType(value);
+                onValueChange={(value: SnippetLanguages) => {
+                  setCurrentLanguage(value);
                 }}
-                value={"text"}
+                value={currentLanguage}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a input type" />
                 </SelectTrigger>
                 <SelectContent className="h-36">
-                  <SelectItem value="text">
+                  {withHTML ? (
+                    <SelectItem value={"html"}>
+                      <span className="font-medium">HTML</span> -{" "}
+                      <span className="text-muted-foreground">Form Data</span>
+                    </SelectItem>
+                  ) : null}
+                  <SelectItem value={"fetch"}>
                     <span className="font-medium">Javascript</span> -{" "}
                     <span className="text-muted-foreground">Fetch</span>
                   </SelectItem>
-                  <SelectItem value="long-text">
+                  <SelectItem value={"axios"}>
                     <span className="font-medium">Javascript</span> -{" "}
                     <span className="text-muted-foreground">Axios</span>
                   </SelectItem>
-                  <SelectItem value="email">
+                  <SelectItem value={"flutter"}>
                     <span className="font-medium">Flutter</span> -{" "}
-                    <span className="text-muted-foreground"></span>
+                    <span className="text-muted-foreground">Dart</span>
                   </SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            <CodeBoard code={step2CodeString} language="xml" />
+            <CodeBoard
+              code={snippets[currentLanguage].code}
+              language={snippets[currentLanguage].language}
+            />
           </div>
         </div>
       </div>

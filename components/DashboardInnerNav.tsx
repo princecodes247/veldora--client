@@ -59,8 +59,6 @@ export function DashboardInnerNav() {
   const router = useRouter();
   const pathname = usePathname();
   const [_, id, route = ""] = pathname?.split("/") ?? ["", ""];
-
-  console.log({ pathname });
   const links = [
     {
       name: "Summary",
