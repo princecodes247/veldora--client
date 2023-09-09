@@ -49,33 +49,20 @@ import { DomainWhitelist } from "@/components/DomainWhitelist";
 import { APITokenInput } from "@/components/APITokenInput";
 
 export default function BucketSecuritySettingsPage() {
-  const router = useRouter();
   const pathname = usePathname();
   const id = pathname?.split("/")[1] ?? "";
 
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });
-  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
 
   const [apiToken, setAPIToken] = useState(bucket.data?.accessToken ?? "");
   const [whitelist, setWhitelist] = useState(bucket.data?.whiteList ?? []);
 
-  const [customRedirect, setCustomRedirect] = useState(
-    bucket.data?.customRedirect ?? "",
-  );
-
-  const updateBucketMutation = useMutate(updateBucket, {
-    loadingMessage: "Updating Bucket",
-  });
-
   const regenerateAPITokenMutation = useMutate(regenerateAPIToken, {
     loadingMessage: "Regenerating API Token",
     successMessage: "API Token Regenerated",
-    onSuccessFunction: (data) => {
+    onSuccessFunction: ({data}) => {
       setAPIToken(data.data);
     },
   });
@@ -83,18 +70,11 @@ export default function BucketSecuritySettingsPage() {
   const updateWhitelistMutation = useMutate(updateWhitelist, {
     loadingMessage: "Updating Whitelist",
     successMessage: "Whitelist Updated",
-    onSuccessFunction: (data: IBucketDataWithStats) => {
-      setWhitelist(data?.whiteList ?? []);
+    onSuccessFunction: ({ data }) => {
+      console.log({ ww: data?.data?.whiteList });
+      setWhitelist(data?.data?.whiteList ?? []);
     },
   });
-
-  const handleSubmit = () =>
-    updateBucketMutation.mutate({
-      id: bucket.data?._id ?? "",
-      bucketData: {
-        customRedirect,
-      },
-    });
 
   return (
     <>
@@ -114,8 +94,8 @@ export default function BucketSecuritySettingsPage() {
         </div>
       )}
       {!bucket.isError && !bucket.isLoading && (
-        <div className="flex-1 space-y-4 p-0 md:p-8">
-          <div className="flex w-full justify-between">
+        <div className="flex-1 p-0 space-y-4 md:p-8">
+          <div className="flex justify-between w-full">
             <div>
               {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
             </div>
@@ -158,11 +138,7 @@ export default function BucketSecuritySettingsPage() {
                   />
                 </div>
               </CardContent>
-              <CardFooter className="flex flex-col gap-2">
-                <Button onClick={handleSubmit} className="w-full">
-                  Update Bucket
-                </Button>
-              </CardFooter>
+              <CardFooter className="flex flex-col gap-2"></CardFooter>
             </Card>
           </div>
         </div>

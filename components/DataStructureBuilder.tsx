@@ -14,11 +14,13 @@ import { Button } from "./ui/button";
 import { useReducer, useState } from "react";
 import { Delete, X } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { Separator } from "./ui/separator";
 
 interface DataItem {
   id: number;
   name: string;
   type: string;
+  isUnique: string;
   isOptional: boolean;
   defaultValue: string;
 }
@@ -48,8 +50,9 @@ export function DataStructureBuilder() {
 
   const [newInputName, setNewInputName] = useState("");
   const [newInputType, setNewInputType] = useState("text");
+  const [newInputIsUnique, setNewInputIsUnique] = useState(false);
   const [newInputDefaultValue, setNewInputDefaultValue] = useState("none");
-  const [newInputIsOptional, setNewInputIsOptional] = useState(false);
+  const [newInputIsOptional, setNewInputIsOptional] = useState(true);
 
   const handleAddItem = () => {
     dispatch({
@@ -58,6 +61,7 @@ export function DataStructureBuilder() {
         id: dataStructure.length,
         name: newInputName,
         type: newInputType,
+        isUnique: newInputType,
         defaultValue: newInputDefaultValue,
         isOptional: false,
       },
@@ -70,7 +74,7 @@ export function DataStructureBuilder() {
 
   return (
     <div>
-      <div>
+      <div className="mb-4">
         {"{"}
         {dataStructure.length === 0 && (
           <p className="px-4 py-px text-sm italic text-muted-foreground">
@@ -99,7 +103,8 @@ export function DataStructureBuilder() {
         ))}
         {"}"}
       </div>
-      <div className="my-4 mt-6 px-4 py-2">
+      <Separator />
+      <div className="my-4 mt-2 px-4 py-2">
         {/* <p className="font-semibold">Add new data input</p> */}
         <div className="mb-2">
           <Label htmlFor="text">New Input Name</Label>
@@ -124,70 +129,81 @@ export function DataStructureBuilder() {
             </SelectTrigger>
             <SelectContent className="h-36">
               <SelectItem value="text">
-                <span className="font-medium">Text</span> -{" "}
-                <span className="text-muted-foreground">
-                  A short string of text, like &ldquo;Hello World&rdquo;
+                <span className="font-medium">Text</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A short string of text, like &ldquo;Hello World&rdquo;
                 </span>
               </SelectItem>
               <SelectItem value="long-text">
-                <span className="font-medium">Long Text</span> -{" "}
-                <span className="text-muted-foreground">
-                  A long string of text, like a blog post
+                <span className="font-medium">Long Text</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A long string of text, like a blog post
                 </span>
               </SelectItem>
               <SelectItem value="email">
-                <span className="font-medium">Email</span> -{" "}
-                <span className="text-muted-foreground">
-                  An email address, like &ldquo;support@veldora.io&rdquo;
+                <span className="font-medium">Email</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - An email address, like &ldquo;support@veldora.io&rdquo;
                 </span>
               </SelectItem>
               <SelectItem value="integer">
-                <span className="font-medium">Integer</span> -{" "}
-                <span className="text-muted-foreground">
-                  A whole number, like 42
+                <span className="font-medium">Integer</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A whole number, like 42
                 </span>
               </SelectItem>
               <SelectItem value="decimal">
-                <span className="font-medium">Decimal</span> -{" "}
-                <span className="text-muted-foreground">
-                  A number with a decimal point, like 3.14
+                <span className="font-medium">Decimal</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A number with a decimal point, like 3.14
                 </span>
               </SelectItem>
               <SelectItem value="url">
-                <span className="font-medium">URL</span> -{" "}
-                <span className="text-muted-foreground">
-                  A URL, like &ldquo;https://veldora.io&rdquo;
+                <span className="font-medium">URL</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A URL, like &ldquo;https://veldora.io&rdquo;
                 </span>
               </SelectItem>
               <SelectItem value="phone">
-                <span className="font-medium">Phone</span> -{" "}
-                <span className="text-muted-foreground">
-                  A phone number, like &ldquo;555-555-5555&rdquo;
+                <span className="font-medium">Phone</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A phone number, like &ldquo;555-555-5555&rdquo;
                 </span>
               </SelectItem>
 
               <SelectItem value="boolean">
-                <span className="font-medium">Boolean</span> -{" "}
-                <span className="text-muted-foreground">
-                  A true or false value
+                <span className="font-medium">Boolean</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A true or false value
                 </span>
               </SelectItem>
               <SelectItem value="date">
-                <span className="font-medium">Date</span> -{" "}
-                <span className="text-muted-foreground">
-                  A date, like 2021-01-01
+                <span className="font-medium">Date</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A date, like 2021-01-01
                 </span>
               </SelectItem>
               <SelectItem value="photo">
-                <span className="font-medium">Photo</span> -{" "}
-                <span className="text-muted-foreground">
-                  A photo, like &ldquo;https://veldora.io/photo.png&rdquo;
+                <span className="font-medium">Photo</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A photo, like &ldquo;https://veldora.io/photo.png&rdquo;
                 </span>
               </SelectItem>
               <SelectItem value="file">
-                <span className="font-medium">File</span> -{" "}
-                <span className="text-muted-foreground">
-                  A file, like &ldquo;https://veldora.io/file.pdf&rdquo;
+                <span className="font-medium">File</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A file, like &ldquo;https://veldora.io/file.pdf&rdquo;
                 </span>
               </SelectItem>
             </SelectContent>
@@ -206,18 +222,52 @@ export function DataStructureBuilder() {
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="yes" id="yes" />
               <Label htmlFor="yes">
-                Yes -{" "}
-                <span className="text-muted-foreground">
-                  The input is optional
+                Yes
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - The input is optional
                 </span>
               </Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="no" id="no" />
               <Label htmlFor="no">
-                No -{" "}
-                <span className="text-muted-foreground">
-                  The input is required
+                No
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - The input is required
+                </span>
+              </Label>
+            </div>
+          </RadioGroup>
+        </div>
+        <div className="mb-2">
+          <Label htmlFor="text">Unique</Label>
+
+          <RadioGroup
+            className="py-4"
+            value={newInputIsUnique ? "yes" : "no"}
+            onValueChange={(value: "yes" | "no") =>
+              setNewInputIsUnique(value === "yes")
+            }
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="yes" id="yes" />
+              <Label htmlFor="yes">
+                Yes
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - The input is optional
+                </span>
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="no" id="no" />
+              <Label htmlFor="no">
+                No
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - The input is required
                 </span>
               </Label>
             </div>
@@ -238,26 +288,39 @@ export function DataStructureBuilder() {
             </SelectTrigger>
             <SelectContent className="h-36">
               <SelectItem value="none">
-                <span className="font-medium">None</span> -{" "}
-                <span className="text-muted-foreground">No default value</span>
+                <span className="font-medium">None</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - No default value
+                </span>
               </SelectItem>
               <SelectItem value="current-time">
-                <span className="font-medium">Current Time</span> -{" "}
-                <span className="text-muted-foreground">The current time</span>
+                <span className="font-medium">Current Time</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - The current time
+                </span>
               </SelectItem>
               <SelectItem value="current-date">
-                <span className="font-medium">Current Date</span> -{" "}
-                <span className="text-muted-foreground">The current date</span>
+                <span className="font-medium">Current Date</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - The current date
+                </span>
               </SelectItem>
               <SelectItem value="current-date-time">
-                <span className="font-medium">Current Date & Time</span> -{" "}
-                <span className="text-muted-foreground">
-                  The current date & time
+                <span className="font-medium">Current Date & Time</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - The current date & time
                 </span>
               </SelectItem>
               <SelectItem value="custom">
-                <span className="font-medium">Custom</span> -{" "}
-                <span className="text-muted-foreground">A custom value</span>
+                <span className="font-medium">Custom</span>
+                <span className="hidden text-muted-foreground md:inline">
+                  {" "}
+                  - A custom value
+                </span>
               </SelectItem>
             </SelectContent>
           </Select>
@@ -270,6 +333,7 @@ export function DataStructureBuilder() {
           Add Input
         </Button>
       </div>
+      <Separator />
     </div>
   );
 }

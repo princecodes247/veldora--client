@@ -2,6 +2,7 @@
 
 import React from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/contexts/Auth.context";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -15,6 +16,7 @@ function Providers({ children }: React.PropsWithChildren) {
       <AuthProvider>
         {children}
         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <Toaster />
       </AuthProvider>
     </QueryClientProvider>
   );

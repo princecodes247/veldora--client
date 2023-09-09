@@ -5,18 +5,26 @@ import { AxiosResponse } from "axios";
 
 type ApiFunction<ResultType, ArgType> = (
   arg: ArgType,
-) => Promise<AxiosResponse<ResultType>>;
+) => Promise<AxiosResponse<ResultType, any>>;
 
 export const useMutate = <ResultType, ArgType>(
   api: ApiFunction<ResultType, ArgType>,
   {
-    onSuccessFunction = (data: any) => {},
+    onSuccessFunction = (data) => {},
     onErrorFunction = (error: Error) => {},
     onLoadingFunction = () => {},
     successMessage = "Successfully updated",
     loadingMessage = "Updating...",
     errorMessage = "Failed to update",
     showToast = true,
+  }: {
+    onSuccessFunction?: (data: AxiosResponse<ResultType>) => void;
+    onErrorFunction?: (error: Error) => void;
+    onLoadingFunction?: (args?: ArgType) => void;
+    successMessage?: string;
+    loadingMessage?: string;
+    errorMessage?: string;
+    showToast?: boolean;
   },
 ) => {
   const toastId = useRef<string | undefined>(undefined);

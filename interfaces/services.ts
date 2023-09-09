@@ -32,6 +32,7 @@ export interface IUserData {
 
 export interface ResponseBody<T> {
   status: HttpStatusCode;
+  success: boolean;
   message: string;
   data: T;
 }

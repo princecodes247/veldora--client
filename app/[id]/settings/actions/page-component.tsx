@@ -50,7 +50,7 @@ export default function BucketActionsSettingsPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex-1 space-y-4 p-4 md:p-8">
+      <div className="flex-1 space-y-4 p-0 md:p-8">
         <div className="flex w-full justify-between">
           <div>
             {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}

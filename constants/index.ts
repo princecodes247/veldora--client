@@ -151,6 +151,11 @@ export const displayErrorMessages = {
   },
   INVALID_BUCKET: {
     title: "Oops! It seems like this bucket got lost in the cloud.",
-    body: "We're sorry, but we can't find this bucket.",
+    body: "We're sorry, we tried our best, but we can't find this bucket. You can check out others",
+  },
+
+  UNKNOWN_ERROR: {
+    title: "Something unexpected happened.",
+    body: "...",
   },
 };

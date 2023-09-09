@@ -49,29 +49,6 @@ export default function BucketActionsPage() {
     page: pageIndex,
     pageSize,
   });
-  const [isCopied, setIsCopied] = useState(false);
-  const { copiedText, copy } = useCopyToClipboard();
-  const handleCopy = (text: string) => {
-    copy(text);
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 1000);
-  };
-
-  const [tab, setTab] = useState(
-    submissions.data?.result?.length === 0 ? "how" : "submissions",
-  );
-  useEffect(() => {
-    setTab(submissions.data?.result?.length === 0 ? "how" : "submissions");
-  }, [submissions.isLoading]);
-
-  const deleteSubmissionsMutation = useMutate(deleteSubmissions, {
-    successMessage: "Submissions Deleted",
-    onSuccessFunction: () => {
-      submissions.refetch();
-    },
-  });
   return (
     <>
       <Head>
@@ -94,7 +71,7 @@ export default function BucketActionsPage() {
       {!bucket.isError &&
         !submissions.isError &&
         (!bucket.isLoading || !submissions.isLoading) && (
-          <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
+          <div className="flex-1 space-y-4 p-0 md:p-8 md:pt-6">
             <PageHeader
               // title={bucket.data?.name ?? ""}
               // description={bucket.data?.description ?? ""}
@@ -102,12 +79,7 @@ export default function BucketActionsPage() {
               description="Manage your bucket actions"
             />
             {!submissions.isLoading && (
-              <BucketAnalytics
-                goToSetupTab={() => {
-                  setTab("how");
-                }}
-                bucket={bucket.data}
-              />
+              <BucketAnalytics goToSetupTab={() => {}} bucket={bucket.data} />
             )}
           </div>
         )}

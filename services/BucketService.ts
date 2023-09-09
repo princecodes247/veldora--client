@@ -58,16 +58,7 @@ export const createBucket = ({
   name: string;
   description: string;
 }) => {
-  return api.post<
-    ResponseBody<{
-      event_id: number;
-      uuid: string;
-      commission: number;
-      updated_at: string;
-      created_at: string;
-      id: 4;
-    }>
-  >(
+  return api.post<ResponseBody<IBucketData>>(
     servicePrefix,
     {
       name,
@@ -80,7 +71,7 @@ export const createBucket = ({
 };
 
 export const deleteBucket = ({ id }: { id: string }) => {
-  return api.delete(servicePrefix + id + "/", {
+  return api.delete<ResponseBody<undefined>>(servicePrefix + id + "/", {
     headers: authHeaders(),
   });
 };
@@ -138,7 +129,7 @@ export const deleteSubmissions = ({ ids }: { ids: string[] }) => {
 };
 
 export const regenerateAPIToken = ({ id }: { id: string }) => {
-  return api.post(
+  return api.post<ResponseBody<string>>(
     servicePrefix + "regenerate-access-token",
     {
       id,
@@ -156,7 +147,7 @@ export const updateWhitelist = ({
   id: string;
   domains: string[];
 }) => {
-  return api.post<IBucketDataWithStats>(
+  return api.post<ResponseBody<IBucketDataWithStats>>(
     servicePrefix + id + "/update-whitelist",
     {
       whiteList: domains,
