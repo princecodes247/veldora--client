@@ -62,7 +62,7 @@ export default function BucketAPIPage() {
               <TabsContent value="submit" className="space-y-4">
                 <BucketHow
                   title="Create a Submission"
-                  endpoint={`${submissionApiUrl}/bucket/${bucket.data?._id}`}
+                  endpoint={`${submissionApiUrl}/bucket/${bucket.data?.slug}`}
                   method="POST"
                   withHTML
                 />

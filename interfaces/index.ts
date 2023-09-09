@@ -28,6 +28,7 @@ export enum LoadingType {
 export interface IBucketData {
   _id: string;
   name: string;
+  slug: string;
   description: string;
   submissionsCount: number;
   responseStyle?: "default" | "json" | "params" | "custom";

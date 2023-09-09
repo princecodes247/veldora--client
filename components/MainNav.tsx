@@ -41,7 +41,7 @@ export function MainNav({
             href=""
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            {id.substring(1, 11)}
+            {id.substring(0, 30)}
           </Link>
         </>
       ) : null}

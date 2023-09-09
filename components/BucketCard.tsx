@@ -45,7 +45,7 @@ export function BucketCard({
   listView?: boolean;
 }) {
   return (
-    <Link href="/[id]" className="w-full" as={"/" + bucket._id}>
+    <Link href="/[id]" className="w-full" as={"/" + bucket.slug}>
       <Card
         className={clsx(
           "hover:shadow-md",
@@ -73,7 +73,7 @@ export function BucketCard({
         </CardHeader>
         <CardContent className={clsx(listView && "py-4")}>
           <div className="w-full truncate text-xs text-muted-foreground">
-            {apiUrl}/bucket/{bucket._id}
+            {apiUrl}/bucket/{bucket.slug}
           </div>
           <div className="mt-2 w-full truncate text-sm text-muted-foreground">
             {bucket.description}
