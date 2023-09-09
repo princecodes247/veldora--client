@@ -40,39 +40,7 @@ export default function BucketStructureSettingsPage() {
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });
-  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
 
-  const submissions = useSubmissions({
-    id: id ?? "",
-    page: pageIndex,
-    pageSize,
-  });
-  const [isCopied, setIsCopied] = useState(false);
-  const { copiedText, copy } = useCopyToClipboard();
-  const handleCopy = (text: string) => {
-    copy(text);
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 1000);
-  };
-
-  const [tab, setTab] = useState(
-    submissions.data?.data?.length === 0 ? "how" : "submissions",
-  );
-  useEffect(() => {
-    setTab(submissions.data?.data?.length === 0 ? "how" : "submissions");
-  }, [submissions.isLoading]);
-
-  const deleteSubmissionsMutation = useMutate(deleteSubmissions, {
-    successMessage: "Submissions Deleted",
-    onSuccessFunction: () => {
-      submissions.refetch();
-    },
-  });
   return (
     <>
       <Head>
@@ -81,31 +49,27 @@ export default function BucketStructureSettingsPage() {
         <meta name="description" content="Form data managment made easy" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {(bucket.isError || submissions.isError) && (
-        <BucketPage404 type="INVALID_BUCKET" />
-      )}
+      {bucket.isError && <BucketPage404 type="INVALID_BUCKET" />}
 
-      {bucket.isLoading && submissions.isLoading && (
+      {bucket.isLoading && (
         <div className="flex h-[85vh] items-center justify-center border">
           <div className="w-16 animate-pulse text-[#171123] md:w-32">
             <Loading variant="INLINE" />
           </div>
         </div>
       )}
-      {!bucket.isError &&
-        !submissions.isError &&
-        (!bucket.isLoading || !submissions.isLoading) && (
-          <div className="flex-1 space-y-4 p-4 md:p-8">
-            <div className="flex w-full justify-between">
-              <div>
-                {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
-              </div>
-            </div>
+      {!bucket.isError && !bucket.isLoading && (
+        <div className="flex-1 space-y-4 p-0 md:p-8">
+          <div className="flex w-full justify-between">
             <div>
-              <BucketStructure />
+              {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
             </div>
           </div>
-        )}
+          <div>
+            <BucketStructure />
+          </div>
+        </div>
+      )}
     </>
   );
 }

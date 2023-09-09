@@ -52,7 +52,7 @@ export default function SettingsLayout({ children, id }: SettingsLayoutProps) {
             description="Manage your bucket settings."
           />
           <Separator className="my-6" />
-          <div className="flex flex-col gap-8 space-y-8 md:flex-row lg:flex-row lg:space-x-12 lg:space-y-0">
+          <div className="flex flex-col gap-8 space-y-8 md:flex-row lg:space-x-12 lg:space-y-0 xl:flex-row">
             <aside className="">
               <SidebarNav items={sidebarNavItems(id)} />
             </aside>

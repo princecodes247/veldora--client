@@ -44,10 +44,10 @@ export default function BucketSubmissionsPage() {
   };
 
   const [tab, setTab] = useState(
-    submissions.data?.data?.length === 0 ? "how" : "submissions",
+    submissions.data?.result?.length === 0 ? "how" : "submissions",
   );
   useEffect(() => {
-    setTab(submissions.data?.data?.length === 0 ? "how" : "submissions");
+    setTab(submissions.data?.result.length === 0 ? "how" : "submissions");
   }, [submissions.isLoading]);
 
   const deleteSubmissionsMutation = useMutate(deleteSubmissions, {
@@ -93,7 +93,7 @@ export default function BucketSubmissionsPage() {
                   })
                 }
                 data={
-                  submissions?.data?.data?.map((submission) => {
+                  submissions?.data?.result?.map((submission) => {
                     return {
                       ...submission,
                       ...submission.data,
@@ -103,7 +103,7 @@ export default function BucketSubmissionsPage() {
                 columns={submissionColumns(
                   Array.from(
                     new Set(
-                      submissions?.data?.data?.flatMap((submission) =>
+                      submissions?.data?.result?.flatMap((submission) =>
                         Object.keys(submission?.data ?? {}),
                       ),
                     ),
@@ -111,7 +111,7 @@ export default function BucketSubmissionsPage() {
                 )}
                 pageIndex={pageIndex}
                 pageSize={pageSize}
-                pageCount={submissions.data.pageInfo.pages}
+                pageCount={submissions.data.meta.pages}
                 onPaginationChange={setPagination}
               />
             )}

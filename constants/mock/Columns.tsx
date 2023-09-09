@@ -7,7 +7,7 @@ import { labels, priorities, statuses } from "@/constants/data";
 import { Task } from "@/constants/index";
 import { DataTableColumnHeader } from "@/components/Table/DataTableColumnHeader";
 import { DataTableRowActions } from "@/components/Table/DataTableRowActions";
-import { ISubmissionData } from "@/interfaces";
+import { IParamData, ISubmissionData } from "@/interfaces";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -174,3 +174,45 @@ export const submissionColumns = (
     })) as ColumnDef<ISubmissionData>[]),
   ];
 };
+
+export const queryParamsColumns: ColumnDef<IParamData>[] = [
+  {
+    accessorKey: "param",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Param" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center">
+          <span>{row.getValue("param")}</span>
+        </div>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+    enableSorting: false,
+    enableHiding: false,
+    size: 80,
+    // maxSize: 800,
+  },
+  {
+    accessorKey: "description",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Description" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex w-[100px] items-center">
+          <span>{row.getValue("description")}</span>
+        </div>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+    enableSorting: false,
+    // size: 80,
+    enableHiding: false,
+  },
+];

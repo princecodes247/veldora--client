@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { GetBucketsData, ResponseBody } from "../interfaces/services";
+import { PaginatedResponse, ResponseBody } from "../interfaces/services";
 import api, { authHeaders } from "./config";
 import {
   IBucketData,
@@ -25,7 +25,7 @@ export const getUserBuckets = ({
   page: number;
   pageSize: number;
 }>) => {
-  return api.get<GetBucketsData>(
+  return api.get<PaginatedResponse<IBucketData>>(
     `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
     {
       headers: authHeaders(),
@@ -41,16 +41,14 @@ export const getSubmissions = ({
   page?: number;
   pageSize?: number;
 }>) => {
-  return api.get<{
-    data: ISubmissionData[];
-    pageInfo: {
-      hasNextPage: boolean;
-      nextPage: number | null;
-      pages: number;
-    };
-  }>(`${submissionsPrefix}?bucket=${id}&page=${page}&limit=${pageSize}`, {
-    headers: authHeaders(),
-  });
+  return api.get<PaginatedResponse<ISubmissionData>>(
+    `${submissionsPrefix}?bucket=${id}&page=${
+      (page ?? 0) + 1
+    }&limit=${pageSize}`,
+    {
+      headers: authHeaders(),
+    },
+  );
 };
 
 export const createBucket = ({
@@ -60,16 +58,7 @@ export const createBucket = ({
   name: string;
   description: string;
 }) => {
-  return api.post<
-    ResponseBody<{
-      event_id: number;
-      uuid: string;
-      commission: number;
-      updated_at: string;
-      created_at: string;
-      id: 4;
-    }>
-  >(
+  return api.post<ResponseBody<IBucketData>>(
     servicePrefix,
     {
       name,
@@ -82,7 +71,7 @@ export const createBucket = ({
 };
 
 export const deleteBucket = ({ id }: { id: string }) => {
-  return api.delete(servicePrefix + id + "/", {
+  return api.delete<ResponseBody<undefined>>(servicePrefix + id + "/", {
     headers: authHeaders(),
   });
 };
@@ -96,7 +85,7 @@ export const getBuckets = ({
   page: number;
   pageSize: number;
 }>) => {
-  return api.get<GetBucketsData>(
+  return api.get<PaginatedResponse<IBucketData>>(
     `${servicePrefix}?name=${name}&page=${page}&pageSize=${pageSize}`,
     {
       headers: authHeaders(),
@@ -140,7 +129,7 @@ export const deleteSubmissions = ({ ids }: { ids: string[] }) => {
 };
 
 export const regenerateAPIToken = ({ id }: { id: string }) => {
-  return api.post(
+  return api.post<ResponseBody<string>>(
     servicePrefix + "regenerate-access-token",
     {
       id,
@@ -158,7 +147,7 @@ export const updateWhitelist = ({
   id: string;
   domains: string[];
 }) => {
-  return api.post<IBucketDataWithStats>(
+  return api.post<ResponseBody<IBucketDataWithStats>>(
     servicePrefix + id + "/update-whitelist",
     {
       whiteList: domains,

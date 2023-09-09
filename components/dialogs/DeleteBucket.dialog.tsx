@@ -31,7 +31,7 @@ export default function DeleteBucketDialog({
   const router = useRouter();
   const deleteBucketMutation = useMutate(deleteBucket, {
     loadingMessage: "",
-    onSuccessFunction: ({ data }: { data: IBucketData }) => {
+    onSuccessFunction: () => {
       setOpen(false);
       router.push(clientUrl + "/dashboard");
     },

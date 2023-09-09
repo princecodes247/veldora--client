@@ -74,3 +74,8 @@ export interface FeatureData {
   title: string;
   description: string;
 }
+
+export interface IParamData {
+  param: string;
+  description: string;
+}

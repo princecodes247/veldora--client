@@ -9,29 +9,26 @@ export const wakeUpCall = () => {
 
 export const getUser = (userRequired: boolean = true) => {
   if (userRequired) {
-    return api.get<IUserData>(servicePrefix + "/me", {
+    return api.get<{ data: IUserData }>(servicePrefix + "/me", {
       headers: authHeaders(),
     });
   }
-  return uninterceptedApi.get<IUserData>(servicePrefix, {
+  return uninterceptedApi.get<{ data: IUserData }>(servicePrefix, {
     headers: authHeaders(),
   });
 };
 
-export const updateUser = (userData: Partial<{
-  "email": string;
-  "phone": string;
-  "user_metadata": Partial<{
-    username: string;
-    theme: string;
-  }>
-}>) => {
-  return api.patch(
-    servicePrefix + "/me",
-    userData,
-    {
-      headers: authHeaders(),
-    },
-  );
+export const updateUser = (
+  userData: Partial<{
+    email: string;
+    phone: string;
+    user_metadata: Partial<{
+      username: string;
+      theme: string;
+    }>;
+  }>,
+) => {
+  return api.patch(servicePrefix + "/me", userData, {
+    headers: authHeaders(),
+  });
 };
-

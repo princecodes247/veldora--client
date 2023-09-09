@@ -31,7 +31,16 @@ export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
     loadingMessage: "Updating Bucket",
   });
 
-  const handleSubmit = () =>
+  const handleSubmitResponseStyle = () =>
+    updateBucketMutation.mutate({
+      id: bucket?._id ?? "",
+      bucketData: {
+        customRedirect,
+        responseStyle,
+      },
+    });
+
+  const handleSubmitDataStructure = () =>
     updateBucketMutation.mutate({
       id: bucket?._id ?? "",
       bucketData: {
@@ -45,18 +54,28 @@ export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
       <Card className="max-w-[700px]">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Data Structure</CardTitle>
-          <CardDescription>
-            Configure the allowed data inputs and the response style.
-          </CardDescription>
+          <CardDescription>Configure the allowed data inputs.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="text">Data Inputs</Label>
+            <Label htmlFor="text"></Label>
             <DataStructureBuilder />
           </div>
-
+        </CardContent>
+        <CardFooter className="flex flex-col gap-2">
+          <Button onClick={handleSubmitDataStructure} className="w-full">
+            Update Data Structure
+          </Button>
+        </CardFooter>
+      </Card>
+      <Card className="mt-4 max-w-[700px]">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl">Response Style</CardTitle>
+          <CardDescription>Configure the api response style.</CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="text">Response Style</Label>
+            <Label htmlFor="text"></Label>
             <RadioGroup
               className="py-4"
               value={responseStyle}
@@ -96,8 +115,8 @@ export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
           )}
         </CardContent>
         <CardFooter className="flex flex-col gap-2">
-          <Button onClick={handleSubmit} className="w-full">
-            Update Data Structure
+          <Button onClick={handleSubmitResponseStyle} className="w-full">
+            Update Response Style
           </Button>
         </CardFooter>
       </Card>
