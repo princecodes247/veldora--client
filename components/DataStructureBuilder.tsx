@@ -63,7 +63,7 @@ export function DataStructureBuilder() {
         type: newInputType,
         isUnique: newInputType,
         defaultValue: newInputDefaultValue,
-        isOptional: false,
+        isOptional: newInputIsOptional,
       },
     });
 
@@ -259,7 +259,7 @@ export function DataStructureBuilder() {
                 Yes
                 <span className="hidden text-muted-foreground md:inline">
                   {" "}
-                  - The input is optional
+                  - The input is unique
                 </span>
               </Label>
             </div>
@@ -269,7 +269,7 @@ export function DataStructureBuilder() {
                 No
                 <span className="hidden text-muted-foreground md:inline">
                   {" "}
-                  - The input is required
+                  - The input is not unique
                 </span>
               </Label>
             </div>
