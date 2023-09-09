@@ -25,6 +25,7 @@ import { Input } from "./ui/input";
 import {
   generateIntegrationSnippets,
   SnippetLanguages,
+  SnippetMethods,
 } from "@/constants/snippets";
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -73,13 +74,15 @@ export function BucketHow({
   title,
   description,
   method = "GET",
+  accessToken,
   params,
   withHTML,
 }: {
   endpoint: string;
   description?: string;
   title: string;
-  method: "GET" | "POST" | "DELETE" | "PUT";
+  accessToken?: string;
+  method: SnippetMethods;
   params?: IParamData[];
   withHTML?: boolean;
 }) {
@@ -87,7 +90,7 @@ export function BucketHow({
     withHTML ? "html" : "fetch",
   );
 
-  const snippets = generateIntegrationSnippets(endpoint);
+  const snippets = generateIntegrationSnippets(endpoint, method, accessToken);
 
   return (
     <Suspense fallback={<Loading variant="INLINE" />}>

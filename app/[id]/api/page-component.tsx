@@ -51,8 +51,8 @@ export default function BucketAPIPage() {
             <div className="w-full overflow-auto">
               <TabsList className="">
                 <TabsTrigger value="submit">Submit Data</TabsTrigger>
+                <TabsTrigger value="get-stats">Get Stats</TabsTrigger>
                 <TabsTrigger value="get-all">Get All Data</TabsTrigger>
-                <TabsTrigger value="get-one">Get a Row</TabsTrigger>
 
                 {/* <TabsTrigger value="update-one">Update a Row</TabsTrigger> */}
                 {/* <TabsTrigger value="delete-one">Delete a Row</TabsTrigger> */}
@@ -68,10 +68,20 @@ export default function BucketAPIPage() {
                 />
               </TabsContent>
 
+              <TabsContent value="get-stats" className="space-y-4">
+                <BucketHow
+                  title="Get Bucket Stats"
+                  accessToken={bucket.data?.accessToken}
+                  endpoint={`${openApiUrl}/bucket/stats`}
+                  method="GET"
+                />
+              </TabsContent>
+
               <TabsContent value="get-all" className="space-y-4">
                 <BucketHow
                   title="Get all Submissions"
-                  endpoint={`${openApiUrl}/bucket/${bucket.data?._id}`}
+                  accessToken={bucket.data?.accessToken}
+                  endpoint={`${openApiUrl}/bucket`}
                   method="GET"
                 />
               </TabsContent>
