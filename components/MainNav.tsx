@@ -3,7 +3,12 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { LucideChevronRight, LucideChevronRightSquare } from "lucide-react";
+import {
+  LucideChevronRight,
+  LucideChevronRightSquare,
+  LucideCopySlash,
+  Slash,
+} from "lucide-react";
 
 export function MainNav({
   className,
@@ -33,15 +38,15 @@ export function MainNav({
           >
             Home
           </Link>
-          <span className="-mx-2 self-end">
-            <LucideChevronRight size={15} color="#444" />
+          <span className="-mx-2 self-end text-muted-foreground">
+            /{/* <LucideChevronRight size={15} color="#444" /> */}
           </span>
 
           <Link
             href=""
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            {id.substring(1, 11)}
+            {id.substring(0, 30)}
           </Link>
         </>
       ) : null}

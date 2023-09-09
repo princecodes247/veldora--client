@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
 import { IBucketData } from "@/interfaces";
-import { apiUrl } from "@/constants";
+import { apiUrl, submissionApiUrl } from "@/constants";
 
 const bucketCardVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -45,7 +45,7 @@ export function BucketCard({
   listView?: boolean;
 }) {
   return (
-    <Link href="/[id]" className="w-full" as={"/" + bucket._id}>
+    <Link href="/[id]" className="w-full" as={"/" + bucket.slug}>
       <Card
         className={clsx(
           "hover:shadow-md",
@@ -73,7 +73,7 @@ export function BucketCard({
         </CardHeader>
         <CardContent className={clsx(listView && "py-4")}>
           <div className="w-full truncate text-xs text-muted-foreground">
-            {apiUrl}/bucket/{bucket._id}
+            {submissionApiUrl}/bucket/{bucket.slug}
           </div>
           <div className="mt-2 w-full truncate text-sm text-muted-foreground">
             {bucket.description}
