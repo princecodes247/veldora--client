@@ -58,32 +58,46 @@ export function DashboardInnerNav() {
   // GEt id from router
   const router = useRouter();
   const pathname = usePathname();
-  const id = pathname?.split("/")[1] ?? "";
-
+  const [_, id, route = ""] = pathname?.split("/") ?? ["", ""];
+  const links = [
+    {
+      name: "Summary",
+      href: "/[id]",
+      as: ``,
+    },
+    {
+      name: "Submissions",
+      href: "/[id]/submissions",
+      as: `submissions`,
+    },
+    {
+      name: "API",
+      href: "/[id]/api",
+      as: `api`,
+    },
+    {
+      name: "Settings",
+      href: "/[id]/settings",
+      as: `settings`,
+    },
+  ];
   return (
     <NavigationMenu className="px-4 pb-1">
       <NavigationMenuList>
-        <NavigationMenuItem>
-          <Link href="/[id]" as={`/${id}`}>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Summary
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/[id]/submissions" as={`/${id}/submissions`}>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Submissions
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/[id]/api" as={`/${id}/api`}>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              API
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+        {React.Children.toArray(
+          links.map((link) => (
+            <NavigationMenuItem>
+              <Link href={link.href} as={`/${id}/${link.as}`}>
+                <NavigationMenuLink
+                  data-state={route === link.as ? "open" : ""}
+                  className={navigationMenuTriggerStyle()}
+                >
+                  {link.name}
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          )),
+        )}
         {/* <NavigationMenuItem>
           <Link
             href="/[id]/actions"
@@ -99,13 +113,6 @@ export function DashboardInnerNav() {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem> */}
-        <NavigationMenuItem>
-          <Link href="/[id]/settings" as={`/${id}/settings`}>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Settings
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   );

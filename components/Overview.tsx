@@ -55,31 +55,31 @@ const defaultData = [
 
 export function Overview({ data = defaultData }) {
   return (
-     <>
+    <>
       {data.length > 0 ? (
-    <ResponsiveContainer width="100%" height={350}>
-        <BarChart data={data}>
-          <XAxis
-            dataKey="date"
-            stroke="#888888"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-          />
-          <YAxis
-            stroke="#888888"
-            fontSize={12}
-            tickLine={true}
-            axisLine={false}
-            allowDecimals={false}
-            tickFormatter={(value: string) => `${value} subs`}
-          />
-          <Bar dataKey="count" fill="#adfa1d" radius={[4, 4, 0, 0]} />
-        </BarChart>
-    </ResponsiveContainer>
+        <ResponsiveContainer width="100%" height={350}>
+          <BarChart data={data}>
+            <XAxis
+              dataKey="date"
+              stroke="#888888"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis
+              stroke="#888888"
+              fontSize={12}
+              tickLine={true}
+              axisLine={false}
+              allowDecimals={false}
+              tickFormatter={(value: string) => `${value} subs`}
+            />
+            <Bar dataKey="count" fill="#FDBB30" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
       ) : (
-      <NoData/>
+        <NoData />
       )}
-     </>
+    </>
   );
 }
