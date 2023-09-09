@@ -28,9 +28,9 @@ export default function CreateBucketDialog({
   const router = useRouter();
   const createBucketMutation = useMutate(createBucket, {
     loadingMessage: "",
-    onSuccessFunction: ({ data }: { data: IBucketData }) => {
+    onSuccessFunction: ({ data }) => {
       setOpen(false);
-      router.push(clientUrl + "/" + data._id);
+      router.push(clientUrl + "/" + data.data._id);
     },
   });
 
@@ -48,7 +48,15 @@ export default function CreateBucketDialog({
             Buckets are used to gather data from your forms.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <form
+          onSubmit={() =>
+            createBucketMutation.mutate({
+              description,
+              name,
+            })
+          }
+          className="grid gap-4 py-4"
+        >
           <div className="flex flex-col gap-4">
             <Label htmlFor="name" className="">
               Bucket Name
@@ -73,7 +81,7 @@ export default function CreateBucketDialog({
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-        </div>
+        </form>
         <DialogFooter>
           <Button
             onClick={() =>

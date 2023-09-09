@@ -77,13 +77,13 @@ export function DashboardInnerNav() {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        {/* <NavigationMenuItem>
-          <Link href="/[id]/configuration" as={`/${id}/configuration`}>
+        <NavigationMenuItem>
+          <Link href="/[id]/api" as={`/${id}/api`}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Configuration
+              API
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem> */}
+        </NavigationMenuItem>
         {/* <NavigationMenuItem>
           <Link
             href="/[id]/actions"

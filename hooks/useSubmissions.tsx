@@ -20,7 +20,7 @@ const useSubmissions = ({
       });
 
       const submissions = result.data;
-      return submissions;
+      return submissions.data;
     },
   });
 };

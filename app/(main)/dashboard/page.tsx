@@ -84,7 +84,7 @@ function Dashboard() {
           ) : (
             <>
               {!buckets.isLoading &&
-                buckets.data?.pages[0]?.data?.length === 0 && (
+                buckets.data?.pages[0]?.data?.result?.length === 0 && (
                   <div className="flex min-h-[40vh] flex-col items-center justify-center py-12">
                     <div className="w-16 text-gray-300 md:w-24">
                       <Logo variant="plain" />
@@ -115,7 +115,7 @@ function Dashboard() {
                   {React.Children.toArray(
                     !buckets.isLoading &&
                       buckets.data?.pages?.map((group) =>
-                        group?.data
+                        group?.data?.result
                           ?.filter((bucket) => {
                             return (
                               bucket.name
@@ -136,7 +136,7 @@ function Dashboard() {
                   {React.Children.toArray(
                     !buckets.isLoading &&
                       buckets.data?.pages?.map((group) =>
-                        group?.data
+                        group?.data?.result
                           ?.filter((bucket) =>
                             bucket.name
                               .toLowerCase()

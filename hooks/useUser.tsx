@@ -13,8 +13,8 @@ const useUser = ({
     staleTime: 0,
     queryFn: async () => {
       const result = await getUser(userRequired);
-      onSuccessFunction(result.data);
-      return result.data;
+      onSuccessFunction(result.data.data);
+      return result.data.data;
     },
     refetchOnWindowFocus: !tryOnce,
     retry: tryOnce ? false : 3,

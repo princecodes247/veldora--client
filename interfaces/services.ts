@@ -23,16 +23,16 @@ export interface IWallet {
   amount: 0;
 }
 
-
-  export interface IUserData {
-    userID: string,
-      email: string,
-      phone?: string,
-      metadata: { username: string; theme: "light" | "dark" }
-  }
+export interface IUserData {
+  userID: string;
+  email: string;
+  phone?: string;
+  metadata: { username: string; theme: "light" | "dark" };
+}
 
 export interface ResponseBody<T> {
   status: HttpStatusCode;
+  success: boolean;
   message: string;
   data: T;
 }
@@ -41,13 +41,18 @@ export interface PaginationMeta {
     total: number;
     page: number;
     limit: number;
-    totalPages: number;
+    pages: number;
+    hasNextPage: boolean;
+    nextPage: number;
   };
 }
 
-export interface GetBucketsData
-  extends ResponseBody<IBucketData[]>,
-    PaginationMeta {}
+export interface PaginatedResponse<T>
+  extends ResponseBody<
+    {
+      result: T[];
+    } & PaginationMeta
+  > {}
 
 // links: {
 //   first: "string";
