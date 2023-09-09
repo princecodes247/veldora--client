@@ -6,16 +6,7 @@ import { DataTable } from "@/components/Table/DataTable";
 import { submissionColumns } from "@/constants/mock/Columns";
 import { usePathname, useRouter } from "next/navigation";
 import useBucket from "@/hooks/useBucket";
-import useSubmissions from "@/hooks/useSubmissions";
-import BucketAnalytics from "@/components/BucketAnalytics";
-import { Copy, Trash } from "lucide-react";
-import useCopyToClipboard from "@/hooks/useCopyToClipboard";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 import { useEffect, useMemo, useState } from "react";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import DeleteBucketDialog from "@/components/dialogs/DeleteBucket.dialog";
@@ -25,10 +16,6 @@ import { apiUrl } from "@/constants";
 import { BucketConfig } from "@/components/BucketConfig";
 import { Loading } from "@/components/Loading";
 import { PaginationState, Updater } from "@tanstack/react-table";
-import { ISubmissionData } from "@/interfaces";
-import { useMutate } from "@/hooks/useMutate";
-import { deleteSubmissions } from "@/services/BucketService";
-import { DashboardInnerNav } from "@/components/DashboardInnerNav";
 import { PageHeader } from "@/components/PageHeader";
 import { BucketHow } from "@/components/BucketHow";
 
@@ -40,10 +27,7 @@ export default function BucketAPIPage() {
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });
-  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
+
   return (
     <>
       <Head>
@@ -69,15 +53,15 @@ export default function BucketAPIPage() {
             title="Bucket API"
             description="A mini API guide"
           />
-          <Tabs className="space-y-4 ">
+          <Tabs defaultValue="get-all" className="space-y-4 ">
             <div className="w-full overflow-auto">
               <TabsList className="">
-                <TabsTrigger value="get-all">Get All Rows</TabsTrigger>
+                <TabsTrigger value="submit">Submit Data</TabsTrigger>
+                <TabsTrigger value="get-all">Get All Data</TabsTrigger>
                 <TabsTrigger value="get-one">Get a Row</TabsTrigger>
 
-                <TabsTrigger value="create-one">Add a Row</TabsTrigger>
-                <TabsTrigger value="delete-one">Delete a Row</TabsTrigger>
-                <TabsTrigger value="update-one">Update a Row</TabsTrigger>
+                {/* <TabsTrigger value="update-one">Update a Row</TabsTrigger> */}
+                {/* <TabsTrigger value="delete-one">Delete a Row</TabsTrigger> */}
               </TabsList>
             </div>
             <div>
@@ -105,7 +89,7 @@ export default function BucketAPIPage() {
                 />
               </TabsContent>
 
-              <TabsContent value="create-one" className="space-y-4">
+              <TabsContent value="submit" className="space-y-4">
                 <BucketHow
                   title="Create a Submission"
                   endpoint="/get"

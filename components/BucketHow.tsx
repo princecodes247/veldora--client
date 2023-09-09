@@ -94,7 +94,7 @@ export function BucketHow({
         <div className="flex flex-col gap-2 md:flex-row">
           <Input value={targetLink} />
           <Button>
-            <Copy />
+            <Copy size={14} />
             <p className="ml-2 md:hidden">Copy</p>
           </Button>
         </div>
