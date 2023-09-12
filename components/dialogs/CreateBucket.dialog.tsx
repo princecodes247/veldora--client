@@ -30,7 +30,7 @@ export default function CreateBucketDialog({
     loadingMessage: "",
     onSuccessFunction: ({ data }) => {
       setOpen(false);
-      router.push(clientUrl + "/" + data.data._id);
+      router.push(clientUrl + "/" + data.data.slug);
     },
   });
 
