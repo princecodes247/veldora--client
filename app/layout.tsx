@@ -14,7 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers attribute="class" defaultTheme="dark">
+          {children}
+        </Providers>
       </body>
     </html>
   );
