@@ -46,7 +46,8 @@ export function MainNav({
             href=""
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            {id.substring(0, 30)}
+            {id.substring(0, 10)}
+            {id.trim().length > 10 ? "..." : ""}
           </Link>
         </>
       ) : null}
