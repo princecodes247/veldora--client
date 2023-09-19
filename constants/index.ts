@@ -49,8 +49,8 @@ export const openApiUrl =
   process.env.NEXT_PUBLIC_OPEN_API_URL ?? "http://localhost:3050/api/v1/g";
 
 export const submissionApiUrl =
-  (process.env.NEXT_PUBLIC_SUBMISSION_API_URL ??
-    "http://localhost:3050/api/v1/g") + "/buckets";
+  process.env.NEXT_PUBLIC_SUBMISSION_API_URL ??
+  "http://localhost:3050/api/v1/g/buckets";
 
 export const docsUrl =
   process.env.NEXT_PUBLIC_DOCS_URL ?? "https://docs.veldora.io";
