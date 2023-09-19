@@ -10,7 +10,7 @@ export default function SingleBucketLayout({
 }) {
   return (
     <div className="relative min-h-[100vh] flex-col items-center justify-center bg-background md:grid md:grid-cols-3 lg:max-w-none lg:px-0">
-      <div className="col-span-2 pt-4 md:border-r lg:p-8">
+      <div className="col-span-2 border-[#2B1D00] pt-4 md:border-r lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-4 sm:w-[350px]">
           <div className="w-full min-w-[200px] p-4 md:hidden md:min-w-[400px]">
             <div className="pb-8 pl-4">

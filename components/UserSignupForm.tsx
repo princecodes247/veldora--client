@@ -55,7 +55,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               disabled={isLoading}
             />
           </div>
-          <div className="grid gap-1 py-4">
+          <div className="grid gap-1 py-4 pb-0">
             <Label className="" htmlFor="password">
               Password
             </Label>
