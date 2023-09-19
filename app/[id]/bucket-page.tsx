@@ -67,7 +67,7 @@ export default function BucketPage() {
             description="View and manage your bucket"
           >
             <p className="w-full text-xs md:w-fit">
-              {submissionApiUrl}/buckets/{bucket.data?.slug ?? ""}
+              {submissionApiUrl}/{bucket.data?.slug ?? ""}
             </p>
             <TooltipProvider>
               <Tooltip open={isCopied}>
@@ -75,9 +75,7 @@ export default function BucketPage() {
                   <Button
                     onClick={() =>
                       handleCopy(
-                        submissionApiUrl +
-                          "/buckets/" +
-                          (bucket.data?.slug ?? ""),
+                        submissionApiUrl + "/" + (bucket.data?.slug ?? ""),
                       )
                     }
                     variant={"ghost"}
