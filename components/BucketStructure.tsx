@@ -17,7 +17,7 @@ import { updateBucket } from "@/services/BucketService";
 
 import { DataStructureBuilder } from "./DataStructureBuilder";
 
-export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
+export function BucketStructure({ bucket }: { bucket: IBucketDataWithStats }) {
   const [responseStyle, setResponseStyle] = useState(
     bucket?.responseStyle ?? "default",
   );
@@ -48,7 +48,7 @@ export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
         <CardContent className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="text"></Label>
-            <DataStructureBuilder />
+            <DataStructureBuilder bucket={bucket} />
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-2">

@@ -20,37 +20,42 @@ import {
   BucketValidationIsUniqueInputValues,
   BucketValidationTypeInputValues,
 } from "@/constants/settings";
-
-interface DataItem {
-  id: number;
-  name: string;
-  type: string;
-  isUnique: string;
-  isOptional: boolean;
-  defaultValue: string;
-}
+import {
+  BucketStructureItem,
+  IBucketData,
+  IBucketDataWithStats,
+} from "@/interfaces";
 
 type Action =
-  | { type: "ADD_ITEM"; payload: DataItem }
-  | { type: "REMOVE_ITEM"; payload: number };
+  | { type: "ADD_ITEM"; payload: BucketStructureItem }
+  | { type: "REMOVE_ITEM"; payload: string };
 
-const initialState: DataItem[] = [];
+const initialState: BucketStructureItem[] = [];
 
-function dataStructureReducer(state: DataItem[], action: Action): DataItem[] {
+function dataStructureReducer(
+  state: BucketStructureItem[],
+  action: Action,
+): BucketStructureItem[] {
   switch (action.type) {
     case "ADD_ITEM":
       return [...state, action.payload];
     case "REMOVE_ITEM":
-      return state.filter((item) => item.id !== action.payload);
+      return state.filter(
+        (item) => item.name.toLowerCase() !== action.payload.toLowerCase(),
+      );
     default:
       return state;
   }
 }
 
-export function DataStructureBuilder() {
+export function DataStructureBuilder({
+  bucket,
+}: {
+  bucket: IBucketDataWithStats;
+}) {
   const [dataStructure, dispatch] = useReducer(
     dataStructureReducer,
-    initialState,
+    bucket.structure,
   );
 
   const [newInputName, setNewInputName] = useState("");
@@ -63,12 +68,11 @@ export function DataStructureBuilder() {
     dispatch({
       type: "ADD_ITEM",
       payload: {
-        id: dataStructure.length,
         name: newInputName,
         type: newInputType,
-        isUnique: newInputType,
-        defaultValue: newInputDefaultValue,
-        isOptional: newInputIsOptional,
+        unique: newInputType,
+        default: newInputDefaultValue,
+        required: newInputIsOptional,
       },
     });
 
@@ -90,15 +94,15 @@ export function DataStructureBuilder() {
           <div key={index} className="flex items-center gap-2 px-4 py-px">
             <p className="mb-2 text-sm text-muted-foreground">
               {item.name}: {item.type} |{" "}
-              {item.isOptional ? "optional" : "required"},{" "}
-              {item.isUnique ? "unique" : ""}, {item.defaultValue}
+              {item.required ? "optional" : "required"},{" "}
+              {item.unique ? "unique" : ""}, {item.default}
             </p>
             <Button
               className=""
               onClick={() => {
                 dispatch({
                   type: "REMOVE_ITEM",
-                  payload: item.id,
+                  payload: item.name,
                 });
               }}
               size="icon"
