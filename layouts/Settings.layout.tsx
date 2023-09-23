@@ -5,26 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarNav } from "@/components/settings/SettingsSidebarNav";
 import Head from "next/head";
 import { PageHeader } from "@/components/PageHeader";
-
-const sidebarNavItems = (id: string = "...") => [
-  {
-    title: "General",
-    href: `/${id}/settings`,
-  },
-
-  {
-    title: "Structure",
-    href: `/${id}/settings/structure`,
-  },
-  {
-    title: "Actions",
-    href: `/${id}/settings/actions`,
-  },
-  {
-    title: "Security",
-    href: `/${id}/settings/security`,
-  },
-];
+import { sidebarNavItems } from "@/constants/nav";
 
 interface SettingsLayoutProps {
   children: React.ReactNode;

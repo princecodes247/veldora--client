@@ -24,6 +24,7 @@ import DeleteBucketDialog from "./dialogs/DeleteBucket.dialog";
 import { APITokenInput } from "./APITokenInput";
 import { DomainWhitelist } from "./DomainWhitelist";
 import { DataStructureBuilder } from "./DataStructureBuilder";
+import { BucketResponseStyle } from "./settings/BucketResponseStyle";
 
 export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
   const [bucketName, setBucketName] = useState(bucket?.name ?? "");
@@ -88,7 +89,7 @@ export function BucketConfig({ bucket }: { bucket?: IBucketDataWithStats }) {
           </Button>
         </CardFooter>
       </Card>
-
+      <BucketResponseStyle bucket={bucket} />
       <Card className="max-w-[700px]">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Delete Bucket</CardTitle>

@@ -10,10 +10,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "./ui/textarea";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { useState } from "react";
-import { IBucketData, IBucketDataWithStats } from "@/interfaces";
+import { IBucketDataWithStats } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
 import { updateBucket } from "@/services/BucketService";
 
@@ -31,15 +29,6 @@ export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
     loadingMessage: "Updating Bucket",
   });
 
-  const handleSubmitResponseStyle = () =>
-    updateBucketMutation.mutate({
-      id: bucket?._id ?? "",
-      bucketData: {
-        customRedirect,
-        responseStyle,
-      },
-    });
-
   const handleSubmitDataStructure = () =>
     updateBucketMutation.mutate({
       id: bucket?._id ?? "",
@@ -53,8 +42,8 @@ export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
     <>
       <Card className="max-w-[700px]">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Data Structure</CardTitle>
-          <CardDescription>Configure the allowed data inputs.</CardDescription>
+          <CardTitle className="text-2xl">Validations</CardTitle>
+          <CardDescription>Restrict data from being saved</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
           <div className="grid gap-2">
@@ -65,58 +54,6 @@ export function BucketStructure({ bucket }: { bucket?: IBucketDataWithStats }) {
         <CardFooter className="flex flex-col gap-2">
           <Button onClick={handleSubmitDataStructure} className="w-full">
             Update Data Structure
-          </Button>
-        </CardFooter>
-      </Card>
-      <Card className="mt-4 max-w-[700px]">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Response Style</CardTitle>
-          <CardDescription>Configure the api response style.</CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="text"></Label>
-            <RadioGroup
-              className="py-4"
-              value={responseStyle}
-              onValueChange={(
-                value: "default" | "json" | "params" | "custom",
-              ) => setResponseStyle(value)}
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="default" id="default" />
-                <Label htmlFor="default">Default</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="json" id="json" />
-                <Label htmlFor="json">JSON</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="params" id="params" />
-                <Label htmlFor="params">Params</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="custom" id="custom" />
-                <Label htmlFor="custom">Custom</Label>
-              </div>
-            </RadioGroup>
-          </div>
-          {responseStyle === "custom" && (
-            <div className="grid gap-2">
-              <Label htmlFor="text">Custom Redirect</Label>
-              <Input
-                id="text"
-                value={customRedirect}
-                onChange={(e) => setCustomRedirect(e.target.value)}
-                type="text"
-                placeholder="https://redirect.com"
-              />
-            </div>
-          )}
-        </CardContent>
-        <CardFooter className="flex flex-col gap-2">
-          <Button onClick={handleSubmitResponseStyle} className="w-full">
-            Update Response Style
           </Button>
         </CardFooter>
       </Card>
