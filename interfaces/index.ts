@@ -24,7 +24,13 @@ export enum LoadingType {
   INLINE = "inline",
   TEXT = "text",
 }
-
+export type BucketStructureItem = {
+  name: string;
+  type: string;
+  unique: string;
+  required: boolean;
+  default: string;
+};
 export interface IBucketData {
   _id: string;
   name: string;
@@ -35,6 +41,7 @@ export interface IBucketData {
   customRedirect?: string;
   accessToken: string;
   whiteList?: string[];
+  structure: BucketStructureItem[];
   views: {
     country: string;
     device: string;
