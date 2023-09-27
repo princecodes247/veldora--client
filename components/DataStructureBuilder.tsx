@@ -11,7 +11,7 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import { Dispatch, useReducer, useState } from "react";
+import React, { Dispatch, useReducer, useState } from "react";
 import { Delete, X } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Separator } from "./ui/separator";
@@ -67,28 +67,30 @@ export function DataStructureBuilder({
             Flexible: ...Any data sent would be collected
           </p>
         )}
-        {structure.map((item, index) => (
-          <div key={index} className="flex items-center gap-2 px-4 py-px">
-            <p className="mb-2 text-sm text-muted-foreground">
-              {item.name}: {item.type} |{" "}
-              {item.required ? "optional" : "required"},{" "}
-              {item.unique ? "unique" : ""}, {item.default}
-            </p>
-            <Button
-              className=""
-              onClick={() => {
-                structureDispatch({
-                  type: "REMOVE_ITEM",
-                  payload: item.name,
-                });
-              }}
-              size="icon"
-              variant="ghost"
-            >
-              <X size={12} />
-            </Button>
-          </div>
-        ))}
+        {React.Children.toArray(
+          structure.map((item, index) => (
+            <div key={index} className="flex items-center gap-2 px-4 py-px">
+              <p className="mb-2 text-sm text-muted-foreground">
+                {item.name}: {item.type} |{" "}
+                {item.required ? "optional" : "required"},{" "}
+                {item.unique ? "unique" : ""}, {item.default}
+              </p>
+              <Button
+                className=""
+                onClick={() => {
+                  structureDispatch({
+                    type: "REMOVE_ITEM",
+                    payload: item.name,
+                  });
+                }}
+                size="icon"
+                variant="ghost"
+              >
+                <X size={12} />
+              </Button>
+            </div>
+          )),
+        )}
         {"}"}
       </div>
       <Separator />
@@ -116,15 +118,17 @@ export function DataStructureBuilder({
               <SelectValue placeholder="Select a input type" />
             </SelectTrigger>
             <SelectContent className="h-36">
-              {BucketValidationTypeInputValues.map((validationItem) => (
-                <SelectItem value={validationItem.value}>
-                  <span className="font-medium">{validationItem.name}</span>
-                  <span className="hidden text-muted-foreground md:inline">
-                    {" "}
-                    - {validationItem.description}
-                  </span>
-                </SelectItem>
-              ))}
+              {React.Children.toArray(
+                BucketValidationTypeInputValues.map((validationItem) => (
+                  <SelectItem value={validationItem.value}>
+                    <span className="font-medium">{validationItem.name}</span>
+                    <span className="hidden text-muted-foreground md:inline">
+                      {" "}
+                      - {validationItem.description}
+                    </span>
+                  </SelectItem>
+                )),
+              )}
             </SelectContent>
           </Select>
         </div>
@@ -138,18 +142,20 @@ export function DataStructureBuilder({
               setNewInputIsOptional(value === "yes")
             }
           >
-            {BucketValidationIsOptionalInputValues.map((item) => (
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value={item.value} id={item.value} />
-                <Label htmlFor={item.value}>
-                  {item.name}
-                  <span className="hidden text-muted-foreground md:inline">
-                    {" "}
-                    - {item.description}
-                  </span>
-                </Label>
-              </div>
-            ))}
+            {React.Children.toArray(
+              BucketValidationIsOptionalInputValues.map((item) => (
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value={item.value} id={item.value} />
+                  <Label htmlFor={item.value}>
+                    {item.name}
+                    <span className="hidden text-muted-foreground md:inline">
+                      {" "}
+                      - {item.description}
+                    </span>
+                  </Label>
+                </div>
+              )),
+            )}
           </RadioGroup>
         </div>
         <div className="mb-2">
@@ -162,18 +168,20 @@ export function DataStructureBuilder({
               setNewInputIsUnique(value === "yes")
             }
           >
-            {BucketValidationIsUniqueInputValues.map((item) => (
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value={item.value} id={item.value} />
-                <Label htmlFor={item.value}>
-                  {item.name}
-                  <span className="hidden text-muted-foreground md:inline">
-                    {" "}
-                    - {item.description}
-                  </span>
-                </Label>
-              </div>
-            ))}
+            {React.Children.toArray(
+              BucketValidationIsUniqueInputValues.map((item) => (
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value={item.value} id={item.value} />
+                  <Label htmlFor={item.value}>
+                    {item.name}
+                    <span className="hidden text-muted-foreground md:inline">
+                      {" "}
+                      - {item.description}
+                    </span>
+                  </Label>
+                </div>
+              )),
+            )}
           </RadioGroup>
         </div>
 
