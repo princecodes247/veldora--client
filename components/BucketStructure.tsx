@@ -10,32 +10,45 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { IBucketDataWithStats } from "@/interfaces";
+import { useReducer, useState } from "react";
+import { BucketStructureItem, IBucketDataWithStats } from "@/interfaces";
 import { useMutate } from "@/hooks/useMutate";
-import { updateBucket } from "@/services/BucketService";
+import { updateBucket, updateBucketStructure } from "@/services/BucketService";
 
 import { DataStructureBuilder } from "./DataStructureBuilder";
+type Action =
+  | { type: "ADD_ITEM"; payload: BucketStructureItem }
+  | { type: "REMOVE_ITEM"; payload: string };
 
 export function BucketStructure({ bucket }: { bucket: IBucketDataWithStats }) {
-  const [responseStyle, setResponseStyle] = useState(
-    bucket?.responseStyle ?? "default",
-  );
-  const [customRedirect, setCustomRedirect] = useState(
-    bucket?.customRedirect ?? "",
+  function dataStructureReducer(
+    state: BucketStructureItem[],
+    action: Action,
+  ): BucketStructureItem[] {
+    switch (action.type) {
+      case "ADD_ITEM":
+        return [...state, action.payload];
+      case "REMOVE_ITEM":
+        return state.filter(
+          (item) => item.name.toLowerCase() !== action.payload.toLowerCase(),
+        );
+      default:
+        return state;
+    }
+  }
+  const [dataStructure, dataStructureDispatch] = useReducer(
+    dataStructureReducer,
+    bucket.structure,
   );
 
-  const updateBucketMutation = useMutate(updateBucket, {
+  const updateBucketMutation = useMutate(updateBucketStructure, {
     loadingMessage: "Updating Bucket",
   });
 
   const handleSubmitDataStructure = () =>
     updateBucketMutation.mutate({
       id: bucket?._id ?? "",
-      bucketData: {
-        customRedirect,
-        responseStyle,
-      },
+      bucketStructure: dataStructure,
     });
 
   return (
@@ -48,7 +61,11 @@ export function BucketStructure({ bucket }: { bucket: IBucketDataWithStats }) {
         <CardContent className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="text"></Label>
-            <DataStructureBuilder bucket={bucket} />
+            <DataStructureBuilder
+              structure={dataStructure}
+              structureDispatch={dataStructureDispatch}
+              bucket={bucket}
+            />
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-2">

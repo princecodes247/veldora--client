@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import { PaginatedResponse, ResponseBody } from "../interfaces/services";
 import api, { authHeaders } from "./config";
 import {
+  BucketStructureItem,
   IBucketData,
   IBucketDataWithStats,
   ISubmissionData,
@@ -106,6 +107,18 @@ export const updateBucket = ({
   >;
 }) => {
   return api.patch(servicePrefix + id, bucketData, {
+    headers: authHeaders(),
+  });
+};
+
+export const updateBucketStructure = ({
+  bucketStructure,
+  id,
+}: {
+  id: string;
+  bucketStructure: BucketStructureItem[];
+}) => {
+  return api.patch(servicePrefix + id, {structure: bucketStructure}, {
     headers: authHeaders(),
   });
 };

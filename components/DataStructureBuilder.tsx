@@ -11,7 +11,7 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import { useReducer, useState } from "react";
+import { Dispatch, useReducer, useState } from "react";
 import { Delete, X } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Separator } from "./ui/separator";
@@ -26,38 +26,15 @@ import {
   IBucketDataWithStats,
 } from "@/interfaces";
 
-type Action =
-  | { type: "ADD_ITEM"; payload: BucketStructureItem }
-  | { type: "REMOVE_ITEM"; payload: string };
-
-const initialState: BucketStructureItem[] = [];
-
-function dataStructureReducer(
-  state: BucketStructureItem[],
-  action: Action,
-): BucketStructureItem[] {
-  switch (action.type) {
-    case "ADD_ITEM":
-      return [...state, action.payload];
-    case "REMOVE_ITEM":
-      return state.filter(
-        (item) => item.name.toLowerCase() !== action.payload.toLowerCase(),
-      );
-    default:
-      return state;
-  }
-}
-
 export function DataStructureBuilder({
   bucket,
+  structure,
+  structureDispatch,
 }: {
   bucket: IBucketDataWithStats;
+  structure: BucketStructureItem[];
+  structureDispatch: Dispatch<any>;
 }) {
-  const [dataStructure, dispatch] = useReducer(
-    dataStructureReducer,
-    bucket.structure,
-  );
-
   const [newInputName, setNewInputName] = useState("");
   const [newInputType, setNewInputType] = useState("text");
   const [newInputIsUnique, setNewInputIsUnique] = useState(false);
@@ -65,12 +42,12 @@ export function DataStructureBuilder({
   const [newInputIsOptional, setNewInputIsOptional] = useState(true);
 
   const handleAddItem = () => {
-    dispatch({
+    structureDispatch({
       type: "ADD_ITEM",
       payload: {
         name: newInputName,
         type: newInputType,
-        unique: newInputType,
+        unique: newInputIsUnique,
         default: newInputDefaultValue,
         required: newInputIsOptional,
       },
@@ -85,12 +62,12 @@ export function DataStructureBuilder({
     <div>
       <div className="mb-4">
         {"{"}
-        {dataStructure.length === 0 && (
+        {structure.length === 0 && (
           <p className="px-4 py-px text-sm italic text-muted-foreground">
             Flexible: ...Any data sent would be collected
           </p>
         )}
-        {dataStructure.map((item, index) => (
+        {structure.map((item, index) => (
           <div key={index} className="flex items-center gap-2 px-4 py-px">
             <p className="mb-2 text-sm text-muted-foreground">
               {item.name}: {item.type} |{" "}
@@ -100,7 +77,7 @@ export function DataStructureBuilder({
             <Button
               className=""
               onClick={() => {
-                dispatch({
+                structureDispatch({
                   type: "REMOVE_ITEM",
                   payload: item.name,
                 });
