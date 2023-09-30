@@ -238,8 +238,12 @@ body {
 }
 
 :not(.overlay) > .pricing-card:hover {
-  --lightness: 95%;
+  --lightness: 55%;
   background: hsla(var(--hsl), 0.1);
+}
+
+.pricing-cards-container {
+  @apply flex w-full flex-wrap gap-6 p-0 py-8;
 }
 
 @keyframes hueRot {

@@ -6,15 +6,15 @@ import { IPricing } from "@/interfaces";
 
 export function PricingPlanCard({
   className,
-  ref,
+  refs,
   data,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & {
-  ref: React.Ref<HTMLDivElement>;
+  refs: React.Ref<HTMLDivElement>;
   data: IPricing;
 }) {
   return (
-    <div ref={ref} className="cards__card pricing-card">
+    <div ref={refs} className="cards__card pricing-card">
       <h2 className="font-semibold ">{data?.name ?? ""}</h2>
       <p className="text-3xl font-semibold">${data?.price ?? ""}</p>
       <ul role="list" className="pricing-card__bullets leading-6">

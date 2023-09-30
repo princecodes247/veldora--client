@@ -24,17 +24,17 @@ export function PricingSection() {
   return (
     <section ref={overlayRef} className="relative p-6 py-14 md:p-24">
       <h2 className="text-2xl font-semibold md:text-4xl">Pricing</h2>
-      <div className="relative ">
-        <div className="flex flex-wrap gap-6 p-0 py-8">
+      <div className="relative">
+        <div className="pricing-cards-container">
           {React.Children.toArray(
             pricingPlans.map((pricing, index) => (
-              <PricingPlanCard data={pricing} ref={planCardsRefs[index]} />
+              <PricingPlanCard data={pricing} refs={planCardsRefs[index]} />
             )),
           )}
         </div>
 
         <div
-          className="overlay flex flex-wrap gap-6 p-0 py-8"
+          className="overlay pricing-cards-container pt-4"
           style={{
             opacity: planCardsRefsOverlayStyles.opacity,
             WebkitMask: `radial-gradient(

@@ -29,14 +29,13 @@ const usePlanCardEffect = ({
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
       entries.forEach((entry, index) => {
-        const cardIndex = Array.from(mainCards).indexOf(
-          entry.target as HTMLDivElement,
-        );
         const width = entry.borderBoxSize[0].inlineSize;
         const height = entry.borderBoxSize[0].blockSize;
         if (index >= 0 && overlayCards[index]) {
           const target = overlayCards[index];
-          if (target === null) return;
+          if (target === null) {
+            return;
+          }
           target.style.width = `${width}px`;
           target.style.height = `${height}px`;
         }
@@ -44,7 +43,9 @@ const usePlanCardEffect = ({
     });
 
     mainCards.forEach((cardEl) => {
-      if (!cardEl) return;
+      if (!cardEl) {
+        return;
+      }
       observer.observe(cardEl);
     });
 
