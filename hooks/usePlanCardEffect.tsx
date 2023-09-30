@@ -16,7 +16,7 @@ const usePlanCardEffect = ({
     y: "0px",
   });
 
-  const applyOverlayMask = (e: React.MouseEvent) => {
+  const applyOverlayMask = (e: React.PointerEvent<HTMLDivElement>) => {
     const rect = plansSection?.getBoundingClientRect();
     if (!rect) return;
     const offsetX = e.clientX - rect.left - 100;
@@ -35,8 +35,10 @@ const usePlanCardEffect = ({
         const width = entry.borderBoxSize[0].inlineSize;
         const height = entry.borderBoxSize[0].blockSize;
         if (index >= 0 && overlayCards[index]) {
-          overlayCards[index].style.width = `${width}px`;
-          overlayCards[index].style.height = `${height}px`;
+          const target = overlayCards[index];
+          if (target === null) return;
+          target.style.width = `${width}px`;
+          target.style.height = `${height}px`;
         }
       });
     });
@@ -49,23 +51,15 @@ const usePlanCardEffect = ({
     if (!plansSection) {
       return;
     }
-
+    // @ts-ignore
     plansSection.addEventListener("pointermove", applyOverlayMask);
 
     // Cleanup by removing event listener when the component unmounts
     return () => {
+      // @ts-ignore
       plansSection.removeEventListener("pointermove", applyOverlayMask);
     };
   }, [plansSection, mainCards, overlayCards]);
-
-  const createOverlayCta = (ctaText) => {
-    const button = document.createElement("button");
-    button.classList.add("cta");
-    button.ariaHidden = "true";
-    button.value = ctaText;
-
-    return button;
-  };
 
   return overlayStyles;
 };

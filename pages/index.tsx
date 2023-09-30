@@ -15,6 +15,7 @@ import { useMutate } from "@/hooks/useMutate";
 import { subscribeToNewsletter } from "@/services/BucketService";
 import usePlanCardEffect from "@/hooks/usePlanCardEffect";
 import { PricingPlanCard } from "@/components/PricingPlanCard";
+import { PricingSection } from "@/fragments/home/PricingSection.fragment";
 
 export default function Home() {
   const mouseTrackRef = React.useRef(null);
@@ -32,37 +33,6 @@ export default function Home() {
     subscribeMutation.mutate(email);
   };
 
-  const [plansSectX, setPlansSectX] = useState(0);
-  const [plansSectY, setPlansSectY] = useState(0);
-  const overlayRef = useRef<HTMLElement | null>(null);
-  const planCardsRefs = [
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-  ];
-  const planCardOverlaysRefs = [
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-  ];
-  const planCardsRefsOverlayStyles = usePlanCardEffect({
-    mainCards: planCardsRefs?.map((ref) => ref?.current),
-    overlayCards: planCardOverlaysRefs?.map((ref) => ref?.current),
-    plansSection: overlayRef?.current,
-  });
-
-  useEffect(() => {
-    function handlePointerMove(e) {
-      setPlansSectX(e.pageX);
-      setPlansSectY(e.pageY);
-    }
-
-    document.body.addEventListener("pointermove", handlePointerMove);
-
-    return () => {
-      document.body.removeEventListener("pointermove", handlePointerMove);
-    };
-  }, []);
   return (
     <>
       <Header />
@@ -139,50 +109,7 @@ export default function Home() {
             </Link>
           </div>
         </section>
-        <section ref={overlayRef} className="relative p-6 py-14 md:p-24">
-          <h2 className="text-2xl font-semibold md:text-4xl">Pricing</h2>
-          <div className="relative ">
-            <div className="flex flex-wrap gap-6 p-0 py-8">
-              {React.Children.toArray(
-                pricingPlans.map((pricing, index) => (
-                  <PricingPlanCard data={pricing} ref={planCardsRefs[index]} />
-                )),
-              )}
-            </div>
-
-            <div
-              className="overlay flex flex-wrap gap-6 p-0 py-8"
-              style={{
-                opacity: planCardsRefsOverlayStyles.opacity,
-                WebkitMask: `radial-gradient(
-                  25rem 25rem at ${planCardsRefsOverlayStyles.x} ${planCardsRefsOverlayStyles.y},
-                  #000 1%,
-                  transparent 50%
-                )`,
-                mask: `radial-gradient(
-                  25rem 25rem at ${planCardsRefsOverlayStyles.x} ${planCardsRefsOverlayStyles.y},
-                  #000 1%,
-                  transparent 50%
-                )`,
-              }}
-              data-x={planCardsRefsOverlayStyles.x}
-              data-y={planCardsRefsOverlayStyles.y}
-            >
-              <div
-                ref={planCardOverlaysRefs[0]}
-                className="cards__card pricing-card"
-              ></div>
-              <div
-                ref={planCardOverlaysRefs[1]}
-                className="cards__card pricing-card"
-              ></div>
-              <div
-                ref={planCardOverlaysRefs[2]}
-                className="cards__card pricing-card"
-              ></div>
-            </div>
-          </div>
-        </section>
+        <PricingSection />
         {/* <section className="relative grid grid-cols-2 p-6 py-8 md:p-18 md:grid-cols-3 lg:grid-cols-6">
           {React.Children.toArray(
             [0, 0, 0, 0, 0, 0].map((feature) => (
