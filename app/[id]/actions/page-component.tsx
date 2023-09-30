@@ -31,11 +31,7 @@ import { deleteSubmissions } from "@/services/BucketService";
 import { DashboardInnerNav } from "@/components/DashboardInnerNav";
 import { PageHeader } from "@/components/PageHeader";
 
-export default function BucketActionsPage() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const id = pathname?.split("/")[1] ?? "";
-
+export default function BucketActionsPage({ id }: { id: string }) {
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });

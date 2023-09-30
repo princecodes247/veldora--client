@@ -15,11 +15,7 @@ import { useMutate } from "@/hooks/useMutate";
 import { deleteSubmissions } from "@/services/BucketService";
 import { PageHeader } from "@/components/PageHeader";
 
-export default function BucketSubmissionsPage() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const id = pathname?.split("/")[1] ?? "";
-
+export default function BucketSubmissionsPage({ id }: { id: string }) {
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });

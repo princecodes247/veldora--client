@@ -23,10 +23,7 @@ import { Loading } from "@/components/Loading";
 
 import { PageHeader } from "@/components/PageHeader";
 
-export default function BucketPage() {
-  const pathname = usePathname();
-  const id = pathname?.split("/")[1] ?? "";
-
+export default function BucketPage({ id }: { id: string }) {
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });

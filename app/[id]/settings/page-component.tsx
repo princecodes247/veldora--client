@@ -10,10 +10,7 @@ import { BucketPage404 } from "@/components/errors/Error";
 import { BucketConfig } from "@/components/BucketConfig";
 import { Loading } from "@/components/Loading";
 
-export default function BucketSettingsPage() {
-  const pathname = usePathname();
-  const id = pathname?.split("/")[1] ?? "";
-
+export default function BucketSettingsPage({ id }: { id: string }) {
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });
