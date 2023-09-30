@@ -1,4 +1,4 @@
-import { IAnimeQuote } from "@/interfaces";
+import { IAnimeQuote, IPricing } from "@/interfaces";
 import { z } from "zod";
 import integrationIcon from "@/public/icons/integration_icon.json";
 import interfaceIcon from "@/public/icons/interface_icon.json";
@@ -166,3 +166,53 @@ export const displayErrorMessages = {
     body: "...",
   },
 };
+
+export const pricingPlans: IPricing[] = [
+  {
+    name: "Free",
+    price: "0.00",
+    features: [
+      "5 API buckets",
+      "50MB worth of stored data",
+      "Basic Form Validation",
+      "Rate Limiting",
+      "Whitelisting",
+      "100 event emits",
+    ],
+    cta: {
+      link: "/login",
+      text: "Get Started",
+    },
+  },
+  {
+    name: "Pro",
+    price: "4.99",
+    features: [
+      "... Everything in free",
+      "+15 API buckets",
+      "+150MB worth of stored data",
+      "File Upload",
+      "Advanced Form Validation",
+      "Custom Redirect",
+      "+100 event emits",
+    ],
+    cta: {
+      link: "/login",
+      text: "Get Started",
+    },
+  },
+  {
+    name: "Enterprise",
+    price: "25.99",
+
+    features: [
+      "Active Support/Consultation",
+      "Custom Domain",
+      "Feature Requests",
+    ],
+    cta: {
+      link: "/login",
+      text: "Get Started",
+    },
+  },
+];

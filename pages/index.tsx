@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import ReactPlayer from "react-player";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { faqsList, featuresList } from "@/constants";
+import { faqsList, featuresList, pricingPlans } from "@/constants";
 import { ArrowRight } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
@@ -14,6 +14,7 @@ import { VideoPlayer } from "@/components/VideoPlayer";
 import { useMutate } from "@/hooks/useMutate";
 import { subscribeToNewsletter } from "@/services/BucketService";
 import usePlanCardEffect from "@/hooks/usePlanCardEffect";
+import { PricingPlanCard } from "@/components/PricingPlanCard";
 
 export default function Home() {
   const mouseTrackRef = React.useRef(null);
@@ -142,68 +143,11 @@ export default function Home() {
           <h2 className="text-2xl font-semibold md:text-4xl">Pricing</h2>
           <div className="relative ">
             <div className="flex flex-wrap gap-6 p-0 py-8">
-              <div ref={planCardsRefs[0]} className="cards__card pricing-card">
-                <h2 className="font-semibold ">Basic</h2>
-                <p className="text-3xl font-semibold">$0.00</p>
-                <ul role="list" className="card__bullets leading-6">
-                  <li>Access to standard workouts and nutrition plans</li>
-                  <li>Email support</li>
-                </ul>
-                <div className="flex self-end ">
-                  <Link href="/login" className="flex-1">
-                    <Button
-                      variant="secondary"
-                      className="w-full px-6 font-semibold"
-                    >
-                      Get Started
-                      <ArrowRight size={15} className="-mr-2 ml-2" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-
-              <div ref={planCardsRefs[1]} className="cards__card pricing-card">
-                <h2 className="font-semibold ">Pro</h2>
-                <p className="text-3xl font-semibold">$11.99</p>
-                <ul role="list" className="card__bullets flow">
-                  <li>Access to advanced workouts and nutrition plans</li>
-                  <li>Priority Email support</li>
-                  <li>Exclusive access to live Q&A sessions</li>
-                </ul>
-                <div className="flex self-end ">
-                  <Link href="/login" className="flex-1">
-                    <Button
-                      variant="secondary"
-                      className="w-full px-6 font-semibold"
-                    >
-                      Get Started
-                      <ArrowRight size={15} className="-mr-2 ml-2" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-
-              <div ref={planCardsRefs[2]} className="cards__card pricing-card">
-                <h2 className="font-semibold ">Ultimate</h2>
-                <p className="text-3xl font-semibold">$29.99</p>
-                <ul role="list" className="card__bullets flow">
-                  <li>Access to all premium workouts and nutrition plans</li>
-                  <li>24/7 Priority support</li>
-                  <li>1-on-1 virtual coaching session every month</li>
-                  <li>Exclusive content and early access to new features</li>
-                </ul>
-                <div className="flex self-end ">
-                  <Link href="/login" className="flex-1">
-                    <Button
-                      variant="secondary"
-                      className="w-full px-6 font-semibold"
-                    >
-                      Contact Us
-                      <ArrowRight size={15} className="-mr-2 ml-2" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+              {React.Children.toArray(
+                pricingPlans.map((pricing, index) => (
+                  <PricingPlanCard data={pricing} ref={planCardsRefs[index]} />
+                )),
+              )}
             </div>
 
             <div
