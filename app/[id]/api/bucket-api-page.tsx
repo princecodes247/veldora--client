@@ -19,11 +19,7 @@ import { PaginationState, Updater } from "@tanstack/react-table";
 import { PageHeader } from "@/components/PageHeader";
 import { BucketHow } from "@/components/BucketHow";
 
-export default function BucketAPIPage() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const id = pathname?.split("/")[1] ?? "";
-
+export default function BucketAPIPage({ id }: { id: string }) {
   const bucket = useBucket(id ?? "", () => {
     // router.push("/404")
   });

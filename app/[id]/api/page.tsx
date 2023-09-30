@@ -1,6 +1,6 @@
 // Import your Client Component
-import BucketAPIPage from "./page-component";
+import BucketAPIPage from "./bucket-api-page";
 
-export default async function Page() {
-  return <BucketAPIPage />;
+export default async function Page({ params }: { params: { id: string } }) {
+  return <BucketAPIPage id={params.id} />;
 }
