@@ -4,19 +4,21 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-<>
-<footer className="relative flex flex-col backdrop-blur-sm p-6 py-14 md:p-16 md:pb-8 bg-transparent border-t border-gray-900 items-center gap-4">
-    <div className="w-24">
-    <Logo variant="base"/>
-    </div>
-    <p className="text-gray-400 font-semibold">
-    Simplify, Optimize, Succeed with Veldora
-    </p>
-    <Link href="www.github.com/princecodes247" className="text-gray-600 text-sm hover:underline hover:text-white">
-    <p className="">Built by @princecodes247</p>
-    </Link>
-</footer>
-</>
-
+    <>
+      <footer className="relative flex flex-col items-center gap-4 border-t border-gray-900 bg-transparent p-6 py-14 backdrop-blur-sm md:p-16 md:pb-8">
+        <div className="w-24">
+          <Logo variant="base" />
+        </div>
+        <p className="font-semibold text-gray-400">
+          Simplify, Optimize, with Veldora
+        </p>
+        <Link
+          href="https://www.github.com/princecodes247"
+          className="text-sm text-gray-600 hover:text-white hover:underline"
+        >
+          <p className="">Made with @princecodes247's Special Sauce</p>
+        </Link>
+      </footer>
+    </>
   );
 }
