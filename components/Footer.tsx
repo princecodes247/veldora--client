@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { Logo } from "./Logo";
 import Link from "next/link";
+import { appData } from "@/constants";
 
 export function Footer() {
   return (
@@ -9,9 +10,7 @@ export function Footer() {
         <div className="w-24">
           <Logo variant="base" />
         </div>
-        <p className="font-semibold text-gray-400">
-          Simplify, Optimize, with Veldora
-        </p>
+        <p className="font-semibold text-gray-400">{appData?.slogan ?? ""}</p>
         <Link
           href="https://www.github.com/princecodes247"
           className="text-sm text-gray-600 hover:text-white hover:underline"

@@ -27,9 +27,15 @@ export const submissionSchema = z.object({
 
 export type Submisson = z.infer<typeof submissionSchema>;
 
-export const appLinks = {
-  appStore: "https://apps.apple.com/app/{appName}/id6445799581",
-  playStore: "https://play.google.com/store/apps/details?id=com.{appName}",
+export const appData = {
+  name: process.env.NEXT_PUBLIC_APP_NAME ?? "Veldora",
+  slogan: "Simplify, Optimize, with Veldora",
+  socials: {
+    phone: "",
+    email: "",
+    linkedIn: "",
+    instagram: "",
+  },
 };
 
 export const companySocials = {
