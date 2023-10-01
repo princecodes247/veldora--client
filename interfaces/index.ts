@@ -2,6 +2,16 @@ export interface IFAQ {
   question: string;
   answer: string;
 }
+
+export interface IPricing {
+  name: string
+    price: string
+    features: string[],
+    cta: {
+      link: string
+      text: string
+    },
+}
 export enum UserType {
   USER = "user",
   ADMIN = "admin",
