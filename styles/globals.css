@@ -160,7 +160,7 @@ body {
 .pricing-card {
   --flow-space: 0.5em;
   --hsl: var(--hue), var(--saturation), var(--lightness);
-  flex: 1 1 14rem;
+  flex: 1 1 17rem;
   padding: 1.5em 2em;
   display: grid;
   grid-template-rows: auto auto auto 1fr;
