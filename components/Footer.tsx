@@ -11,7 +11,7 @@ export function Footer() {
           <Logo variant="base" />
         </div>
         <p className="font-semibold text-gray-400">{appData?.slogan ?? ""}</p>
-          <p className="">Made with &#9830; by <Link href="https://www.github.com/princecodes247">@princecodes247</Link> and <Link href="https://www.x.com/dtechoracle">dtechoracle</Link></p>
+          <p className="font-semibold text-gray-400 text-center">Made with &#10084; by <Link href="https://www.github.com/princecodes247">@princecodes247</Link> and <Link href="https://www.x.com/dtechoracle">dtechoracle</Link></p>
       </footer>
     </>
   );
