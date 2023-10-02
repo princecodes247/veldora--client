@@ -194,8 +194,8 @@ export const pricingPlans: IPricing[] = [
     },
   },
   {
-    name: "Pro",
-    price: "4.99",
+    name: "Basic",
+    price: "5.99",
     features: [
       "20 API buckets",
       "10,000 submissions limits",
@@ -213,15 +213,15 @@ export const pricingPlans: IPricing[] = [
     },
   },
   {
-    name: "Enterprise",
-    price: "25.99",
+    name: "Pro",
+    price: "19.99",
 
     features: [
-      "Unlimited API buckets",
+      "100 API buckets",
       "Unlimited submissions limits",
       "Advanced Form Validation",
       "Custom Redirect",
-      "20GB file upload",
+      "50GB file upload",
       "Rate Limiting",
       "Whitelisting",
       "2 collaborators",
