@@ -11,12 +11,7 @@ export function Footer() {
           <Logo variant="base" />
         </div>
         <p className="font-semibold text-gray-400">{appData?.slogan ?? ""}</p>
-        <Link
-          href="https://www.github.com/princecodes247"
-          className="text-sm text-gray-600 hover:text-white hover:underline"
-        >
-          <p className="">Made with @princecodes247&lsquo;s Special Sauce</p>
-        </Link>
+          <p className="">Made with &#9830; by <Link href="https://www.github.com/princecodes247">@princecodes247</Link> and <Link href="https://www.x.com/dtechoracle">dtechoracle</Link></p>
       </footer>
     </>
   );
