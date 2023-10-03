@@ -88,12 +88,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </Button>
         </div>
       </form>
-      <div className="relative">
+      {/* <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
+          <span className="px-2 bg-background text-muted-foreground">
             Or continue with
           </span>
         </div>
@@ -106,9 +106,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           disabled={loginMutation.isLoading}
         >
           {loginMutation.isLoading ? (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
           ) : (
-            <Icons.gitHub className="mr-2 h-4 w-4" />
+            <Icons.gitHub className="w-4 h-4 mr-2" />
           )}{" "}
           Github
         </Button>
@@ -119,13 +119,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           disabled={loginMutation.isLoading}
         >
           {loginMutation.isLoading ? (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
           ) : (
-            <Icons.google className="mr-2 h-4 w-4" />
+            <Icons.google className="w-4 h-4 mr-2" />
           )}{" "}
           Google
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }
