@@ -9,23 +9,36 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icons } from "./Icons";
 import Link from "next/link";
+import { useMutate } from "@/hooks/useMutate";
+import { signIn } from "@/services/AuthService";
+import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const router = useRouter();
+  const loginMutation = useMutate(signIn, {
+    loadingMessage: "Logging in...",
+    successMessage: "Logged in successfully",
+    onSuccessFunction: () => {
+      router.replace("/dashboard");
+    },
+  });
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    console.log({ email, password });
+    loginMutation.mutate({
+      email,
+      password,
+    });
   }
 
   return (
-    <div className={cn("grid gap-6 px-4 md:px-0", className)} {...props}>
+    <div className={cn("light grid gap-6 px-4 md:px-0", className)} {...props}>
       <h1 className="text-xl md:text-3xl">Sign in</h1>
       <p className="text-sm text-gray-500">
         First time?{" "}
@@ -49,7 +62,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              disabled={isLoading}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={loginMutation.isLoading}
             />
           </div>
           <div className="grid gap-1 py-4">
@@ -60,11 +75,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               id="password"
               placeholder="******* fast!"
               type="password"
-              disabled={isLoading}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={loginMutation.isLoading}
             />
           </div>
-          <Button disabled={isLoading}>
-            {isLoading && (
+          <Button disabled={loginMutation.isLoading}>
+            {loginMutation.isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             Sign In
@@ -86,9 +103,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           className="flex-1"
           variant="outline"
           type="button"
-          disabled={isLoading}
+          disabled={loginMutation.isLoading}
         >
-          {isLoading ? (
+          {loginMutation.isLoading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           ) : (
             <Icons.gitHub className="mr-2 h-4 w-4" />
@@ -99,9 +116,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           className="flex-1"
           variant="outline"
           type="button"
-          disabled={isLoading}
+          disabled={loginMutation.isLoading}
         >
-          {isLoading ? (
+          {loginMutation.isLoading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           ) : (
             <Icons.google className="mr-2 h-4 w-4" />
@@ -112,3 +129,4 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     </div>
   );
 }
+UserAuthForm.theme = "dark";

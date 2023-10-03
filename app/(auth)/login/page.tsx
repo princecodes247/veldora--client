@@ -9,7 +9,7 @@ import { wakeUpCall } from "@/services/UserService";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { UserAuthForm } from "@/components/UserAuthForm";
 
-export default function Login() {
+function Login() {
   const appID = process.env.NEXT_PUBLIC_APP_ID;
 
   const wakeUpCallQuery = useQuery({
@@ -19,3 +19,5 @@ export default function Login() {
 
   return <UserAuthForm />;
 }
+
+export default Login;

@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import Providers from "@/utils/provider";
+import { useParams } from "next/navigation";
 
 export const metadata = {
   title: "Veldora Dashboard",

@@ -35,7 +35,28 @@ import {
 // Lazy load the atomOneDark style
 // @ts-ignore
 // const {dark} = lazy(() => import('react-syntax-highlighter/dist/esm/styles/prism'));
-
+function Component() {
+  return (
+    <aside className="w-full max-w-lg rounded-lg bg-black p-6 font-mono text-white">
+      <div className="flex items-center justify-between">
+        <div className="flex space-x-2 text-red-500">
+          <div className="h-3 w-3 rounded-full bg-red-500" />
+          <div className="h-3 w-3 rounded-full bg-yellow-500" />
+          <div className="h-3 w-3 rounded-full bg-green-500" />
+        </div>
+        <p className="text-sm">bash</p>
+      </div>
+      <div className="mt-4">
+        <p className="text-green-400">$ npm install next</p>
+        <p className="text-white">+ next@10.2.3</p>
+        <p className="text-white">
+          added 1 package, and audited 2 packages in 3s
+        </p>
+        <p className="text-green-400">$</p>
+      </div>
+    </aside>
+  );
+}
 const CodeBoard = ({ code, language }: { code: string; language: string }) => {
   const [state, copyToClipboard] = useCopyToClipboard();
   const [isCopied, setIsCopied] = useState(false);

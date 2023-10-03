@@ -16,6 +16,9 @@ interface UserSignupFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = React.useState("");
   const [termsAccepted, setTermsAccepted] = React.useState<CheckedState>(false);
 
   async function onSubmit(event: React.SyntheticEvent) {
@@ -52,6 +55,8 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               disabled={isLoading}
             />
           </div>
@@ -63,6 +68,8 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               id="password"
               placeholder="******* fast!"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               disabled={isLoading}
             />
           </div>
@@ -74,6 +81,8 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               id="confirm-password"
               placeholder="******* fast! again"
               type="password"
+              value={passwordConfirmation}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
               disabled={isLoading}
             />
           </div>
