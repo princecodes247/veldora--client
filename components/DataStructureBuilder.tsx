@@ -11,43 +11,30 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import { useReducer, useState } from "react";
+import React, { Dispatch, useReducer, useState } from "react";
 import { Delete, X } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Separator } from "./ui/separator";
+import {
+  BucketValidationIsOptionalInputValues,
+  BucketValidationIsUniqueInputValues,
+  BucketValidationTypeInputValues,
+} from "@/constants/settings";
+import {
+  BucketStructureItem,
+  IBucketData,
+  IBucketDataWithStats,
+} from "@/interfaces";
 
-interface DataItem {
-  id: number;
-  name: string;
-  type: string;
-  isUnique: string;
-  isOptional: boolean;
-  defaultValue: string;
-}
-
-type Action =
-  | { type: "ADD_ITEM"; payload: DataItem }
-  | { type: "REMOVE_ITEM"; payload: number };
-
-const initialState: DataItem[] = [];
-
-function dataStructureReducer(state: DataItem[], action: Action): DataItem[] {
-  switch (action.type) {
-    case "ADD_ITEM":
-      return [...state, action.payload];
-    case "REMOVE_ITEM":
-      return state.filter((item) => item.id !== action.payload);
-    default:
-      return state;
-  }
-}
-
-export function DataStructureBuilder() {
-  const [dataStructure, dispatch] = useReducer(
-    dataStructureReducer,
-    initialState,
-  );
-
+export function DataStructureBuilder({
+  bucket,
+  structure,
+  structureDispatch,
+}: {
+  bucket: IBucketDataWithStats;
+  structure: BucketStructureItem[];
+  structureDispatch: Dispatch<any>;
+}) {
   const [newInputName, setNewInputName] = useState("");
   const [newInputType, setNewInputType] = useState("text");
   const [newInputIsUnique, setNewInputIsUnique] = useState(false);
@@ -55,15 +42,14 @@ export function DataStructureBuilder() {
   const [newInputIsOptional, setNewInputIsOptional] = useState(true);
 
   const handleAddItem = () => {
-    dispatch({
+    structureDispatch({
       type: "ADD_ITEM",
       payload: {
-        id: dataStructure.length,
         name: newInputName,
         type: newInputType,
-        isUnique: newInputType,
-        defaultValue: newInputDefaultValue,
-        isOptional: newInputIsOptional,
+        unique: newInputIsUnique,
+        default: newInputDefaultValue,
+        required: newInputIsOptional,
       },
     });
 
@@ -76,33 +62,35 @@ export function DataStructureBuilder() {
     <div>
       <div className="mb-4">
         {"{"}
-        {dataStructure.length === 0 && (
+        {structure.length === 0 && (
           <p className="px-4 py-px text-sm italic text-muted-foreground">
             Flexible: ...Any data sent would be collected
           </p>
         )}
-        {dataStructure.map((item, index) => (
-          <div key={index} className="flex items-center gap-2 px-4 py-px">
-            <p className="mb-2 text-sm text-muted-foreground">
-              {item.name}: {item.type} |{" "}
-              {item.isOptional ? "optional" : "required"},{" "}
-              {item.isUnique ? "unique" : ""}, {item.defaultValue}
-            </p>
-            <Button
-              className=""
-              onClick={() => {
-                dispatch({
-                  type: "REMOVE_ITEM",
-                  payload: item.id,
-                });
-              }}
-              size="icon"
-              variant="ghost"
-            >
-              <X size={12} />
-            </Button>
-          </div>
-        ))}
+        {React.Children.toArray(
+          structure.map((item, index) => (
+            <div key={index} className="flex items-center gap-2 px-4 py-px">
+              <p className="mb-2 text-sm text-muted-foreground">
+                {item.name}: {item.type} |{" "}
+                {item.required ? "optional" : "required"},{" "}
+                {item.unique ? "unique" : ""}, {item.default}
+              </p>
+              <Button
+                className=""
+                onClick={() => {
+                  structureDispatch({
+                    type: "REMOVE_ITEM",
+                    payload: item.name,
+                  });
+                }}
+                size="icon"
+                variant="ghost"
+              >
+                <X size={12} />
+              </Button>
+            </div>
+          )),
+        )}
         {"}"}
       </div>
       <Separator />
@@ -130,84 +118,17 @@ export function DataStructureBuilder() {
               <SelectValue placeholder="Select a input type" />
             </SelectTrigger>
             <SelectContent className="h-36">
-              <SelectItem value="text">
-                <span className="font-medium">Text</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A short string of text, like &ldquo;Hello World&rdquo;
-                </span>
-              </SelectItem>
-              <SelectItem value="long-text">
-                <span className="font-medium">Long Text</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A long string of text, like a blog post
-                </span>
-              </SelectItem>
-              <SelectItem value="email">
-                <span className="font-medium">Email</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - An email address, like &ldquo;support@veldora.io&rdquo;
-                </span>
-              </SelectItem>
-              <SelectItem value="integer">
-                <span className="font-medium">Integer</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A whole number, like 42
-                </span>
-              </SelectItem>
-              <SelectItem value="decimal">
-                <span className="font-medium">Decimal</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A number with a decimal point, like 3.14
-                </span>
-              </SelectItem>
-              <SelectItem value="url">
-                <span className="font-medium">URL</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A URL, like &ldquo;https://veldora.io&rdquo;
-                </span>
-              </SelectItem>
-              <SelectItem value="phone">
-                <span className="font-medium">Phone</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A phone number, like &ldquo;555-555-5555&rdquo;
-                </span>
-              </SelectItem>
-
-              <SelectItem value="boolean">
-                <span className="font-medium">Boolean</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A true or false value
-                </span>
-              </SelectItem>
-              <SelectItem value="date">
-                <span className="font-medium">Date</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A date, like 2021-01-01
-                </span>
-              </SelectItem>
-              <SelectItem value="photo">
-                <span className="font-medium">Photo</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A photo, like &ldquo;https://veldora.io/photo.png&rdquo;
-                </span>
-              </SelectItem>
-              <SelectItem value="file">
-                <span className="font-medium">File</span>
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - A file, like &ldquo;https://veldora.io/file.pdf&rdquo;
-                </span>
-              </SelectItem>
+              {React.Children.toArray(
+                BucketValidationTypeInputValues.map((validationItem) => (
+                  <SelectItem value={validationItem.value}>
+                    <span className="font-medium">{validationItem.name}</span>
+                    <span className="hidden text-muted-foreground md:inline">
+                      {" "}
+                      - {validationItem.description}
+                    </span>
+                  </SelectItem>
+                )),
+              )}
             </SelectContent>
           </Select>
         </div>
@@ -221,26 +142,20 @@ export function DataStructureBuilder() {
               setNewInputIsOptional(value === "yes")
             }
           >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="yes" id="yes" />
-              <Label htmlFor="yes">
-                Yes
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - The input is optional
-                </span>
-              </Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="no" id="no" />
-              <Label htmlFor="no">
-                No
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - The input is required
-                </span>
-              </Label>
-            </div>
+            {React.Children.toArray(
+              BucketValidationIsOptionalInputValues.map((item) => (
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value={item.value} id={item.value} />
+                  <Label htmlFor={item.value}>
+                    {item.name}
+                    <span className="hidden text-muted-foreground md:inline">
+                      {" "}
+                      - {item.description}
+                    </span>
+                  </Label>
+                </div>
+              )),
+            )}
           </RadioGroup>
         </div>
         <div className="mb-2">
@@ -253,26 +168,20 @@ export function DataStructureBuilder() {
               setNewInputIsUnique(value === "yes")
             }
           >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="yes" id="yes" />
-              <Label htmlFor="yes">
-                Yes
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - The input is unique
-                </span>
-              </Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="no" id="no" />
-              <Label htmlFor="no">
-                No
-                <span className="hidden text-muted-foreground md:inline">
-                  {" "}
-                  - The input is not unique
-                </span>
-              </Label>
-            </div>
+            {React.Children.toArray(
+              BucketValidationIsUniqueInputValues.map((item) => (
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value={item.value} id={item.value} />
+                  <Label htmlFor={item.value}>
+                    {item.name}
+                    <span className="hidden text-muted-foreground md:inline">
+                      {" "}
+                      - {item.description}
+                    </span>
+                  </Label>
+                </div>
+              )),
+            )}
           </RadioGroup>
         </div>
 
@@ -335,7 +244,7 @@ export function DataStructureBuilder() {
           Add Input
         </Button>
       </div>
-      <Separator />
+      {/* <Separator /> */}
     </div>
   );
 }

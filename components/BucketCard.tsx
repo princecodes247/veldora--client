@@ -73,7 +73,7 @@ export function BucketCard({
         </CardHeader>
         <CardContent className={clsx(listView && "py-4")}>
           <div className="w-full truncate text-xs text-muted-foreground">
-            {submissionApiUrl}/bucket/{bucket.slug}
+            {submissionApiUrl}/{bucket.slug}
           </div>
           <div className="mt-2 w-full truncate text-sm text-muted-foreground">
             {bucket.description}

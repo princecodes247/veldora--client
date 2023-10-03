@@ -62,7 +62,7 @@ export default function BucketAPIPage() {
               <TabsContent value="submit" className="space-y-4">
                 <BucketHow
                   title="Create a Submission"
-                  endpoint={`${submissionApiUrl}/bucket/${bucket.data?.slug}`}
+                  endpoint={`${submissionApiUrl}/${bucket.data?.slug}`}
                   method="POST"
                   withHTML
                 />
@@ -72,7 +72,7 @@ export default function BucketAPIPage() {
                 <BucketHow
                   title="Get Bucket Stats"
                   accessToken={bucket.data?.accessToken}
-                  endpoint={`${openApiUrl}/bucket/stats`}
+                  endpoint={`${openApiUrl}/buckets/stats`}
                   method="GET"
                 />
               </TabsContent>
@@ -81,7 +81,7 @@ export default function BucketAPIPage() {
                 <BucketHow
                   title="Get all Submissions"
                   accessToken={bucket.data?.accessToken}
-                  endpoint={`${openApiUrl}/bucket`}
+                  endpoint={`${openApiUrl}/buckets`}
                   method="GET"
                 />
               </TabsContent>

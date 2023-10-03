@@ -66,7 +66,7 @@ export default function BucketStructureSettingsPage() {
             </div>
           </div>
           <div>
-            <BucketStructure />
+            {bucket?.data ? <BucketStructure bucket={bucket.data} /> : ""}
           </div>
         </div>
       )}

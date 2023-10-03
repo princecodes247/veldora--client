@@ -1,4 +1,4 @@
-import { IAnimeQuote } from "@/interfaces";
+import { IAnimeQuote, IPricing } from "@/interfaces";
 import { z } from "zod";
 import integrationIcon from "@/public/icons/integration_icon.json";
 import interfaceIcon from "@/public/icons/interface_icon.json";
@@ -27,9 +27,15 @@ export const submissionSchema = z.object({
 
 export type Submisson = z.infer<typeof submissionSchema>;
 
-export const appLinks = {
-  appStore: "https://apps.apple.com/app/{appName}/id6445799581",
-  playStore: "https://play.google.com/store/apps/details?id=com.{appName}",
+export const appData = {
+  name: process.env.NEXT_PUBLIC_APP_NAME ?? "Veldora",
+  slogan: "Simplify, Optimize, with Veldora",
+  socials: {
+    phone: "",
+    email: "",
+    linkedIn: "",
+    instagram: "",
+  },
 };
 
 export const companySocials = {
@@ -50,7 +56,7 @@ export const openApiUrl =
 
 export const submissionApiUrl =
   process.env.NEXT_PUBLIC_SUBMISSION_API_URL ??
-  "http://localhost:3050/api/v1/g";
+  "http://localhost:3050/api/v1/g/buckets";
 
 export const docsUrl =
   process.env.NEXT_PUBLIC_DOCS_URL ?? "https://docs.veldora.io";
@@ -166,3 +172,67 @@ export const displayErrorMessages = {
     body: "...",
   },
 };
+
+export const pricingPlans: IPricing[] = [
+  {
+    name: "Free",
+    price: "0.00",
+    disabled: false,
+    features: [
+      "5 API buckets",
+      "100 submissions limit",
+      "Basic Form Validation",
+      "Rate Limiting",
+      "Whitelisting",
+      // "No file upload",
+      // "No collaborators",
+      // "No integrations",
+      // "100 event emits",
+    ],
+    cta: {
+      link: "/login",
+      text: "Get Started",
+    },
+  },
+  {
+    name: "Basic",
+    price: "5.99",
+    disabled: true,
+    features: [
+      "20 API buckets",
+      "10,000 submissions limits",
+      "Advanced Form Validation",
+      "Rate Limiting",
+      "Whitelisting",
+      "Custom Redirect",
+      "5GB file upload",
+      "2 collaborators",
+      // "+100 event emits",
+    ],
+    cta: {
+      link: "/login",
+      text: "Get Started",
+    },
+  },
+  {
+    name: "Pro",
+    price: "19.99",
+    disabled: true,
+    features: [
+      "100 API buckets",
+      "Unlimited submissions limits",
+      "Advanced Form Validation",
+      "Custom Redirect",
+      "50GB file upload",
+      "Rate Limiting",
+      "Whitelisting",
+      "2 collaborators",
+      "Active Support/Consultation",
+      "Custom Domain",
+    ],
+    cta: {
+      link: "/login",
+      text: "Get Started",
+    },
+  },
+];

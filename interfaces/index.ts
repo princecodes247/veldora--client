@@ -2,6 +2,17 @@ export interface IFAQ {
   question: string;
   answer: string;
 }
+
+export interface IPricing {
+  name: string;
+  price: string;
+  disabled?: boolean;
+  features: string[];
+  cta: {
+    link: string;
+    text: string;
+  };
+}
 export enum UserType {
   USER = "user",
   ADMIN = "admin",
@@ -24,7 +35,13 @@ export enum LoadingType {
   INLINE = "inline",
   TEXT = "text",
 }
-
+export type BucketStructureItem = {
+  name: string;
+  type: string;
+  unique: string;
+  required: boolean;
+  default: string;
+};
 export interface IBucketData {
   _id: string;
   name: string;
@@ -35,6 +52,7 @@ export interface IBucketData {
   customRedirect?: string;
   accessToken: string;
   whiteList?: string[];
+  structure: BucketStructureItem[];
   views: {
     country: string;
     device: string;
