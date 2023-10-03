@@ -177,6 +177,7 @@ export const pricingPlans: IPricing[] = [
   {
     name: "Free",
     price: "0.00",
+    disabled: false,
     features: [
       "5 API buckets",
       "100 submissions limit",
@@ -196,6 +197,7 @@ export const pricingPlans: IPricing[] = [
   {
     name: "Basic",
     price: "5.99",
+    disabled: true,
     features: [
       "20 API buckets",
       "10,000 submissions limits",
@@ -215,7 +217,7 @@ export const pricingPlans: IPricing[] = [
   {
     name: "Pro",
     price: "19.99",
-
+    disabled: true,
     features: [
       "100 API buckets",
       "Unlimited submissions limits",

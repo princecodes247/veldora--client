@@ -4,13 +4,14 @@ export interface IFAQ {
 }
 
 export interface IPricing {
-  name: string
-    price: string
-    features: string[],
-    cta: {
-      link: string
-      text: string
-    },
+  name: string;
+  price: string;
+  disabled?: boolean;
+  features: string[];
+  cta: {
+    link: string;
+    text: string;
+  };
 }
 export enum UserType {
   USER = "user",
