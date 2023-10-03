@@ -172,6 +172,10 @@ body {
   border-radius: 10px;
 }
 
+.pricing-card-disabled {
+  opacity: 1;
+}
+
 .pricing-card:nth-child(1) {
   /* --hue: 165;
   --saturation: 82.26%;
