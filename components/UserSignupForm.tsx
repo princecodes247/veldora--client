@@ -18,7 +18,6 @@ import { useRouter } from "next/navigation";
 interface UserSignupFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [passwordConfirmation, setPasswordConfirmation] = React.useState("");
@@ -68,7 +67,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               autoCorrect="off"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              disabled={isLoading}
+              disabled={registerMutation.isLoading}
             />
           </div>
           <div className="grid gap-1 py-4 pb-0">
@@ -81,7 +80,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              disabled={isLoading}
+              disabled={registerMutation.isLoading}
             />
           </div>
           <div className="grid gap-1 py-4">
@@ -94,7 +93,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               type="password"
               value={passwordConfirmation}
               onChange={(e) => setPasswordConfirmation(e.target.value)}
-              disabled={isLoading}
+              disabled={registerMutation.isLoading}
             />
           </div>
           <div className="pb-4">
@@ -131,12 +130,12 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
           </div>
           <Button
             disabled={
-              isLoading ||
+              registerMutation.isLoading ||
               !termsAccepted ||
               !(password.trim() === passwordConfirmation.trim())
             }
           >
-            {isLoading && (
+            {registerMutation.isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             Sign In
@@ -158,9 +157,9 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
           className="flex-1"
           variant="outline"
           type="button"
-          disabled={isLoading}
+          disabled={registerMutation.isLoading}
         >
-          {isLoading ? (
+          {registerMutation.isLoading ? (
             <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
           ) : (
             <Icons.gitHub className="w-4 h-4 mr-2" />
@@ -171,9 +170,9 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
           className="flex-1"
           variant="outline"
           type="button"
-          disabled={isLoading}
+          disabled={registerMutation.isLoading}
         >
-          {isLoading ? (
+          {registerMutation.isLoading ? (
             <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
           ) : (
             <Icons.google className="w-4 h-4 mr-2" />
