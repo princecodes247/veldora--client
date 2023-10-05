@@ -8,25 +8,21 @@ import { useQuery } from "@tanstack/react-query";
 import { wakeUpCall } from "@/services/UserService";
 
 export default function Login() {
-  useEffect(() => {
-    require("@passageidentity/passage-elements/passage-auth");
-  }, []);
-
   const appID = process.env.NEXT_PUBLIC_APP_ID;
 
   const wakeUpCallQuery = useQuery({
     queryKey: ["wakeUp"],
-    queryFn: wakeUpCall
-  })
+    queryFn: wakeUpCall,
+  });
 
   return (
     <>
-    <Head>
+      <Head>
         <title>Login - Veldora</title>
         <meta name="description" content="Form data management made easy" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container relative min-h-[100vh] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="container relative min-h-[100vh] flex-col items-center justify-center bg-background md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900">
             <img
@@ -52,9 +48,9 @@ export default function Login() {
               <div className="mx-auto flex h-8 w-24 items-center justify-center md:hidden ">
                 <Logo variant="wordmark" />
               </div>
-              <passage-auth app-id={appID}></passage-auth>
+              {/* <passage-auth app-id={appID}></passage-auth> */}
             </div>
-            {/* <p className="px-8 text-center text-sm text-muted-foreground">
+            {/* <p className="px-8 text-sm text-center text-muted-foreground">
               By clicking continue, you agree to our{" "}
               <Link
                 href="/terms"

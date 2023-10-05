@@ -4,7 +4,7 @@ import { DeviceType, IBucketData } from ".";
 export interface IAuthData {
   email: string;
   password: string;
-  device_name: DeviceType;
+  device_name?: DeviceType;
 }
 
 export interface IRegistrationData extends IAuthData {

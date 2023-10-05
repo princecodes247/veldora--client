@@ -4,6 +4,7 @@ import axios from "axios";
 const api = axios.create({
   baseURL: apiUrl.toString(),
   maxBodyLength: Infinity,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
@@ -11,6 +12,7 @@ const api = axios.create({
 const uninterceptedApi = axios.create({
   baseURL: apiUrl.toString(),
   maxBodyLength: Infinity,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
@@ -40,7 +42,7 @@ const authHeaders = (extraConfig?: { [key: string]: string | undefined }) => {
   return {
     ...{
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("psg_auth_token") ?? ""}`,
+      // Authorization: `Bearer ${localStorage.getItem("psg_auth_token") ?? ""}`,
     },
     ...extraConfig,
   };
