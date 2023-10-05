@@ -17,3 +17,7 @@ export const sidebarNavItems = (id: string = "...") => [
     href: `/${id}/settings/security`,
   },
 ];
+
+export enum InAppLinks {
+  GetStarted = "/signup",
+}

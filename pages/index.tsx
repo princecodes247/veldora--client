@@ -16,6 +16,7 @@ import { subscribeToNewsletter } from "@/services/BucketService";
 import usePlanCardEffect from "@/hooks/usePlanCardEffect";
 import { PricingPlanCard } from "@/components/PricingPlanCard";
 import { PricingSection } from "@/fragments/home/PricingSection.fragment";
+import { InAppLinks } from "@/constants/nav";
 
 export default function Home() {
   const mouseTrackRef = React.useRef(null);
@@ -62,7 +63,7 @@ export default function Home() {
             your speed. Experience the beauty of efficiency and take control of
             your forms like never before.
           </p>
-          <Link href="/login">
+          <Link href={InAppLinks.GetStarted}>
             <Button variant="secondary" className="px-6 font-semibold">
               Get Started
               <ArrowRight size={15} className="-mr-2 ml-2" />
@@ -101,7 +102,7 @@ export default function Home() {
             )}
           </div>
           <div className="flex items-center justify-center">
-            <Link href="/login" className="">
+            <Link href={InAppLinks.GetStarted} className="">
               <Button variant="secondary" className="px-6 font-semibold">
                 Get Started
                 <ArrowRight size={15} className="-mr-2 ml-2" />
