@@ -6,8 +6,7 @@ import supportIcon from "@/public/icons/support_icon.json";
 import securityIcon from "@/public/icons/security_icon.json";
 import analyticsIcon from "@/public/icons/analytics_icon.json";
 import submissionIcon from "@/public/icons/submission_icon.json";
-// import integrationIcon from "@/public/icons/integration_icon.json";
-// import integrationIcon from "@/public/icons/integration_icon.json";
+import { InAppLinks } from "./nav";
 // We're keeping a simple non-relational schema here.
 // IRL, you will have a schema for your data models.
 export const taskSchema = z.object({
@@ -190,7 +189,7 @@ export const pricingPlans: IPricing[] = [
       // "100 event emits",
     ],
     cta: {
-      link: "/login",
+      link: InAppLinks.GetStarted,
       text: "Get Started",
     },
   },
@@ -210,7 +209,7 @@ export const pricingPlans: IPricing[] = [
       // "+100 event emits",
     ],
     cta: {
-      link: "/login",
+      link: InAppLinks.GetStarted,
       text: "Get Started",
     },
   },
@@ -231,7 +230,7 @@ export const pricingPlans: IPricing[] = [
       "Custom Domain",
     ],
     cta: {
-      link: "/login",
+      link: InAppLinks.GetStarted,
       text: "Get Started",
     },
   },

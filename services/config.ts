@@ -32,7 +32,13 @@ api.interceptors.response.use(
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       console.log("interceptor error");
-      window.location.href = "/login";
+      if (
+        !window.location.href.includes("/login") ||
+        !window.location.href.includes("signup")
+      ) {
+        console.log({ whreff: window.location.href });
+        // window.location.href = "/login";
+      }
     }
     return Promise.reject(error);
   },

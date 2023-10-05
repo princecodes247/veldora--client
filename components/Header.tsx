@@ -3,6 +3,7 @@ import { Logo } from "./Logo";
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import Link from "next/link";
+import { InAppLinks } from "@/constants/nav";
 
 export function Header() {
   return (
@@ -13,7 +14,7 @@ export function Header() {
         </Link>
       </div>
       <div className="flex items-center justify-center">
-        <Link href="/login">
+        <Link href={InAppLinks.GetStarted}>
           <Button
             variant="outline"
             className="border bg-transparent px-6 font-semibold text-white"
