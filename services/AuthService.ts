@@ -1,4 +1,4 @@
-import { IAuthData } from "./../interfaces/services";
+import { IAuthData, IRegistrationData } from "./../interfaces/services";
 import api, { authHeaders } from "./config";
 
 const servicePrefix = "/auth";
@@ -13,8 +13,8 @@ export const signOut = () => {
   return true;
 };
 
-export const signUp = (data: IAuthData) => {
-  return api.post("/register", data);
+export const signUp = (data: IRegistrationData) => {
+  return api.post(servicePrefix + "/register", data);
 };
 
 // export const resendEmailVerification = (data: IEmailVerificationData) => {

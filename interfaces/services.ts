@@ -8,9 +8,7 @@ export interface IAuthData {
 }
 
 export interface IRegistrationData extends IAuthData {
-  name: string;
-  password_confirmation: string;
-  phone_number: string;
+  passwordConfirmation: string;
 }
 
 export interface OTPVerificationData {

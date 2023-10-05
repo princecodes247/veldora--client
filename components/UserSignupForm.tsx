@@ -29,15 +29,16 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
     onSuccessFunction: () => {
       router.replace("/dashboard");
     },
+    errorMessage: "Could not create user",
   });
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    registerMutation.mutate({
+      email,
+      password,
+      passwordConfirmation,
+    });
   }
 
   return (
