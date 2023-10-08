@@ -40,8 +40,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
 
   function validatePassword() {
     if (password.length < 8) {
-      setPasswordError("Password must be at least 8 characters 😞
-");
+      setPasswordError("Password must be at least 8 characters 😞");
     } else {
       setPasswordError(null);
     }
@@ -101,7 +100,10 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               placeholder="******* fast!"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+             onChange={(e) => {
+                setPassword(e.target.value);
+                validatePassword();
+              }}
               disabled={registerMutation.isLoading}
             />
           </div>
@@ -114,7 +116,10 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               placeholder="******* fast! again"
               type="password"
               value={passwordConfirmation}
-              onChange={(e) => setPasswordConfirmation(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                validatePassword();
+              }}
               disabled={registerMutation.isLoading}
             />
           </div>
