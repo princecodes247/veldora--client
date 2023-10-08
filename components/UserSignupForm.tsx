@@ -33,17 +33,26 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
     errorMessage: "Could not create user",
   });
 
+  useEffect(() => {
+    // Clear password error when the user starts typing again
+    setPasswordError(null);
+  }, [password, passwordConfirmation]);
+
+  function validatePassword() {
+    if (password.length < 8) {
+      setPasswordError("Password must be at least 8 characters 😞
+");
+    } else {
+      setPasswordError(null);
+    }
+  }
+
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
 
-     if (password.length < 8) {
-      setPasswordError("Password must be at least 8 characters");
-      return;
-    }
-
     // Password Match Validation
     if (password.trim() !== passwordConfirmation.trim()) {
-      setPasswordError("Passwords do not match, chief");
+      setPasswordError("Passwords do not match, chief 😞");
       return;
     }
     registerMutation.mutate({
@@ -109,8 +118,15 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               disabled={registerMutation.isLoading}
             />
           </div>
-          {passwordError && (
+           {passwordError && (
             <div className="text-red-500 text-sm">{passwordError}</div>
+          )}
+
+          {/* Display Success Message */}
+          {password.length >= 8 && !passwordError && (
+            <div className="text-green-500 text-sm">
+              You are good to go! 😎
+            </div>
           )}
           <div className="pb-4">
             <p className="px-1 pb-4 text-sm text-muted-foreground">
