@@ -110,7 +110,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
             />
           </div>
           {passwordError && (
-            <div className="text-red-500 text-sm mt-2">{passwordError}</div>
+            <div className="text-red-500 text-sm">{passwordError}</div>
           )}
           <div className="pb-4">
             <p className="px-1 pb-4 text-sm text-muted-foreground">
