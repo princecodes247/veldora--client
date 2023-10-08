@@ -22,6 +22,8 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
   const [password, setPassword] = React.useState("");
   const [passwordConfirmation, setPasswordConfirmation] = React.useState("");
   const [termsAccepted, setTermsAccepted] = React.useState<CheckedState>(false);
+  const [passwordError, setPasswordError] = React.useState<string | null>(null);
+
   const router = useRouter();
   const registerMutation = useMutate(signUp, {
     loadingMessage: "Registering...",
@@ -33,6 +35,17 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
+
+     if (password.length < 8) {
+      setPasswordError("Password must be at least 8 characters");
+      return;
+    }
+
+    // Password Match Validation
+    if (password.trim() !== passwordConfirmation.trim()) {
+      setPasswordError("Passwords do not match, chief");
+      return;
+    }
     registerMutation.mutate({
       email,
       password,
@@ -96,6 +109,9 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               disabled={registerMutation.isLoading}
             />
           </div>
+          {passwordError && (
+            <div className="text-red-500 text-sm mt-2">{passwordError}</div>
+          )}
           <div className="pb-4">
             <p className="px-1 pb-4 text-sm text-muted-foreground">
               By registering, you agree to our{" "}
