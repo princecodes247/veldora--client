@@ -40,10 +40,12 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
 
   function validatePassword() {
     if (password.length < 8) {
-      setPasswordError("Password must be at least 8 characters 😞");
-    } else {
-      setPasswordError(null);
-    }
+    setPasswordError("Password must be at least 8 characters 😞");
+  } else {
+    // Clear the error message when the password is valid
+    setPasswordError(null);
+  }
+
   }
 
   async function onSubmit(event: React.SyntheticEvent) {
