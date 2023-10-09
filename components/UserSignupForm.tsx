@@ -31,19 +31,29 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
     errorMessage: "Could not create user",
   });
 
-  useEffect(() => {
-    // Clear password error when the user starts typing again
-    setPasswordError(null);
-  }, [password, passwordConfirmation]);
-
-  function validatePassword() {
-    if (password.length < 8) {
+  const validatePassword = (
+    _password: string,
+    _passwordConfirmation: string,
+  ) => {
+    if (_password.trim().length < 8) {
       setPasswordError("Password must be at least 8 characters 😞");
-    } else {
+    } else if (_password.trim() !== _passwordConfirmation.trim())
+      setPasswordError("Passwords do not match 🟰");
+    else {
       // Clear the error message when the password is valid
       setPasswordError(null);
     }
-  }
+  };
+
+  const updatePassword = (newPassword: string) => {
+    validatePassword(newPassword, passwordConfirmation);
+    setPassword(newPassword);
+  };
+
+  const updatePasswordConfirmation = (newPasswordConfirmation: string) => {
+    validatePassword(password, newPasswordConfirmation);
+    setPasswordConfirmation(newPasswordConfirmation);
+  };
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -54,9 +64,9 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
       return;
     }
     registerMutation.mutate({
-      email,
-      password,
-      passwordConfirmation,
+      email: email.trim(),
+      password: password.trim(),
+      passwordConfirmation: passwordConfirmation.trim(),
     });
   }
 
@@ -100,8 +110,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               type="password"
               value={password}
               onChange={(e) => {
-                setPassword(e.target.value);
-                validatePassword();
+                updatePassword(e.target.value);
               }}
               disabled={registerMutation.isLoading}
             />
@@ -116,8 +125,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               type="password"
               value={passwordConfirmation}
               onChange={(e) => {
-                setPassword(e.target.value);
-                validatePassword();
+                updatePasswordConfirmation(e.target.value);
               }}
               disabled={registerMutation.isLoading}
             />
@@ -164,9 +172,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
           </div>
           <Button
             disabled={
-              registerMutation.isLoading ||
-              !termsAccepted ||
-              !(password.trim() === passwordConfirmation.trim())
+              registerMutation.isLoading || !termsAccepted || !!passwordError
             }
           >
             {registerMutation.isLoading && (
