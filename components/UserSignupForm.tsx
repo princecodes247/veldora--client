@@ -1,9 +1,7 @@
 "use client";
 
-import * as React from "react";
-
+import React, { useEffect } from "react";
 import { cn } from "@/lib/utils";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -40,12 +38,11 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
 
   function validatePassword() {
     if (password.length < 8) {
-    setPasswordError("Password must be at least 8 characters 😞");
-  } else {
-    // Clear the error message when the password is valid
-    setPasswordError(null);
-  }
-
+      setPasswordError("Password must be at least 8 characters 😞");
+    } else {
+      // Clear the error message when the password is valid
+      setPasswordError(null);
+    }
   }
 
   async function onSubmit(event: React.SyntheticEvent) {
@@ -102,7 +99,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               placeholder="******* fast!"
               type="password"
               value={password}
-             onChange={(e) => {
+              onChange={(e) => {
                 setPassword(e.target.value);
                 validatePassword();
               }}
@@ -125,15 +122,13 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               disabled={registerMutation.isLoading}
             />
           </div>
-           {passwordError && (
-            <div className="text-red-500 text-sm">{passwordError}</div>
+          {passwordError && (
+            <div className="text-sm text-red-500">{passwordError}</div>
           )}
 
           {/* Display Success Message */}
           {password.length >= 8 && !passwordError && (
-            <div className="text-green-500 text-sm">
-              You are good to go! 😎
-            </div>
+            <div className="text-sm text-green-500">You are good to go! 😎</div>
           )}
           <div className="pb-4">
             <p className="px-1 pb-4 text-sm text-muted-foreground">
