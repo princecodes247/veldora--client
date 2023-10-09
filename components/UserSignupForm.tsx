@@ -13,16 +13,21 @@ import { useMutate } from "@/hooks/useMutate";
 import { signUp } from "@/services/AuthService";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
+import { useValidEmail } from "@/hooks/useValidEmail";
+import { useValidPassword } from "@/hooks/useValidPassword";
 
 interface UserSignupFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = React.useState("");
+  const { email, handleUpdateEmail, isValidEmail } = useValidEmail();
+  const {
+    password,
+    passwordConfirmation,
+    handleUpdatePassword,
+    handleUpdatePasswordConfirmation,
+    passwordError,
+  } = useValidPassword();
   const [termsAccepted, setTermsAccepted] = React.useState<CheckedState>(false);
-  const [passwordError, setPasswordError] = React.useState<string | null>(null);
-  const [isValidEmail, setIsValidEmail] = React.useState<boolean | null>(null);
 
   const router = useRouter();
   const registerMutation = useMutate(signUp, {
@@ -33,52 +38,9 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
     errorMessage: "Could not create user",
   });
 
-  const validatePassword = (
-    _password: string,
-    _passwordConfirmation: string,
-  ) => {
-    if (_password.trim().length < 8) {
-      setPasswordError("Password must be at least 8 characters 😞");
-    } else if (_password.trim() !== _passwordConfirmation.trim())
-      setPasswordError("Passwords do not match 🟰");
-    else {
-      // Clear the error message when the password is valid
-      setPasswordError(null);
-    }
-  };
-
-  const handleUpdateEmail = (inputValue: string) => {
-    setEmail(inputValue);
-
-    if (inputValue.trim().length === 0) {
-      setIsValidEmail(null);
-      return;
-    }
-    // Regular expression for email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsValidEmail(emailRegex.test(inputValue));
-  };
-
-  const handleUpdatePassword = (newPassword: string) => {
-    validatePassword(newPassword, passwordConfirmation);
-    setPassword(newPassword);
-  };
-
-  const handleUpdatePasswordConfirmation = (
-    newPasswordConfirmation: string,
-  ) => {
-    validatePassword(password, newPasswordConfirmation);
-    setPasswordConfirmation(newPasswordConfirmation);
-  };
-
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
 
-    // Password Match Validation
-    if (password.trim() !== passwordConfirmation.trim()) {
-      setPasswordError("Passwords do not match, chief 😞");
-      return;
-    }
     registerMutation.mutate({
       email: email.trim(),
       password: password.trim(),
@@ -190,7 +152,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               />
               <label
                 htmlFor="terms"
-                className="cursor-pointer text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 Accept terms and conditions
               </label>
@@ -202,7 +164,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
             }
           >
             {registerMutation.isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
             )}
             Sign In
           </Button>
