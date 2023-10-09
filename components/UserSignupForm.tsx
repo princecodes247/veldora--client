@@ -1,9 +1,7 @@
 "use client";
 
-import * as React from "react";
-
+import React, { useEffect } from "react";
 import { cn } from "@/lib/utils";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,6 +20,8 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
   const [password, setPassword] = React.useState("");
   const [passwordConfirmation, setPasswordConfirmation] = React.useState("");
   const [termsAccepted, setTermsAccepted] = React.useState<CheckedState>(false);
+  const [passwordError, setPasswordError] = React.useState<string | null>(null);
+
   const router = useRouter();
   const registerMutation = useMutate(signUp, {
     loadingMessage: "Registering...",
@@ -31,8 +31,28 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
     errorMessage: "Could not create user",
   });
 
+  useEffect(() => {
+    // Clear password error when the user starts typing again
+    setPasswordError(null);
+  }, [password, passwordConfirmation]);
+
+  function validatePassword() {
+    if (password.length < 8) {
+      setPasswordError("Password must be at least 8 characters 😞");
+    } else {
+      // Clear the error message when the password is valid
+      setPasswordError(null);
+    }
+  }
+
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
+
+    // Password Match Validation
+    if (password.trim() !== passwordConfirmation.trim()) {
+      setPasswordError("Passwords do not match, chief 😞");
+      return;
+    }
     registerMutation.mutate({
       email,
       password,
@@ -79,7 +99,10 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               placeholder="******* fast!"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                validatePassword();
+              }}
               disabled={registerMutation.isLoading}
             />
           </div>
@@ -92,10 +115,21 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               placeholder="******* fast! again"
               type="password"
               value={passwordConfirmation}
-              onChange={(e) => setPasswordConfirmation(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                validatePassword();
+              }}
               disabled={registerMutation.isLoading}
             />
           </div>
+          {passwordError && (
+            <div className="text-sm text-red-500">{passwordError}</div>
+          )}
+
+          {/* Display Success Message */}
+          {password.length >= 8 && !passwordError && (
+            <div className="text-sm text-green-500">You are good to go! 😎</div>
+          )}
           <div className="pb-4">
             <p className="px-1 pb-4 text-sm text-muted-foreground">
               By registering, you agree to our{" "}
