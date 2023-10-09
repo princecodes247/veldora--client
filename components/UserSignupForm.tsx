@@ -12,15 +12,22 @@ import { CheckedState } from "@radix-ui/react-checkbox";
 import { useMutate } from "@/hooks/useMutate";
 import { signUp } from "@/services/AuthService";
 import { useRouter } from "next/navigation";
+import clsx from "clsx";
+import { useValidEmail } from "@/hooks/useValidEmail";
+import { useValidPassword } from "@/hooks/useValidPassword";
 
 interface UserSignupFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = React.useState("");
+  const { email, handleUpdateEmail, isValidEmail } = useValidEmail();
+  const {
+    password,
+    passwordConfirmation,
+    handleUpdatePassword,
+    handleUpdatePasswordConfirmation,
+    passwordError,
+  } = useValidPassword();
   const [termsAccepted, setTermsAccepted] = React.useState<CheckedState>(false);
-  const [passwordError, setPasswordError] = React.useState<string | null>(null);
 
   const router = useRouter();
   const registerMutation = useMutate(signUp, {
@@ -31,32 +38,13 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
     errorMessage: "Could not create user",
   });
 
-  useEffect(() => {
-    // Clear password error when the user starts typing again
-    setPasswordError(null);
-  }, [password, passwordConfirmation]);
-
-  function validatePassword() {
-    if (password.length < 8) {
-      setPasswordError("Password must be at least 8 characters 😞");
-    } else {
-      // Clear the error message when the password is valid
-      setPasswordError(null);
-    }
-  }
-
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
 
-    // Password Match Validation
-    if (password.trim() !== passwordConfirmation.trim()) {
-      setPasswordError("Passwords do not match, chief 😞");
-      return;
-    }
     registerMutation.mutate({
-      email,
-      password,
-      passwordConfirmation,
+      email: email.trim(),
+      password: password.trim(),
+      passwordConfirmation: passwordConfirmation.trim(),
     });
   }
 
@@ -86,10 +74,20 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               autoComplete="email"
               autoCorrect="off"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleUpdateEmail(e.target.value)}
               disabled={registerMutation.isLoading}
             />
           </div>
+          {isValidEmail !== null && (
+            <div
+              className={clsx(
+                "text-sm",
+                isValidEmail ? "text-green-500" : "text-red-500",
+              )}
+            >
+              {isValidEmail ? "Email is valid" : "Email is not valid"}
+            </div>
+          )}
           <div className="grid gap-1 py-4 pb-0">
             <Label className="" htmlFor="password">
               Password
@@ -100,8 +98,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               type="password"
               value={password}
               onChange={(e) => {
-                setPassword(e.target.value);
-                validatePassword();
+                handleUpdatePassword(e.target.value);
               }}
               disabled={registerMutation.isLoading}
             />
@@ -116,8 +113,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               type="password"
               value={passwordConfirmation}
               onChange={(e) => {
-                setPassword(e.target.value);
-                validatePassword();
+                handleUpdatePasswordConfirmation(e.target.value);
               }}
               disabled={registerMutation.isLoading}
             />
@@ -156,7 +152,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               />
               <label
                 htmlFor="terms"
-                className="cursor-pointer text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 Accept terms and conditions
               </label>
@@ -164,13 +160,11 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
           </div>
           <Button
             disabled={
-              registerMutation.isLoading ||
-              !termsAccepted ||
-              !(password.trim() === passwordConfirmation.trim())
+              registerMutation.isLoading || !termsAccepted || !!passwordError
             }
           >
             {registerMutation.isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
             )}
             Sign In
           </Button>
