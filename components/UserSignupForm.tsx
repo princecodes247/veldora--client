@@ -12,6 +12,7 @@ import { CheckedState } from "@radix-ui/react-checkbox";
 import { useMutate } from "@/hooks/useMutate";
 import { signUp } from "@/services/AuthService";
 import { useRouter } from "next/navigation";
+import clsx from "clsx";
 
 interface UserSignupFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -21,6 +22,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
   const [passwordConfirmation, setPasswordConfirmation] = React.useState("");
   const [termsAccepted, setTermsAccepted] = React.useState<CheckedState>(false);
   const [passwordError, setPasswordError] = React.useState<string | null>(null);
+  const [isValidEmail, setIsValidEmail] = React.useState<boolean | null>(null);
 
   const router = useRouter();
   const registerMutation = useMutate(signUp, {
@@ -45,12 +47,26 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
     }
   };
 
-  const updatePassword = (newPassword: string) => {
+  const handleUpdateEmail = (inputValue: string) => {
+    setEmail(inputValue);
+
+    if (inputValue.trim().length === 0) {
+      setIsValidEmail(null);
+      return;
+    }
+    // Regular expression for email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsValidEmail(emailRegex.test(inputValue));
+  };
+
+  const handleUpdatePassword = (newPassword: string) => {
     validatePassword(newPassword, passwordConfirmation);
     setPassword(newPassword);
   };
 
-  const updatePasswordConfirmation = (newPasswordConfirmation: string) => {
+  const handleUpdatePasswordConfirmation = (
+    newPasswordConfirmation: string,
+  ) => {
     validatePassword(password, newPasswordConfirmation);
     setPasswordConfirmation(newPasswordConfirmation);
   };
@@ -96,10 +112,20 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               autoComplete="email"
               autoCorrect="off"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleUpdateEmail(e.target.value)}
               disabled={registerMutation.isLoading}
             />
           </div>
+          {isValidEmail !== null && (
+            <div
+              className={clsx(
+                "text-sm",
+                isValidEmail ? "text-green-500" : "text-red-500",
+              )}
+            >
+              {isValidEmail ? "Email is valid" : "Email is not valid"}
+            </div>
+          )}
           <div className="grid gap-1 py-4 pb-0">
             <Label className="" htmlFor="password">
               Password
@@ -110,7 +136,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               type="password"
               value={password}
               onChange={(e) => {
-                updatePassword(e.target.value);
+                handleUpdatePassword(e.target.value);
               }}
               disabled={registerMutation.isLoading}
             />
@@ -125,7 +151,7 @@ export function UserSignupForm({ className, ...props }: UserSignupFormProps) {
               type="password"
               value={passwordConfirmation}
               onChange={(e) => {
-                updatePasswordConfirmation(e.target.value);
+                handleUpdatePasswordConfirmation(e.target.value);
               }}
               disabled={registerMutation.isLoading}
             />
