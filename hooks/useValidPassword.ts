@@ -37,15 +37,15 @@ export function useValidPassword(
   );
 
   const handleUpdatePassword = (newPassword: string) => {
-    debouncedValidation(newPassword, passwordConfirmation);
     setPassword(newPassword);
+    debouncedValidation(newPassword, passwordConfirmation);
   };
 
   const handleUpdatePasswordConfirmation = (
     newPasswordConfirmation: string,
   ) => {
-    debouncedValidation(password, newPasswordConfirmation);
     setConfirmPassword(newPasswordConfirmation);
+    debouncedValidation(password, newPasswordConfirmation);
   };
 
   return {

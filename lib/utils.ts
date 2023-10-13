@@ -7,11 +7,12 @@ export function cn(...inputs: ClassValue[]) {
 
 // Debounce function
 export function debounce(func: Function, delay: number) {
-  let timer: NodeJS.Timeout;
+  let timer: NodeJS.Timeout | null = null;
   return (...args: any[]) => {
-    clearTimeout(timer);
+    if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
       func(...args);
+      timer = null;
     }, delay);
   };
 }
