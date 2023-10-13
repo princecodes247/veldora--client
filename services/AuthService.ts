@@ -1,4 +1,8 @@
-import { IAuthData, IRegistrationData } from "./../interfaces/services";
+import {
+  IAuthData,
+  IRegistrationData,
+  ResponseBody,
+} from "./../interfaces/services";
 import api, { authHeaders } from "./config";
 
 const servicePrefix = "/auth";
@@ -22,28 +26,32 @@ export const signUp = (data: IRegistrationData) => {
 // };
 
 export const forgotPassword = (data: { email: string }) => {
-  return api.post("/forgot/password", data);
+  return api.post<
+    ResponseBody<{
+      id: string;
+    }>
+  >(servicePrefix + "/password/recover", data);
 };
 
-export const verifyPasswordReset = (data: { code: string; email: string }) => {
-  return api.post("/reset/password/verify", data);
+export const verifyPasswordReset = (data: { otp: string; id: string }) => {
+  return api.post(servicePrefix + "/password/verify", data);
 };
 
 export const resetPassword = (data: {
-  code: string;
-  email: string;
+  otp: string;
+  id: string;
   password: string;
-  password_confirmation: string;
+  passwordConfirmation: string;
 }) => {
-  return api.post("/reset/password", data);
+  return api.post(servicePrefix + "/password/reset", data);
 };
 
 export const emailVerification = (data: { email: string; otp: string }) => {
-  return api.post("/verification", data);
+  return api.post(servicePrefix + "/verification", data);
 };
 
 export const resendOTP = (data: { email: string }) => {
-  return api.post("/resend/otp", data);
+  return api.post(servicePrefix + "/resend/otp", data);
 };
 
 export const verifyAuth = () => {
