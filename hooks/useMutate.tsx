@@ -41,10 +41,12 @@ export const useMutate = <ResultType, ArgType>(
       if (showToast)
         toast.error(
           errorMessage +
-            ": " +
-            (error?.response?.data?.message
-              ? error.response?.data?.message
-              : error?.response?.data?.data[0]),
+            (error?.response?.data
+              ? ": " +
+                (error?.response?.data?.message
+                  ? error.response?.data?.message
+                  : error?.response?.data?.data[0])
+              : ""),
           {
             id: toastId?.current ? toastId?.current : undefined,
           },

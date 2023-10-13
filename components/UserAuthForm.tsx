@@ -26,6 +26,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     onSuccessFunction: () => {
       router.replace("/dashboard");
     },
+    errorMessage: "Could not complete login process",
   });
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -67,7 +68,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               disabled={loginMutation.isLoading}
             />
           </div>
-          <div className="grid gap-1 py-4">
+          <div className="grid gap-1 py-4 pb-1">
             <Label className="" htmlFor="password">
               Password
             </Label>
@@ -79,6 +80,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               onChange={(e) => setPassword(e.target.value)}
               disabled={loginMutation.isLoading}
             />
+          </div>
+          <div className="pb-2">
+            <Link
+              className="text-sm font-semibold text-sky-400 hover:underline"
+              href="/forgot-password"
+            >
+              Forgot Password?
+            </Link>
           </div>
           <Button disabled={loginMutation.isLoading}>
             {loginMutation.isLoading && (

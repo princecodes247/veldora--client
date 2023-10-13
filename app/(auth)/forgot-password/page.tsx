@@ -7,12 +7,26 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { useMutate } from "@/hooks/useMutate";
-import { signUp } from "@/services/AuthService";
+import { forgotPassword, signUp } from "@/services/AuthService";
 import { useRouter } from "next/navigation";
+import { useValidEmail } from "@/hooks/useValidEmail";
 
 export default function ForgotPassword() {
+  const router = useRouter();
+  const { email, handleUpdateEmail, isValidEmail } = useValidEmail();
+  const requestPasswordChangeMutation = useMutate(forgotPassword, {
+    loadingMessage: "Requesting for password change...",
+    onSuccessFunction: ({ data }) => {
+      router.replace("/forgot-password/" + data?.data?.id);
+    },
+    errorMessage: "Could not complete request",
+  });
+
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
+    requestPasswordChangeMutation.mutate({
+      email: email.trim(),
+    });
   }
 
   return (
@@ -40,13 +54,17 @@ export default function ForgotPassword() {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              // value={email}
-              // onChange={(e) => setEmail(e.target.value)}
-              // disabled={registerMutation.isLoading}
+              value={email}
+              onChange={(e) => handleUpdateEmail(e.target.value)}
+              disabled={requestPasswordChangeMutation.isLoading}
             />
           </div>
 
-          <Button disabled={true}>Confirm OTP</Button>
+          <Button
+            disabled={requestPasswordChangeMutation.isLoading || !isValidEmail}
+          >
+            Forgot Password
+          </Button>
         </div>
       </form>
     </div>

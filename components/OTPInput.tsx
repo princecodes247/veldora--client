@@ -12,9 +12,9 @@ export default function OTPInput({
     <OtpInput
       value={value}
       onChange={onChange}
-      numInputs={4}
-      placeholder="VELD"
-      renderSeparator={<span>-</span>}
+      numInputs={6}
+      placeholder="VELDlT"
+      // renderSeparator={<span>-</span>}
       containerStyle={"flex gap-4 max-w-[400px]"}
       renderInput={(props) => (
         <input
