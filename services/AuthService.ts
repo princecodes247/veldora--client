@@ -30,29 +30,28 @@ export const forgotPassword = (data: { email: string }) => {
     ResponseBody<{
       id: string;
     }>
-  >(servicePrefix + "/password/recover", data);
+  >(servicePrefix + "/forgot-password", data);
 };
 
 export const verifyPasswordReset = (data: { otp: string; id: string }) => {
-  return api.post(servicePrefix + "/password/verify", data);
+  return api.post(servicePrefix + "/forgot-password/verify", data);
 };
 
 export const resetPassword = (data: {
-  otp: string;
   id: string;
   password: string;
   passwordConfirmation: string;
 }) => {
-  return api.post(servicePrefix + "/password/reset", data);
+  return api.post(servicePrefix + "/forgot-password/reset", data);
 };
 
 export const emailVerification = (data: { email: string; otp: string }) => {
   return api.post(servicePrefix + "/verification", data);
 };
 
-export const resendOTP = (data: { email: string }) => {
-  return api.post(servicePrefix + "/resend/otp", data);
-};
+// export const resendOTP = (data: { email: string }) => {
+//   return api.post(servicePrefix + "/resend/otp", data);
+// };
 
 export const verifyAuth = () => {
   return api.get<{ authStatus: string; identifier: string }>(`/users/me`, {
