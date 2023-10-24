@@ -15,9 +15,9 @@ export default function ForgotPassword() {
   const router = useRouter();
   const { email, handleUpdateEmail, isValidEmail } = useValidEmail();
   const requestPasswordChangeMutation = useMutate(forgotPassword, {
-    loadingMessage: "Requesting for password change...",
+    loadingMessage: "Requesting for password reset link...",
     onSuccessFunction: ({ data }) => {
-      router.replace("/forgot-password/" + data?.data?.id);
+      router.replace("/forgot-password/reset");
     },
     errorMessage: "Could not complete request",
   });
