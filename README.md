@@ -21,19 +21,23 @@
 - [*] Add method to docs
 - [*] Fix geographic chart
 - [*] Add return page, return response and custom return page choice
+- [*] Add Schema to form
+- [*] Search form responses
+- [*] Add a modal to display mini API docs
+- [*] Add custom slugs
+- [*] Add API references to lead user to docs
+- [*] Add actions to form
 - [] Add video or image to Landing page
+- [] Add loading to submission table when going to the next set of submissions
+- [] Move Validations/Rules and Events to Tabs
+- [] Change Code snippet styles
+- [] Add Pricing plan
 - [] Install @vercel/analytics
 
 ### Nice to have
 
-- [*] Search form responses
-- [*] Add Schema to form
-- [*] Add a modal to display mini API docs
 - [] Delete response
 - [] Send data to email anonymously
-- [] Add custom slugs
-- [] Add API references to lead user to docs
-- [] Add actions to form
 - [] Add data import
 - [] Add Logs to summary page
 - [] Add file uploads

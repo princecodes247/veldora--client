@@ -23,6 +23,7 @@ export default function ForgotPassword({
     id: string;
   };
 }) {
+  const router = useRouter();
   const [isVerified, setIsVerified] = useState(false);
   const [otp, setOtp] = useState("");
   const {
@@ -45,8 +46,9 @@ export default function ForgotPassword({
   const makePasswordChangeMutation = useMutate(resetPassword, {
     loadingMessage: "Validating...",
     onSuccessFunction: ({ data }) => {
-      console.log("verified");
+      router.push("/login");
     },
+    successMessage: "Password Updated",
     errorMessage: "Could not complete request",
   });
   async function onSubmit(event: React.SyntheticEvent) {
@@ -55,12 +57,11 @@ export default function ForgotPassword({
       id: params.id,
     });
     // if (isVerified) {
-    //   makePasswordChangeMutation.mutate({
-    //     otp,
-    //     id: params.id,
-    //     password,
-    //     passwordConfirmation,
-    //   });
+    makePasswordChangeMutation.mutate({
+      otp: params.id,
+      password,
+      passwordConfirmation,
+    });
     // } else {
     //   verifyPasswordChangeMutation.mutate({
     //     otp,
