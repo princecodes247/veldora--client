@@ -29,7 +29,7 @@ export function UserNav({ user }: { user: IUserData }) {
               src="/avatars/01.png"
               alt={user?.metadata?.username ?? "UU"}
             /> */}
-            <Avvvatars size={32} value={user?.metadata?.username ?? "UU"} />
+            <Avvvatars size={32} value={user?.username ?? "UU"} />
             {/* <AvatarFallback>
               {user?.metadata?.username.slice(0, 2).toUpperCase() ?? "UU"}
             </AvatarFallback> */}
@@ -40,7 +40,7 @@ export function UserNav({ user }: { user: IUserData }) {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">
-              {user?.metadata?.username ?? "UU"}
+              {user?.username ?? "UU"}
             </p>
             <p className="text-xs leading-none text-muted-foreground">
               {user.email}

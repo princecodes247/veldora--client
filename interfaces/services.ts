@@ -22,10 +22,11 @@ export interface IWallet {
 }
 
 export interface IUserData {
+  [x: string]: string;
   userID: string;
   email: string;
-  phone?: string;
-  metadata: { username: string; theme: "light" | "dark" };
+  // phone?: string;
+  // metadata: { username: string; theme: "light" | "dark" };
 }
 
 export interface ResponseBody<T> {
