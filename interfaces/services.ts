@@ -22,9 +22,9 @@ export interface IWallet {
 }
 
 export interface IUserData {
-  [x: string]: string;
   userID: string;
   email: string;
+  username: string;
   // phone?: string;
   // metadata: { username: string; theme: "light" | "dark" };
 }

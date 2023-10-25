@@ -49,20 +49,18 @@ export function AppearanceForm() {
   });
 
   useEffect(() => {
-    form.setValue("theme", userData?.metadata.theme ?? "light")
-  }, [userData, form])
+    form.setValue("theme", "light");
+  }, [userData, form]);
 
   const profileInfoMutation = useMutate(updateUser, {
     loadingMessage: "Updating Theme",
-    successMessage: "Theme Updated"
-  })
+    successMessage: "Theme Updated",
+  });
   function onSubmit(data: AppearanceFormValues) {
-  
     profileInfoMutation.mutate({
-      user_metadata: {theme: data?.theme}
-    })
-
-    
+      // user_metadata: { theme: data?.theme },
+      // theme: data?.theme
+    });
   }
   return (
     <Form {...form}>
@@ -87,7 +85,7 @@ export function AppearanceForm() {
                     <option value="system">System</option>
                   </select>
                 </FormControl>
-                <ChevronDown className="absolute right-3 top-3 h-4 w-4 opacity-50" />
+                <ChevronDown className="absolute w-4 h-4 opacity-50 right-3 top-3" />
               </div>
               <FormDescription>
                 Set the font you want to use in the dashboard.
@@ -107,7 +105,9 @@ export function AppearanceForm() {
               </FormDescription>
               <FormMessage />
               <RadioGroup
-                onValueChange={(option: "light" | "dark") => field.onChange(option)}
+                onValueChange={(option: "light" | "dark") =>
+                  field.onChange(option)
+                }
                 defaultValue={field.value}
                 className="grid max-w-md grid-cols-2 gap-8 pt-2"
               >

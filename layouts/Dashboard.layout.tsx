@@ -19,12 +19,9 @@ function DashboardLayout({ children, user, subNav }: DashboardLayoutProps) {
           user ??
           userData ?? {
             email: "",
-            phone: "",
             userID: "",
-            metadata: {
-              theme: "light",
-              username: "",
-            },
+            // theme: "light",
+            username: "",
           }
         }
       >
