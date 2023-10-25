@@ -19,6 +19,7 @@ export default function ForgotPassword() {
     onSuccessFunction: ({ data }) => {
       router.replace("/forgot-password/reset");
     },
+    successMessage: "Password reset link sent!",
     errorMessage: "Could not complete request",
   });
 

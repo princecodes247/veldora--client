@@ -38,7 +38,7 @@ export const verifyPasswordReset = (data: { otp: string; id: string }) => {
 };
 
 export const resetPassword = (data: {
-  id: string;
+  otp: string;
   password: string;
   passwordConfirmation: string;
 }) => {
