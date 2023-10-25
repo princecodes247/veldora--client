@@ -22,10 +22,8 @@ export const updateUser = (
   userData: Partial<{
     email: string;
     phone: string;
-    user_metadata: Partial<{
-      username: string;
-      theme: string;
-    }>;
+    username: string;
+    // theme: string;
   }>,
 ) => {
   return api.patch(servicePrefix + "/me", userData, {

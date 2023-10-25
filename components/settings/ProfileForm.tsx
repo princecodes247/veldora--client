@@ -38,19 +38,16 @@ const profileFormSchema = z.object({
       required_error: "Please select an email to display.",
     })
     .email(),
-
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
-
 
 export function ProfileForm() {
   const { userData } = useContext(AuthContext);
   // This can come from your database or API.
   const defaultValues: Partial<ProfileFormValues> = {
-      email: userData?.email ?? "",
-      username: userData?.metadata?.username ?? ""
-  
+    email: userData?.email ?? "",
+    username: userData?.username ?? "",
   };
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -59,14 +56,14 @@ export function ProfileForm() {
   });
 
   useEffect(() => {
-    form.setValue("email", userData?.email ?? "")
-  form.setValue("username", userData?.metadata?.username ?? "")
-  }, [userData, form])
+    form.setValue("email", userData?.email ?? "");
+    form.setValue("username", userData?.username ?? "");
+  }, [userData, form]);
 
   const profileInfoMutation = useMutate(updateUser, {
     loadingMessage: "Updating Profile",
-    successMessage: "Profile Updated"
-  })
+    successMessage: "Profile Updated",
+  });
   function onSubmit(data: ProfileFormValues) {
     // toast({
     //   title: "You submitted the following values:",
@@ -78,13 +75,10 @@ export function ProfileForm() {
     // })
     profileInfoMutation.mutate({
       email: data?.email,
-      user_metadata: {username: data?.username}
-    })
-
-    
+      // user_metadata: { username: data?.username },
+      username: data?.username,
+    });
   }
-
-  
 
   return (
     <Form {...form}>
@@ -92,15 +86,15 @@ export function ProfileForm() {
         <FormField
           control={form.control}
           name="username"
-          defaultValue={userData?.metadata?.username}
+          defaultValue={userData?.username}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder={userData?.metadata.username} {...field} />
+                <Input placeholder={userData?.username} {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name. 
+                This is your public display name.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -116,7 +110,7 @@ export function ProfileForm() {
               <FormControl>
                 <Input placeholder={userData?.email} {...field} />
               </FormControl>
-               
+
               <FormDescription>
                 You can manage verified email addresses in your{" "}
                 <Link href="/examples/forms">email settings</Link>.
@@ -125,7 +119,7 @@ export function ProfileForm() {
             </FormItem>
           )}
         />
-       
+
         <Button type="submit">Update profile</Button>
       </form>
     </Form>
