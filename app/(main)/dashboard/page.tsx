@@ -56,20 +56,6 @@ function Dashboard() {
               className="flex-1"
             />
             <div className="flex gap-2">
-              <TabsList>
-                <TabsTrigger value="grid-view">
-                  <LayoutGrid size={18} />
-                </TabsTrigger>
-                <TabsTrigger value="list-view">
-                  <List size={18} />
-                </TabsTrigger>
-                {/* <TabsTrigger value="reports" disabled>
-                Reports
-              </TabsTrigger>
-              <TabsTrigger value="notifications" disabled>
-                Notifications
-              </TabsTrigger> */}
-              </TabsList>
               <CreateBucketDialog
                 open={openCreateBucket}
                 setOpen={setOpenCreateBucket}
@@ -105,48 +91,31 @@ function Dashboard() {
                     </Button>
                   </div>
                 )}
-              <TabsContent value="grid-view" className="space-y-4">
-                <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  {React.Children.toArray(
-                    buckets.isLoading &&
-                      [0, 0, 0, 0, 0, 0].map(() => <BucketCardSkeleton />),
-                  )}
 
-                  {React.Children.toArray(
-                    !buckets.isLoading &&
-                      buckets.data?.pages?.map((group) =>
-                        group?.data?.result
-                          ?.filter((bucket) => {
-                            return (
-                              bucket.name
-                                .toLowerCase()
-                                .includes(debouncedSearchQuery.toLowerCase()) ||
-                              bucket.description
-                                .toLowerCase()
-                                .includes(debouncedSearchQuery.toLowerCase())
-                            );
-                          })
-                          .map((bucket) => <BucketCard bucket={bucket} />),
-                      ),
-                  )}
-                </div>
-              </TabsContent>
-              <TabsContent value="list-view" className="space-y-4">
-                <div className="flex flex-col gap-4">
-                  {React.Children.toArray(
-                    !buckets.isLoading &&
-                      buckets.data?.pages?.map((group) =>
-                        group?.data?.result
-                          ?.filter((bucket) =>
+              <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {React.Children.toArray(
+                  buckets.isLoading &&
+                    [0, 0, 0, 0, 0, 0].map(() => <BucketCardSkeleton />),
+                )}
+
+                {React.Children.toArray(
+                  !buckets.isLoading &&
+                    buckets.data?.pages?.map((group) =>
+                      group?.data?.result
+                        ?.filter((bucket) => {
+                          return (
                             bucket.name
                               .toLowerCase()
-                              .includes(debouncedSearchQuery.toLowerCase()),
-                          )
-                          .map((bucket) => <BucketCard bucket={bucket} />),
-                      ),
-                  )}
-                </div>
-              </TabsContent>
+                              .includes(debouncedSearchQuery.toLowerCase()) ||
+                            bucket.description
+                              .toLowerCase()
+                              .includes(debouncedSearchQuery.toLowerCase())
+                          );
+                        })
+                        .map((bucket) => <BucketCard bucket={bucket} />),
+                    ),
+                )}
+              </div>
             </>
           )}
         </Tabs>
