@@ -19,5 +19,9 @@ export const sidebarNavItems = (id: string = "...") => [
 ];
 
 export enum InAppLinks {
+  // Auth
   GetStarted = "/signup",
+  Login = "/login",
+  // Landing
+  Home = "/",
 }

@@ -1,6 +1,7 @@
 "use client";
 import { DashboardInnerNav } from "@/components/DashboardInnerNav";
 import { Logo } from "@/components/Logo";
+import { InAppLinks } from "@/constants/nav";
 import DashboardLayout from "@/layouts/Dashboard.layout";
 import Link from "next/link";
 
@@ -15,7 +16,7 @@ export default function SingleBucketLayout({
         <div className="mx-auto flex w-full flex-col justify-center space-y-4 sm:w-[350px]">
           <div className="w-full min-w-[200px] p-4 md:hidden md:min-w-[400px]">
             <div className="pb-8 pl-4">
-              <Link href={"/"} className="flex w-36 ">
+              <Link href={InAppLinks.Home} className="flex w-36 ">
                 <Logo variant="wordmark" />
               </Link>
             </div>
@@ -24,7 +25,10 @@ export default function SingleBucketLayout({
         </div>
       </div>
       <div className="relative hidden h-full flex-col justify-center p-10 md:flex">
-        <Link href={"/"} className="relative -left-12 w-44 bg-background py-4">
+        <Link
+          href={InAppLinks.Home}
+          className="relative -left-12 w-44 bg-background py-4"
+        >
           <Logo variant="wordmark" />
         </Link>
 

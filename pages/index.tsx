@@ -63,12 +63,20 @@ export default function Home() {
             your speed. Experience the beauty of efficiency and take control of
             your forms like never before.
           </p>
-          <Link href={InAppLinks.GetStarted}>
-            <Button variant="secondary" className="px-6 font-semibold">
-              Get Started
-              <ArrowRight size={15} className="-mr-2 ml-2" />
-            </Button>
-          </Link>
+          <div className="flex flex-col items-center gap-4 md:flex-row">
+            <Link
+              href={InAppLinks.Login}
+              className="px-2 text-sm font-medium tracking-wide text-gray-400 transition-all hover:text-white"
+            >
+              Login
+            </Link>
+            <Link href={InAppLinks.GetStarted}>
+              <Button variant="secondary" className="px-6 font-semibold">
+                Get Started
+                <ArrowRight size={15} className="-mr-2 ml-2" />
+              </Button>
+            </Link>
+          </div>
         </section>
         <section className="peer relative cursor-pointer py-8 text-center  text-white transition-all duration-500  md:tracking-[0.4em] md:hover:tracking-[0.45em]">
           <h3>Powerful Tools. Limitless Possibilities.</h3>
