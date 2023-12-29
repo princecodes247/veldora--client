@@ -54,8 +54,8 @@ export default function BucketAPIPage() {
                 <TabsTrigger value="get-stats">Get Stats</TabsTrigger>
                 <TabsTrigger value="get-all">Get All Data</TabsTrigger>
 
-                {/* <TabsTrigger value="update-one">Update a Row</TabsTrigger> */}
-                {/* <TabsTrigger value="delete-one">Delete a Row</TabsTrigger> */}
+                <TabsTrigger value="update-one">Update a Row</TabsTrigger>
+                <TabsTrigger value="delete-one">Delete a Row</TabsTrigger>
               </TabsList>
             </div>
             <div>
@@ -89,7 +89,8 @@ export default function BucketAPIPage() {
               <TabsContent value="get-one" className="space-y-4">
                 <BucketHow
                   title="Get Submission"
-                  endpoint={`${openApiUrl}/submissions`}
+                  accessToken={bucket.data?.accessToken}
+                  endpoint={`${openApiUrl}/submissions/:submission-id`}
                   method="GET"
                 />
               </TabsContent>
@@ -97,16 +98,19 @@ export default function BucketAPIPage() {
               <TabsContent value="update-one" className="space-y-4">
                 <BucketHow
                   title="Update a Submission"
-                  endpoint="/get"
+                  accessToken={bucket.data?.accessToken}
+                  endpoint={`${openApiUrl}/submissions/{submission-id}/update`}
                   method="PUT"
+                  withHTML
                 />
               </TabsContent>
 
               <TabsContent value="delete-one" className="space-y-4">
                 <BucketHow
                   title="Delete a Submission"
-                  endpoint="/get"
-                  method="POST"
+                  accessToken={bucket.data?.accessToken}
+                  endpoint={`${openApiUrl}/submissions/{submission-id}/delete`}
+                  method="DELETE"
                 />
               </TabsContent>
             </div>

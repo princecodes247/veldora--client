@@ -62,7 +62,7 @@ export default function BucketSecuritySettingsPage() {
   const regenerateAPITokenMutation = useMutate(regenerateAPIToken, {
     loadingMessage: "Regenerating API Token",
     successMessage: "API Token Regenerated",
-    onSuccessFunction: ({data}) => {
+    onSuccessFunction: ({ data }) => {
       setAPIToken(data.data);
     },
   });
@@ -94,8 +94,8 @@ export default function BucketSecuritySettingsPage() {
         </div>
       )}
       {!bucket.isError && !bucket.isLoading && (
-        <div className="flex-1 p-0 space-y-4 md:p-8">
-          <div className="flex justify-between w-full">
+        <div className="flex-1 space-y-4 p-0 md:p-8">
+          <div className="flex w-full justify-between">
             <div>
               {/* <DeleteBucketDialog id={bucket?.data?._id ?? ""} name={bucket?.data?.name ?? ""}/> */}
             </div>
@@ -109,7 +109,7 @@ export default function BucketSecuritySettingsPage() {
               <CardContent className="grid gap-4">
                 <div className="grid gap-2">
                   <Label htmlFor="text">Authorized domains</Label>
-                  <p>
+                  <p className="text-sm text-gray-600">
                     Add domain to allow your API request. Add valid domain url.
                     For example https://example.com or https://for.example.com
                   </p>

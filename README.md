@@ -36,10 +36,12 @@
 
 ### Nice to have
 
-- [] Delete response
+- [*] Delete response
 - [] Send data to email anonymously
 - [] Add data import
 - [] Add Logs to summary page
+- [] Add events
+- [] Setup multiple API tokens
 - [] Add file uploads
 - [] Setup theme
 
