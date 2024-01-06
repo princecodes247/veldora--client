@@ -58,10 +58,11 @@ export default function Home() {
             Speed Up Your Workflow with Veldora
           </h1>
           <p className="mx-auto max-w-[660px] px-6 text-center text-gray-400">
-            Simplify your life and work smarter, not harder. Veldora offers a
-            seamless platform to setup your forms, analyze the data and boost
-            your speed. Experience the beauty of efficiency and take control of
-            your forms like never before.
+            Veldora revolutionizes the workflow for frontend developers by
+            providing a powerful solution to accelerate API generation. With
+            Veldora, frontend developers can seamlessly create APIs tailored to
+            their project needs, streaming the process of collecting and storing
+            data.
           </p>
           <Link href={InAppLinks.GetStarted}>
             <Button variant="secondary" className="px-6 font-semibold">

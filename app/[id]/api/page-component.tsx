@@ -54,8 +54,8 @@ export default function BucketAPIPage() {
                 <TabsTrigger value="get-stats">Get Stats</TabsTrigger>
                 <TabsTrigger value="get-all">Get All Data</TabsTrigger>
 
-                {/* <TabsTrigger value="update-one">Update a Row</TabsTrigger> */}
-                {/* <TabsTrigger value="delete-one">Delete a Row</TabsTrigger> */}
+                <TabsTrigger value="update-one">Update a Row</TabsTrigger>
+                <TabsTrigger value="delete-one">Delete a Row</TabsTrigger>
               </TabsList>
             </div>
             <div>
