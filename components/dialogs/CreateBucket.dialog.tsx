@@ -49,12 +49,13 @@ export default function CreateBucketDialog({
           </DialogDescription>
         </DialogHeader>
         <form
-          onSubmit={() =>
+          onSubmit={(e) => {
+            e.preventDefault();
             createBucketMutation.mutate({
               description,
               name,
-            })
-          }
+            });
+          }}
           className="grid gap-4 py-4"
         >
           <div className="flex flex-col gap-4">

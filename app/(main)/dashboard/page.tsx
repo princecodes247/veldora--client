@@ -77,7 +77,7 @@ function Dashboard() {
                     </div>
 
                     <h2 className="mt-4 text-xl md:text-3xl">
-                      Oops! No bucket created yet!
+                      No bucket created yet!
                     </h2>
                     <p className="mx-auto my-4 max-w-[600px] text-center text-gray-500">
                       {" "}
